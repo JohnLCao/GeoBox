@@ -19,5 +19,6 @@ test:
 production:
   <<: *default
   database: production_database
+
   username: <%= ENV['PG_USER']%>
   password: <%= ENV['PG_PASSWORD']%>
