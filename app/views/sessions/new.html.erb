@@ -1,0 +1,23 @@
+<div class="cntr">
+	<%= notice %>
+	<%= alert %>
+	
+	<h1>Login</h1>
+	<%= form_for(:user, url: sessions_path) do |f| %>
+		<div class="field">
+			<%= f.label :username %>
+			<br />
+			<%= f.text_field :username %>
+		</div>
+
+		<div class="field">
+			<%= f.label :password %>
+			<br />
+			<%= f.password_field :password %>
+		</div>
+
+		<div>
+			<%= f.submit "Login" %>
+		</div>
+	<% end %>
+</div>
