@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-	  skip_before_action :ensure_login, only: [:new, :create]
+	  skip_before_action :ensure_login, only: [:new, :create, :guest]
 
 	  def new
 	  	# will invoke new.html.erb
@@ -20,5 +20,10 @@ class SessionsController < ApplicationController
 	  def destroy
 	  	reset_session
 		redirect_to login_path, notice: "You have been logged out"
+	  end
+
+	  def guest
+	  	session[:guest] = true
+	  	redirect_to root_path, notice: "Logged in as guest"
 	  end
 end
