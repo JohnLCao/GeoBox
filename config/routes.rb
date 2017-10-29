@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get "/login" => "sessions#new", as: :login
   delete "/logout" => "sessions#destroy", as: :logout
+  get "/guest_login" => "sessions#guest", as: :guest_login
 
   #TO BE CHANGED
   root to: "dummy#home"

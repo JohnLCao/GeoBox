@@ -8,14 +8,16 @@ class ApplicationController < ActionController::Base
 
   protected
   	def ensure_login
-  		redirect_to login_path unless session[:user_id]
+  		redirect_to login_path unless (session[:user_id] || session[:guest])
   	end
 
   	def logged_in?
+      # currently, this will return false for guests
   		session[:user_id]
   	end
 
   	def current_user
+      # behaviour not well defined for guest user.
   		@current_user ||= User.find(session[:user_id])
   	end
 end
