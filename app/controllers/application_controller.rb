@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+	add_flash_types :success, :danger, :info
+
   before_action :ensure_login
   helper_method :logged_in?, :current_user # these will be available in views erb
 
