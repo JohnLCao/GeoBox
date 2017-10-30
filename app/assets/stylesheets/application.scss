@@ -9,11 +9,33 @@
  * compiled file so the styles you add here take precedence over styles defined in any styles
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
- *
- *= require_tree .
- *= require_self
  */
- .cntr{
- 	margin: auto;
- 	text-align: center;
- }
+
+@import "bootstrap";
+@import "toastr";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+.cntr{
+  margin: auto;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+.container-color {
+  background-color: #eaf1f3;
+  border-radius: 5px;
+  border: 1px solid #d5e5ea;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.btn:visited { color:#FFF; }
+
+.input-group-addon {
+  min-width: 40px;
+  text-align:center;
+}
