@@ -8,22 +8,22 @@ class SessionsController < ApplicationController
 	  def create
 	  	user = User.find_by(username: params[:user][:username])
 	  	password = params[:user][:password]
-	
-	  	if user && (user.authenticate("#{password}") != false)
+
+	  	if user && user.authenticate("#{password}")
 	  		session[:user_id] = user.id
-	  		redirect_to root_path, notice: "Logged in succesfully"
+	  		redirect_to root_path, success: "Logged in succesfully"
 	  	else
-	  		redirect_to login_path, alert: "Invalid username/password combination!"
+	  		redirect_to login_path, danger: "Invalid username/password combination!"
 	  	end
 	  end
 
 	  def destroy
 	  	reset_session
-		redirect_to login_path, notice: "You have been logged out"
+		redirect_to login_path, success: "You have been logged out"
 	  end
 
 	  def guest
 	  	session[:guest] = true
-	  	redirect_to root_path, notice: "Logged in as guest"
+	  	redirect_to root_path, info: "Logged in as guest"
 	  end
 end

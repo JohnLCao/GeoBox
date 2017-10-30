@@ -1,31 +1,35 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div class="field form-group">
+    <%= f.label :username %>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-user-circle-o"></i></span>
+      <%= f.text_field :username, class: 'form-control', placeholder: 'Your name' %>
     </div>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :email %>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+      <%= f.text_field :email, class: 'form-control', placeholder: 'Your email'  %>
+    </div>
+  </div>
+
+  <% unless @user.persisted? %>
+
+  <div class="field form-group">
+    <%= f.label :password %>
+    <div class="input-group">
+      <span class="input-group-addon" aria-hidden="true"><i class="fa fa-lock"></i></span>
+      <%= f.password_field :password, class: 'form-control', placeholder: 'Your password'  %>
+    </div>
+  </div>
+
   <% end %>
 
-  <div class="field">
-    <%= f.label :username %><br>
-    <%= f.text_field :username %>
+  <div>
+    <%= f.submit 'Create User', class: 'btn btn-primary' %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <% unless @user.persisted? %>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <% end %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>
