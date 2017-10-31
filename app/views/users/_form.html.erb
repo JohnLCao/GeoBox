@@ -25,9 +25,14 @@
       <%= f.password_field :password, class: 'form-control', placeholder: 'Your password'  %>
     </div>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
+
+  <div class="field form-group">
+    <%= f.label :password_confirmation %>
+    <div class="input-group">
+      <span class="input-group-addon" aria-hidden="true"><i class="fa fa-shield"></i></span>
+      <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Your password again' %>
+    </div>
+
   </div>
   <% end %>
 
