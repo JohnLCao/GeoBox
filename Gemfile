@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'gmaps4rails'
 
 gem 'bootstrap', '~> 4.0.0.beta2.1'
-
+gem 'underscore-rails'
 gem 'toastr-rails'
 gem 'font-awesome-sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

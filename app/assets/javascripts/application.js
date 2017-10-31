@@ -15,5 +15,10 @@
 //= require turbolinks
 //= require angular
 //= require toastr
-//= require geobox.module
+
+//= require underscore
+//= require gmaps/google
+//= require popper
+//= require bootstrap
+
 //= require_tree .
