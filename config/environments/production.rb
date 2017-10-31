@@ -76,4 +76,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # prevent angular breaking due to renaming by js compression
+  config.assets.js_compressor = Uglifier.new(mangle: false)
 end

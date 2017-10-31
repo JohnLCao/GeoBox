@@ -21,3 +21,16 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    attributes:
+      user:
+        password: "Password"
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              blank: "is blank!"
+            password_confirmation:
+              blank: "does not match confirmation!"
