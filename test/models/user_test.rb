@@ -39,4 +39,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not @new_user.save, "Save the user without valid email"
   end
 
+  test "should not create user with different password and password confirmation" do
+    @new_user = User.new(
+      username: "valid_username", 
+      email: "valid@email.ca", 
+      password:"pass", 
+      password_confirmation:"word")
+    assert_not @new_user.save, "Save the user with different password and password confirmation fields"
+  end
+  
 end
