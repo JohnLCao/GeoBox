@@ -18,3 +18,6 @@
 
 # Ignore IDE files
 .idea/*
+
+#ignore MACOS bs
+.DS_Store
