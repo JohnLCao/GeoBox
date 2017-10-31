@@ -34,6 +34,9 @@ gem 'bcrypt'
 #google-cloud-storage
 gem 'google-cloud-storage'
 
+# angular
+gem 'angularjs-rails'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

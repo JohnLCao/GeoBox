@@ -4,10 +4,9 @@
   <title>GeoBox</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js'%>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-app="GeoBox">
 <%= render :partial => 'flash_messages', :flash => flash %>
 <%= yield %>
 

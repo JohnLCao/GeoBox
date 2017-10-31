@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   #TO BE CHANGED
   root to: "dummy#home"
+  get "/angular_example" => "dummy#angular_example"
   #TO BE CHANGED
 
   # The priority is based upon order of creation: first created -> highest priority.
