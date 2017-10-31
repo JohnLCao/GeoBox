@@ -18,4 +18,5 @@
 //= require gmaps/google
 //= require popper
 //= require bootstrap
+//= require jquery-sidebar
 //= require_tree .
