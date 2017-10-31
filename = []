@@ -1,0 +1,75 @@
+[1mdiff --git a/app/controllers/users_controller.rb b/app/controllers/users_controller.rb[m
+[1mindex e5219bf..01ef474 100644[m
+[1m--- a/app/controllers/users_controller.rb[m
+[1m+++ b/app/controllers/users_controller.rb[m
+[36m@@ -29,7 +29,13 @@[m [mclass UsersController < ApplicationController[m
+ [m
+     respond_to do |format|[m
+       if @user.save[m
+[31m-        format.html { redirect_to @user, success: 'User was successfully created.' }[m
+[32m+[m[32m        format.html {[m[41m [m
+[32m+[m[32m          unless session[:user_id][m
+[32m+[m[32m            session[:user_id] = @user.id[m
+[32m+[m[32m            redirect_to root_path, success: "User was successfully created."[m
+[32m+[m[32m          end[m
+[32m+[m[32m          redirect_to @user, success: 'User was successfully created.'[m[41m [m
+[32m+[m[32m        }[m
+         format.json { render :show, status: :created, location: @user }[m
+       else[m
+         flash[:danger] = @user.errors.collect { |key, value| "#{key.capitalize} #{value}" }.first[m
+[36m@@ -71,6 +77,6 @@[m [mclass UsersController < ApplicationController[m
+ [m
+     # Never trust parameters from the scary internet, only allow the white list through.[m
+     def user_params[m
+[31m-      params.require(:user).permit(:username, :email, :password)[m
+[32m+[m[32m      params.require(:user).permit(:username, :email, :password, :password_confirmation)[m
+     end[m
+ end[m
+[1mdiff --git a/app/views/layouts/application.html.erb b/app/views/layouts/application.html.erb[m
+[1mindex 3bb6d58..a1b8a72 100644[m
+[1m--- a/app/views/layouts/application.html.erb[m
+[1m+++ b/app/views/layouts/application.html.erb[m
+[36m@@ -4,6 +4,7 @@[m
+   <title>GeoBox</title>[m
+   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>[m
+   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>[m
+[32m+[m[32m  <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js'%>[m
+   <%= csrf_meta_tags %>[m
+ </head>[m
+ <body>[m
+[1mdiff --git a/config/environments/development.rb b/config/environments/development.rb[m
+[1mindex b55e214..4978c76 100644[m
+[1m--- a/config/environments/development.rb[m
+[1m+++ b/config/environments/development.rb[m
+[36m@@ -38,4 +38,7 @@[m [mRails.application.configure do[m
+ [m
+   # Raises error for missing translations[m
+   # config.action_view.raise_on_missing_translations = true[m
+[32m+[m
+[32m+[m[32m  # prevent angular breaking due to renaming by js compression[m
+[32m+[m[32m  config.assets.js_compressor = Uglifier.new(mangle: false)[m
+ end[m
+[1mdiff --git a/config/environments/production.rb b/config/environments/production.rb[m
+[1mindex 5c1b32e..6895022 100644[m
+[1m--- a/config/environments/production.rb[m
+[1m+++ b/config/environments/production.rb[m
+[36m@@ -76,4 +76,7 @@[m [mRails.application.configure do[m
+ [m
+   # Do not dump schema after migrations.[m
+   config.active_record.dump_schema_after_migration = false[m
+[32m+[m
+[32m+[m[32m  # prevent angular breaking due to renaming by js compression[m
+[32m+[m[32m  config.assets.js_compressor = Uglifier.new(mangle: false)[m
+ end[m
+[1mdiff --git a/config/environments/test.rb b/config/environments/test.rb[m
+[1mindex 1c19f08..5abbe0a 100644[m
+[1m--- a/config/environments/test.rb[m
+[1m+++ b/config/environments/test.rb[m
+[36m@@ -39,4 +39,7 @@[m [mRails.application.configure do[m
+ [m
+   # Raises error for missing translations[m
+   # config.action_view.raise_on_missing_translations = true[m
+[32m+[m
+[32m+[m[32m  # prevent angular breaking due to renaming by js compression[m
+[32m+[m[32m  config.assets.js_compressor = Uglifier.new(mangle: false)[m
+ end[m

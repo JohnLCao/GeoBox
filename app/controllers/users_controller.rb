@@ -29,7 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, success: 'User was successfully created.' }
+        session[:user_id] = @user.id if session[:user_id].nil?
+        format.html { redirect_to root_path, success: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         flash[:danger] = @user.errors.collect { |key, value| "#{key.capitalize} #{value}" }.first
@@ -71,6 +72,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :password)
+      params.require(:user).permit(:username, :email, :password, :password_confirmation)
     end
 end

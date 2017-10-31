@@ -39,4 +39,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # prevent angular breaking due to renaming by js compression
+  config.assets.js_compressor = Uglifier.new(mangle: false)
 end
