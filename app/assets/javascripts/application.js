@@ -21,3 +21,4 @@
 //= require bootstrap
 //= require jquery-sidebar
 //= require_tree .
+//= require jquery.turbolinks
