@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :filename %><br>
-    <%= f.text_field :filename %>
+    <%= f.text_field :filename, class: 'form-control', placeholder: 'Name of your file to be uploaded' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: 'form-control', placeholder: 'A brief description of your file' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :latitude %><br>
-    <%= f.text_field :latitude %>
+    <%= f.text_field :latitude, class: 'form-control', placeholder: 'The latitude ASSIGNED' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :longitude %><br>
-    <%= f.text_field :longitude %>
+    <%= f.text_field :longitude, class: 'form-control', placeholder: 'The longitude ASSIGNED' %>
   </div>
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :cloudKey %><br>
-    <%= f.text_field :cloudKey %>
+    <%= f.text_field :cloudKey, class: 'form-control', placeholder: 'The cloud-key ASSIGNED' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :Submit, {class: 'btn btn-primary'} %>
   </div>
 <% end %>
