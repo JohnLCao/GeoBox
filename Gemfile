@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'gmaps4rails'
 
 gem 'bootstrap', '~> 4.0.0.beta2.1'
-
+gem 'underscore-rails'
 gem 'toastr-rails'
 gem 'font-awesome-sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -33,6 +33,9 @@ gem 'bcrypt'
 
 #google-cloud-storage
 gem 'google-cloud-storage'
+
+# angular
+gem 'angularjs-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

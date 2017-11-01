@@ -15,6 +15,7 @@
 @import "toastr";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "sidebar";
 
 .cntr{
   margin: auto;
@@ -39,3 +40,7 @@
   min-width: 40px;
   text-align:center;
 }
+
+#geolocation {position: relative;}
+
+#geolocation {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
