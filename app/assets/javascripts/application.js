@@ -15,10 +15,9 @@
 //= require turbolinks
 //= require angular
 //= require toastr
-
 //= require underscore
 //= require gmaps/google
 //= require popper
 //= require bootstrap
-
+//= require jquery-sidebar
 //= require_tree .
