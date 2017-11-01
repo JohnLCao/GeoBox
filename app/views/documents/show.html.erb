@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @document.filename %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @document.description %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @document.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @document.longitude %>
+</p>
+
+<p>
+  <strong>Cloudkey:</strong>
+  <%= @document.cloudKey %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @document.user %>
+</p>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>
