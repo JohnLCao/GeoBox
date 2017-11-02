@@ -11,6 +11,7 @@ function SidebarController($http, $rootScope){
 
 	$ctrl.$onInit = function(){
 		$rootScope.$broadcast('login:login', {}); // we can consider adding data to this event
+		var sidebar = $('#sidebar').sidebar();
 	}
 }
 
