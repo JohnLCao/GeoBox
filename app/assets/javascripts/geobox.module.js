@@ -2,6 +2,6 @@
 
 'use strict';
 
-angular.module('GeoBox', []); //base module. dependencies go into []
+angular.module('GeoBox', ['templates']); //base module. dependencies go into []
 
 })(); //Immediately Invoked 

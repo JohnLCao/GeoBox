@@ -2,30 +2,16 @@
 <html>
 <head>
   <title>GeoBox</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+<body ng-app="GeoBox">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="/">GeoBox</a>
-  <div class="collapse navbar-collapse">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <%= link_to 'Home', root_path, {class: 'nav-link', method: :get}%>
-      </li>
-    </ul>
-    <span class="nav-item active">
-      <%= link_to '', new_document_path, {class: 'fa fa-plus btn'} %>
-      <%= link_to 'Logout', logout_path, {method: :delete, class: 'btn'} %>
-    </span>
-  </div>
-</nav>
-
+<geobox-header></geobox-header>
 
 <%= render :partial => 'flash_messages', :flash => flash %>
 <%= yield %>

@@ -14,10 +14,13 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require angular
+//= require angular-rails-templates
 //= require toastr
 //= require underscore
 //= require gmaps/google
 //= require popper
 //= require bootstrap
 //= require jquery-sidebar
+//= require geobox.module
+//= require_tree ../templates
 //= require_tree .

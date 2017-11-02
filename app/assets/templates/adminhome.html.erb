@@ -1,0 +1,7 @@
+<% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
+<% environment.context_class.instance_eval { include ActionView::Helpers::UrlHelper } %>
+<div class="cntr">
+	<h1>Admin Home Page</h1> <br>
+	<%= link_to 'Users', users_path %> <hr>
+	<%= link_to 'Documents', documents_path %> 
+</div>
