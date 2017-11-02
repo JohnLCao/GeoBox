@@ -36,6 +36,10 @@ gem 'google-cloud-storage'
 
 # angular
 gem 'angularjs-rails'
+gem 'angular-rails-templates'
+
+# asset packaging
+gem 'sprockets'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
