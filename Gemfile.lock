@@ -247,7 +247,6 @@ DEPENDENCIES
   rails (= 4.2.8)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
-  sprockets
   toastr-rails
   turbolinks
   tzinfo-data
