@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :getNearByDocs]
+  before_action :ensure_admin, only: :index
   skip_before_action :ensure_login, only: [:new, :create]
   include DocumentsHelper
 
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   # GET /nearbydocs/:id/
-  def getNearByDocs    
+  def getNearByDocs
     return DocumentsHelper.fetchfiles(getCurrLatlng())
   end
 
@@ -61,7 +62,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(user_params) # users not allowed to change their class
         format.html { redirect_to @user, info: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
