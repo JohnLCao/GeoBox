@@ -5,86 +5,47 @@
 
 
 
-<div id="sidebar" class="sidebar collapsed">
-  <!-- Nav tabs -->
-  <div class="sidebar-tabs">
-    <ul role="tablist">
-      <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
-      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
-    </ul>
-
-    <ul role="tablist">
-      <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
-    </ul>
-  </div>
-
-  <!-- Tab panes -->
-  <div class="sidebar-content">
-    <div class="sidebar-pane" id="home">
-      <h1 class="sidebar-header">
-        Files
-        <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
-      </h1>
-
-      <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-          <div class="d-flex w-100 justify-content-between">
-          <table>
-            <% @documents.each do |document| %>
-          <tr>
-            <td><h5 class="mb-1"><%=link_to document.filename, document.cloudKey, data: { confirm: 'Are you sure you want to download?' }%></h5></td>
-        </tr>
-        <% end %>
-        <tr>
-          <td>
-            <div ng-app="mySidebar" ng-controller="mySideCtrl">
-  File Name: {{fileName}}
-
-</div>
-<script>
-var app = angular.module("mySidebar", ['ui.bootstrap', [require('angular-resource')]]);
-
-app.factory('Document', function($resource) {
-  return $resource('//localhost:3000/dummy/:documents', { documents: '@documents'},
-  {
-   'Docget': { method: 'GET', isArray: true }
-  });
-});
-
-app.controller('mySideCtrl', function($scope, Document) {
-    $scope.documents = Document.index();
-    $scope.fileName= documents.filename;
-    });
-</script>
-          </td>
-        </tr>
-        </table>
-        </div>
-        </a>
-      </div>
-
-    </div>
-
-    <div class="sidebar-pane" id="profile">
-      <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-    </div>
-
-    <div class="sidebar-pane" id="messages">
-      <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-    </div>
-
-    <div class="sidebar-pane" id="settings">
-      <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-    </div>
-  </div>
-</div>
+<geobox-sidebar></geobox-sidebar>
 
 <div id="geolocation"></div>
 
 
 <script >
+
+  var hours = (new Date()).getHours();
+  var mapStyle;
+
+  if (hours > 6 && hours < 20) {
+    mapStyle = [
+        {"featureType": "administrative", "stylers": [{"visibility": "off"}]},
+        {"featureType": "poi", "stylers": [{"visibility": "simplified"}]},
+        {"featureType": "road", "elementType": "labels", "stylers": [{"visibility": "simplified"}]},
+        {"featureType": "water", "stylers": [{"visibility": "simplified"}]},
+        {"featureType": "transit", "stylers": [{"visibility": "simplified"}]},
+        {"featureType": "landscape", "stylers": [{"visibility": "simplified"}]},
+        {"featureType": "road.highway", "stylers": [{"visibility": "off"}]},
+        {"featureType": "road.local", "stylers": [{"visibility": "on"}]},
+        {"featureType": "road.highway", "elementType": "geometry", "stylers": [{"visibility": "on"}]},
+        {"featureType": "water", "stylers": [{"color": "#84afa3"}, {"lightness": 52}]},
+        {"stylers": [{"saturation": -17}, {"gamma": 0.36}]},
+        {"featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#3f518c"}]}
+    ];
+  } else {
+    mapStyle = [
+        {"stylers": [{"hue": "#ff1a00"}, {"invert_lightness": true}, {"saturation": -100}, {"lightness": 33}, {"gamma": 0.5}]},
+        {"featureType": "water", "elementType": "geometry", "stylers": [{"color": "#2D333C"}]}
+    ]
+  }
+
     var handler = Gmaps.build('Google');
-    handler.buildMap({ internal: {id: 'geolocation'} }, function(){
+    handler.buildMap({ internal: {id: 'geolocation'}, provider:{
+        zoom: 19,
+        styles: mapStyle,
+        heading: 90,
+        tilt: 45,
+        streetViewControl: false,
+        fullscreenControl: false
+    }}, function(){
         // be aware chrome >= 50 requires https for geolocation to work
         if(navigator.geolocation)
             navigator.geolocation.getCurrentPosition(displayOnMap);
@@ -97,7 +58,9 @@ app.controller('mySideCtrl', function($scope, Document) {
         // TODO pass postion.coords lat and lng to UsersController
         handler.map.centerOn(marker);
     }
-    var sidebar = $('#sidebar').sidebar();
+
+    // var sidebar = $('#sidebar').sidebar();
+
 </script>
 
 <style>

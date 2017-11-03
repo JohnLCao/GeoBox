@@ -6,11 +6,12 @@ class SessionsController < ApplicationController
 	  end
 
 	  def create
-	  	user = User.find_by(username: params[:user][:username])
+	  	user = User.find_by(username: params[:user][:username].strip)
 	  	password = params[:user][:password]
 
 	  	if user && user.authenticate("#{password}")
 	  		session[:user_id] = user.id
+  			redirect_to admin_root_path and return if is_admin?
 	  		redirect_to root_path, success: "Logged in succesfully"
 	  	else
 	  		redirect_to login_path, danger: "Invalid username/password combination!"

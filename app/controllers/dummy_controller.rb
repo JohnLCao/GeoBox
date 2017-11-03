@@ -1,4 +1,6 @@
 class DummyController < ApplicationController
+	before_action :ensure_admin, only: :admin_home
+	
 	def home
 		@documents = Document.all
 		#could be @documents = Document.where(mutual_radius==true)
@@ -9,6 +11,9 @@ class DummyController < ApplicationController
 		@lat = params[:lat]
 		@lng = params[:lng]
 		render json: @lng
+	end
+
+	def admin_home
 	end
 
 	def angular_example

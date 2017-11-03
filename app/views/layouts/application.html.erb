@@ -2,13 +2,14 @@
 <html>
 <head>
   <title>GeoBox</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= csrf_meta_tags %>
 </head>
 
+<<<<<<< HEAD
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -24,7 +25,11 @@
     </span>
   </div>
 </nav>
+=======
+<body ng-app="GeoBox">
+>>>>>>> 99b7861dbd8a6d0729ec9d1511262435eb60c74f
 
+<geobox-header></geobox-header>
 
 <%= render :partial => 'flash_messages', :flash => flash %>
 <%= yield %>
