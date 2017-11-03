@@ -7,10 +7,12 @@
   z-index: 2000; }
 .sidebar.collapsed {
   width: 40px; }
+
+// Handles sidebar collapse
 @media (min-width: 768px) {
   .sidebar {
     top: 140px;
-    bottom: 10px;
+    bottom: 40px;
     transition: width 500ms; } }
 @media (min-width: 768px) and (max-width: 991px) {
   .sidebar {
@@ -34,11 +36,22 @@
   .sidebar-right {
     right: 10px; } }
 
+// Makes stuff move for sidebar to dock
+@media (max-width: 768px){
+  .sidebar {
+    margin-top: 56px;
+  }
+  #geolocation {
+    margin-left: 40px;
+  }
+}
+
+
 .sidebar-tabs {
   top: 0;
   bottom: 0;
   height: 100%;
-  background-color: #fff; }
+  background-color: #363a40; }
 .sidebar-left .sidebar-tabs {
   left: 0; }
 .sidebar-right .sidebar-tabs {
@@ -52,16 +65,16 @@
 .sidebar-tabs > li, .sidebar-tabs > ul > li {
   width: 100%;
   height: 40px;
-  color: #666;
+  color: #ffffff;
   font-size: 12pt;
   overflow: hidden;
   transition: all 80ms; }
 .sidebar-tabs > li:hover, .sidebar-tabs > ul > li:hover {
-  color: #000;
-  background-color: #fff9e6; }
+  color: #fff9e6;
+  background-color: #363a40; }
 .sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
-  color: #000;
-  background-color: #febf00; }
+  color: #363a40;
+  background-color: #ffffff; }
 .sidebar-tabs > li.disabled, .sidebar-tabs > ul > li.disabled {
   color: rgba(102, 102, 102, 0.4); }
 .sidebar-tabs > li.disabled:hover, .sidebar-tabs > ul > li.disabled:hover {
@@ -95,6 +108,7 @@
 .sidebar.collapsed > .sidebar-content {
   overflow-y: hidden; }
 
+// opening pane
 .sidebar-pane {
   display: none;
   left: 0;
@@ -113,17 +127,19 @@
   .sidebar-pane {
     min-width: 420px; } }
 
+// Header
 .sidebar-header {
   margin: -10px -20px 0;
   height: 40px;
   padding: 0 20px;
   line-height: 40px;
   font-size: 14.4pt;
-  color: #000;
-  background-color: #febf00; }
+  color: #363a40;
+  background-color: #ffffff; }
 .sidebar-right .sidebar-header {
   padding-left: 40px; }
 
+// Close button
 .sidebar-close {
   position: absolute;
   top: 0;
@@ -136,6 +152,7 @@
 .sidebar-right .sidebar-close {
   left: 0; }
 
+/*
 .sidebar-left ~ .sidebar-map {
   margin-left: 40px; }
 @media (min-width: 768px) {
@@ -155,7 +172,9 @@
   .sidebar {
     border: 0;
     border-radius: 2px; } }
+*/
 
+/*
 @media (min-width: 768px) {
   .sidebar-left {
     bottom: 35px; } }
@@ -202,4 +221,4 @@
 
 @media (min-width: 768px) {
   .sidebar-right.collapsed ~ .sidebar-map .gm-style > div.gmnoprint[style*="right: 28px"] {
-    margin-right: 60px !important; } }
+    margin-right: 60px !important; } }*/
