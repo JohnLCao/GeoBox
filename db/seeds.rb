@@ -7,5 +7,26 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.destroy_all
 User.create!([
-	{username: "jon", email: "know@nothing.ca", password: "snow"}
+	{username: "jon", email: "know@nothing.ca", password: "snow", password_confirmation: "snow"}
 ])
+
+Document.destroy_all
+Document.create!([
+	{
+		filename: "thefirst",
+		description: "some description",
+		latitude: "49.264603",
+		longitude: "-123.156184",
+		cloudKey: "123456",
+	}
+	])
+
+	Document.create!([
+		{
+			filename: "thesecond",
+			description: "some description",
+			latitude: "49.264603",
+			longitude: "-123.156184",
+			cloudKey: "234567",
+		}
+		])

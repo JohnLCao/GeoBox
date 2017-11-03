@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/angular_example" => "dummy#angular_example"
   #TO BE CHANGED
 
+  post "/dummy/newcoords"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
