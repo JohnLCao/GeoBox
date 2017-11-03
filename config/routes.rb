@@ -12,12 +12,8 @@ Rails.application.routes.draw do
   get "/angular_example" => "dummy#angular_example"
   #TO BE CHANGED
 
-<<<<<<< HEAD
-  post "/dummy/newcoords"
-=======
   get "/admin_root" => "dummy#admin_home", as: :admin_root
 
->>>>>>> 99b7861dbd8a6d0729ec9d1511262435eb60c74f
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

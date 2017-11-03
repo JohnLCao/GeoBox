@@ -5,7 +5,7 @@
 angular.module('GeoBox')
 .controller('SidebarController', SidebarController);
 
-SidebarController.$inject = ['$http', '$rootScope']; 
+SidebarController.$inject = ['$http', '$rootScope'];
 function SidebarController($http, $rootScope){
 	var $ctrl = this;
 
@@ -14,5 +14,12 @@ function SidebarController($http, $rootScope){
 		var sidebar = $('#sidebar').sidebar();
 	}
 }
+
+var app = angular.module('myApp', []);
+
+app.controller('myCtrl', [function($scope) {
+    $scope.firstName= "John";
+    $scope.lastName= "Doe";
+}]);
 
 })();
