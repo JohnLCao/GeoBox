@@ -5,8 +5,8 @@
 angular.module('GeoBox')
 .controller('AdminHomeController', AdminHomeController);
 
-AdminHomeController.$inject = ['$http', '$rootScope']; 
-function AdminHomeController($http, $rootScope){
+AdminHomeController.$inject = ['$rootScope']; 
+function AdminHomeController($rootScope){
 	var $ctrl = this;
 
 	$ctrl.$onInit = function(){

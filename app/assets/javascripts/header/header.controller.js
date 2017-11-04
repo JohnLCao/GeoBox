@@ -5,8 +5,8 @@
 angular.module('GeoBox')
 .controller('HeaderController', HeaderController);
 
-HeaderController.$inject = ['$http', '$scope']; 
-function HeaderController($http, $scope){
+HeaderController.$inject = ['$scope']; 
+function HeaderController($scope){
 	var $ctrl = this;
 	$ctrl.logged_in = false;
 
