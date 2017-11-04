@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 	add_flash_types :success, :danger, :info
 
   before_action :ensure_login
-  helper_method :logged_in?, :current_user # these will be available in views erb
+  helper_method :logged_in?, :current_user, :is_admin?, :ensure_admin, :ensure_not_guest # these will be available in views erb
 
   protected
   	def ensure_login
@@ -22,4 +22,16 @@ class ApplicationController < ActionController::Base
       # behaviour not well defined for guest user.
   		@current_user ||= User.find(session[:user_id])
   	end
+
+    def is_admin?
+      return (logged_in? and current_user.user_class == "admin")
+    end
+
+    def ensure_admin
+      redirect_to root_path unless is_admin?
+    end
+
+    def ensure_not_guest
+      redirect_to login_path unless logged_in?
+    end
 end

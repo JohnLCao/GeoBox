@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>New Document</h1>
+  <%= render 'form' %>
+  <% if is_admin? %>
+  	<%= link_to 'Back', documents_path %>
+  <% else %>
+  	<%= link_to 'Back', root_path, method: :get %>
+  <% end %>
+</div>
+
