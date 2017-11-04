@@ -8,6 +8,4 @@ angular.module('GeoBox')
 	controller: 'SidebarController'
 });
 
-angular.module('myApp', []);
-
 })();

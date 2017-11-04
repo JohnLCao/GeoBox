@@ -24,16 +24,22 @@ Document.create!([
 		longitude: "-123.156184",
 		cloudKey: "123456",
 	},{
+		filename: "firstandhalf",
+		description: "some half description",
+		latitude: "49.264603",
+		longitude: "-123.156184",
+		cloudKey: “098765”,
+	},{
 			filename: "thesecond",
 			description: "some second description",
-			latitude: "49.264603",
-			longitude: "-123.156184",
+			latitude: “53.264603",
+			longitude: "-124.156184",
 			cloudKey: "234567",
 	},{
 			filename: "thethird",
 			description: "some third description",
-			latitude: "49.264603",
-			longitude: "-122.9156184",
+			latitude: "55.264603",
+			longitude: "-124.9156184",
 			cloudKey: "345678",
 	}
 	])
