@@ -23,8 +23,7 @@ class UsersController < ApplicationController
 
   # GET /nearbydocs/:id/
   def getNearByDocs
-    return DocumentsHelper.fetchfiles(mocklatlng)
-    # return DocumentsHelper.fetchfiles(getCurrLatlng())
+    return DocumentsHelper.fetchfiles(getCurrLatlng())
   end
 
   # GET /users/1
