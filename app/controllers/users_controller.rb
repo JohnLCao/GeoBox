@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   skip_before_action :ensure_login, only: [:new, :create]
   include DocumentsHelper
 
-  mocklatlng = '49.2776421,-122.9170006'
 
   # GET /users
   # GET /users.json
@@ -12,18 +11,11 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # TODO tobe parametized later
-  def setCurrLatlng
-    @user.curr_latlng = mocklatlng
-  end
 
-  def getCurrLatlng
-    return @user.curr_latlng
-  end
 
   # GET /nearbydocs/:id/
   def getNearByDocs
-    return DocumentsHelper.fetchfiles(getCurrLatlng())
+    DocumentsHelper.fetchfiles(@user.curr_latlng)
   end
 
   # GET /users/1
@@ -34,6 +26,14 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+  end
+
+  def setlatlng(latlng)
+    @user.curr_latlng = latlng
+  end
+
+  def getlatlng
+    @user.curr_latlng
   end
 
   # GET /users/1/edit

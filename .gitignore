@@ -21,3 +21,6 @@
 
 #ignore MACOS bs
 .DS_Store
+
+/public/uploads/*
+
