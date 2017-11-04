@@ -2,8 +2,8 @@ module DocumentsHelper
   mockRadius = 0.00001497678
   setRadius = mockRadius
 
-  def fetchfiles(Latlng)
-    Document.all.select{|doc| mutualRadius?(Latlng, doc.latitude, doc.longitude)}
+  def fetchfiles(latlng)
+    Document.all.select{|doc| mutualRadius?(latlng, doc.latitude, doc.longitude)}
   end
 
   def mutualRadius?(userCurrentLatlng, doc_lat, doc_lng)
