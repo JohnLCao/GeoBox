@@ -1,0 +1,11 @@
+default: &default
+  cloud_storage:
+    bucket: geobox2
+    access_key_id: GOOGYWB53C7IH2RNJ7GG
+    secret_access_key: kIRXrpOs+XeoNCKAqMbT75xmVE1SLAOrVTHfI5t4
+
+development:
+  <<: *default
+
+production:
+  <<: *default
