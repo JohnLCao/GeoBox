@@ -7,3 +7,15 @@ one:
 two:
   username: MyString
   email: MyString
+
+admin:
+  username: admin_user
+  email: admin@geobox.com
+  password_digest: <%= default_password_digest %>
+  user_class: admin
+
+regular:
+  username: regular_user
+  email: user@geobox.com
+  password_digest: <%= default_password_digest %>
+  user_class: regular
