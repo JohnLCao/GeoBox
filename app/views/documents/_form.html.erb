@@ -1,4 +1,4 @@
-<%= form_for(@document) do |f| %>
+<%= form_for @document, html: { multipart: true } do |f| %>
   <% if @document.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
@@ -12,26 +12,18 @@
   <% end %>
 
   <div class="field form-group">
-    <%= f.label :filename %><br>
-    <%= f.text_field :filename, class: 'form-control', placeholder: 'Name of your file to be uploaded' %>
-  </div>
-  <div class="field form-group">
     <%= f.label :description %><br>
     <%= f.text_area :description, class: 'form-control', placeholder: 'A brief description of your file' %>
   </div>
-  <div class="field form-group">
-    <%= f.label :latitude %><br>
-    <%= f.text_field :latitude, class: 'form-control', placeholder: 'The latitude ASSIGNED' %>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <%= f.label :attachment %>
+      <%= f.file_field :attachment %>
+    </div>
+    <div class="actions col-md-6">
+      <%= f.submit :Submit, {class: 'btn btn-primary'} %>
+    </div>
   </div>
-  <div class="field form-group">
-    <%= f.label :longitude %><br>
-    <%= f.text_field :longitude, class: 'form-control', placeholder: 'The longitude ASSIGNED' %>
-  </div>
-  <div class="field form-group">
-    <%= f.label :cloudKey %><br>
-    <%= f.text_field :cloudKey, class: 'form-control', placeholder: 'The cloud-key ASSIGNED' %>
-  </div>
-  <div class="actions">
-    <%= f.submit :Submit, {class: 'btn btn-primary'} %>
-  </div>
+
 <% end %>

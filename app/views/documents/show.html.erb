@@ -21,13 +21,8 @@
 </p>
 
 <p>
-  <strong>Cloudkey:</strong>
-  <%= @document.cloudKey %>
-</p>
-
-<p>
   <strong>User:</strong>
-  <%= @document.user %>
+  <%= @document.user.username %>
 </p>
 
 <%= link_to 'Edit', edit_document_path(@document) %> |

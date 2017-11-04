@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   	end
 
     def is_admin?
-      return (logged_in? and current_user.user_class == "admin")
+      (logged_in? and current_user.user_class == "admin")
     end
 
     def ensure_admin
