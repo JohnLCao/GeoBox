@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   post "/set_location" => "users#setCurrLatlng"
 
+  get "/get_docs" => "users#getNearByDocs"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

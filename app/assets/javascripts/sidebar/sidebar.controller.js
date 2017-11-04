@@ -8,11 +8,16 @@ angular.module('GeoBox')
 SidebarController.$inject = ['$rootScope', 'DocumentService'];
 function SidebarController($rootScope, DocumentService){
 	var $ctrl = this;
-	$ctrl.first = "test";
+	$ctrl.docs = {};
+
 
 	$ctrl.$onInit = function(){
 		$rootScope.$broadcast('login:login', {}); // we can consider adding data to this event
 		var sidebar = $('#sidebar').sidebar();
+	}
+
+	$ctrl.getDocs = function(){
+		$ctrl.docs = DocumentService.docs;	
 	}
 }
 

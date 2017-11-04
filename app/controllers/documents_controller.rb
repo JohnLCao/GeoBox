@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :ensure_admin, only: :index
-  before_action :ensure_not_guest, only: [:new, :create] 
+  before_action :ensure_not_guest, only: [:new, :create]
 
   # GET /documents
   # GET /documents.json
@@ -29,8 +29,8 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     @document[:user_id] = session[:user_id]
     @document[:filename] = @document.attachment.file.filename
-    @document[:latitude] = current_user.getCurrLatlng().split(',').first
-    @document[:longitude] = current_user.getCurrLatlng().split(',').last
+    @document[:latitude] = current_user.getCurrLatlng[:lat]
+    @document[:longitude] = current_user.getCurrLatlng[:lng]
 
     print(@document.attachment)
     respond_to do |format|

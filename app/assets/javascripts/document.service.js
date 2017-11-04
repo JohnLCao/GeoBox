@@ -12,26 +12,35 @@ function DocumentService($http, DevBaseUrl){
 	doc_service.docs = {};
 
 	doc_service.getDocs = function(){
-
+		$http({
+			method: 'GET',
+			url: DevBaseUrl + '/get_docs',
+		})
+			.then(function(response){
+				doc_service.docs = response.data;
+				console.log(doc_service.docs);
+			})
+			.catch(function(error){
+				console.log(error);
+			})
 	}
+
+
 
 	doc_service.sendLoc = function(browser_lat, browser_lng){
 		$http({
 			method: 'POST',
-			url: DevBaseUrl + '/set_location',
-			data: {
-				user: {
-					lat: browser_lat,
-					lng: browser_lng
-				}
+			url: DevBaseUrl + '/set_location.json',
+			params: {
+				lat: browser_lat,
+				lng: browser_lng
 			}
 		})
 		.then(function(response){
-			doc_service.docs = response.data;
-			console.log(doc_service.docs);
+			doc_service.getDocs();
 		})
 		.catch(function(error){
-			console.warn(error);
+			console.log(error);
 		})
 	}
 
