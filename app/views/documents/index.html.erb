@@ -1,10 +1,10 @@
-
-<div class="container cntr">
+<br><br>
+<div class="container container-color">
   <p id="notice"><%= notice %></p>
 
   <h1>Listing Documents</h1>
 
-  <table class="table">
+  <table class="table table-responsive table-hover table-striped" style="background-color: #ffffff">
     <thead>
     <tr>
       <th>Filename</th>
@@ -24,11 +24,8 @@
           <td><%= document.latitude %></td>
           <td><%= document.longitude %></td>
           <td><%= document.user.username %></td>
-          <td><%= link_to 'Download Document', document.attachment_url %></td>
-          <td><%= link_to 'Show', document, class: 'btn btn-primary' %></td>
-<!--
-          <td><%= link_to 'Edit', edit_document_path(document), class: 'btn btn-warning' %></td>
--->
+          <td><%= link_to 'Download Document', document.attachment_url, class: 'btn btn-primary' %></td>
+          <td><%= link_to 'Show', document, class: 'btn btn-info' %></td>
           <td><%= link_to 'Destroy', document, method: :delete, class: 'btn btn-danger' %></td>
         </tr>
     <% end %>

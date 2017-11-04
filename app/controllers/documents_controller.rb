@@ -26,7 +26,6 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-
     @document = Document.new(document_params)
     @document[:user_id] = session[:user_id]
     @document[:filename] = @document.attachment.file.filename
@@ -61,6 +60,7 @@ class DocumentsController < ApplicationController
   def destroy
 
     # We need to delete the file off of the server at this point
+    @document.remove_attachment
 
     @document.destroy
     respond_to do |format|
