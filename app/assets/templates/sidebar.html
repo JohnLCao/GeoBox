@@ -20,8 +20,11 @@
       </h1>
 
       <div class="list-group">
-          <div ng-app="myApp" ng-controller="myCtrl">
-            Full Name: {{firstName + " " + lastName}}
+          <!-- <div ng-app="myApp" ng-controller="myCtrl">
+            Full Name: {{myCtrl.firstName + " " + myCtrl.lastName}}
+          </div> -->
+          <div>
+            {{$ctrl.first}}
           </div>
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
           <div class="d-flex w-100 justify-content-between">

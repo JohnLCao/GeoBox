@@ -7,10 +7,10 @@ module DocumentsHelper
   end
 
   def mutualRadius?(userCurrentLatlng, doc_lat, doc_lng)
-    userlat = userCurrentLatlng.split(',')[0].to_i
-    userlng = userCurrentLatlng.split(',')[1].to_i
-    deltaLat = userlat - doc_lat.to_i
-    deltaLng = userlng - doc_lng.to_i
+    userlat = userCurrentLatlng[:lat].to_f
+    userlng = userCurrentLatlng[:lng].to_f
+    deltaLat = userlat - doc_lat.to_f
+    deltaLng = userlng - doc_lng.to_f
     distanceInDeg = (deltaLat * deltaLat + deltaLng * deltaLng) ** 0.5 #pythag hypotenuse
     return (distanceInDeg < setRadius)
   end

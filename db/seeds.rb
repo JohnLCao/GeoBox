@@ -28,11 +28,11 @@ Document.create!([
 		description: "some half description",
 		latitude: "49.264603",
 		longitude: "-123.156184",
-		cloudKey: “098765”,
+		cloudKey: "098765",
 	},{
 			filename: "thesecond",
 			description: "some second description",
-			latitude: “53.264603",
+			latitude: "53.264603",
 			longitude: "-124.156184",
 			cloudKey: "234567",
 	},{

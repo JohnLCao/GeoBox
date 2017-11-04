@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :getNearByDocs]
   before_action :ensure_admin, only: :index
   skip_before_action :ensure_login, only: [:new, :create]
+  skip_before_action :verify_authenticity_token, only: [:setCurrLatlng, :getCurrLatlng, :getNearByDocs]
+
   include DocumentsHelper
 
   mocklatlng = '49.2776421,-122.9170006'
@@ -14,7 +16,8 @@ class UsersController < ApplicationController
 
   # TODO tobe parametized later
   def setCurrLatlng
-    @user.curr_latlng = mocklatlng
+    @user.curr_latlng = {lat: loc_params[:user][:lat], lng: loc_params[:user][:lng]}
+    puts @user.curr_latlng
   end
 
   def getCurrLatlng
@@ -91,5 +94,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    end
+
+    def loc_params
+      params.require(:user).permit(:lat, :lng)
     end
 end
