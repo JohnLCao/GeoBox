@@ -25,11 +25,8 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    user = User.find(session[:user_id])
-    document_params[:user] = user
-
     @document = Document.new(document_params)
-
+    @document[:user_id] = session[:user_id]
     respond_to do |format|
       if @document.save
         format.html { redirect_to root_path, success: 'Document was successfully created.' }
@@ -76,6 +73,6 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:filename, :description, :latitude, :longitude, :cloudKey, :user)
+      params.require(:document).permit(:filename, :description, :latitude, :longitude, :cloudKey, :attachment)
     end
 end
