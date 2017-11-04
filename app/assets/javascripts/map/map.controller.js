@@ -5,8 +5,8 @@
 angular.module('GeoBox')
 .controller('MapController', MapController);
 
-MapController.$inject = []; 
-function MapController(){
+MapController.$inject = ['DocumentService']; 
+function MapController(DocumentService){
 	var $ctrl = this;
  
 	$ctrl.$onInit = function(){

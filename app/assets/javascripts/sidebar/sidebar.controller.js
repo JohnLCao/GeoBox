@@ -5,8 +5,8 @@
 angular.module('GeoBox')
 .controller('SidebarController', SidebarController);
 
-SidebarController.$inject = ['$rootScope']; 
-function SidebarController($rootScope){
+SidebarController.$inject = ['$rootScope', 'DocumentService']; 
+function SidebarController($rootScope, DocumentService){
 	var $ctrl = this;
  
 	$ctrl.$onInit = function(){
