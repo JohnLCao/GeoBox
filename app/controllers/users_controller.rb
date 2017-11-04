@@ -1,12 +1,29 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :getNearByDocs]
   before_action :ensure_admin, only: :index
   skip_before_action :ensure_login, only: [:new, :create]
+  include DocumentsHelper
+
+  mocklatlng = '49.2776421,-122.9170006'
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+  end
+
+  # TODO tobe parametized later
+  def setCurrLatlng
+    @user.curr_latlng = mocklatlng
+  end
+
+  def getCurrLatlng
+    return @user.curr_latlng
+  end
+
+  # GET /nearbydocs/:id/
+  def getNearByDocs
+    return DocumentsHelper.fetchfiles(getCurrLatlng())
   end
 
   # GET /users/1
