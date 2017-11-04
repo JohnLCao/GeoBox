@@ -5,8 +5,8 @@
 angular.module('GeoBox')
 .controller('SidebarController', SidebarController);
 
-SidebarController.$inject = ['$rootScope', 'DocumentService'];
-function SidebarController($rootScope, DocumentService){
+SidebarController.$inject = ['$rootScope', 'DocumentService', '$scope'];
+function SidebarController($rootScope, DocumentService, $scope){
 	var $ctrl = this;
 	$ctrl.docs = {};
 
@@ -16,9 +16,13 @@ function SidebarController($rootScope, DocumentService){
 		var sidebar = $('#sidebar').sidebar();
 	}
 
-	$ctrl.getDocs = function(){
-		$ctrl.docs = DocumentService.docs;	
+	$ctrl.getDocs = function(e,d){
+		// console.log("from sidebar controller:   ", DocumentService.docs)
+		$ctrl.docs = DocumentService.docs;
 	}
+
+	$scope.$on('documents:ready', $ctrl.getDocs);
+
 }
 
 // var app = angular.module('myApp', []);
