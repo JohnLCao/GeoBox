@@ -1,7 +1,8 @@
 class DummyController < ApplicationController
 	before_action :ensure_admin, only: :admin_home
-	
+
 	def home
+
 	end
 
 	def admin_home
