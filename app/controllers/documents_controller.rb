@@ -29,6 +29,9 @@ class DocumentsController < ApplicationController
     @document = Document.new(document_params)
     @document[:user_id] = session[:user_id]
     @document[:filename] = @document.attachment.file.filename
+    @document[:latitude] = current_user.getCurrLatlng().split(',').first
+    @document[:longitude] = current_user.getCurrLatlng().split(',').last
+
     print(@document.attachment)
     respond_to do |format|
       if @document.save
@@ -77,6 +80,6 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:description, :latitude, :longitude, :attachment)
+      params.require(:document).permit(:description, :attachment)
     end
 end
