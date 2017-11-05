@@ -10,11 +10,11 @@ function DocumentService($http, $rootScope){
 	var doc_service = this;
 	doc_service.docs = {};
 
-	doc_service.baseUrl = `<% if Rails.env.production? %>	
-							<%= 'https://geobox.herokuapp.com' %> 
-						  <% else %>
-						  	<%= 'http://localhost:3000' %>
-						  <% end %>`.trim();
+	doc_service.baseUrl = "<% if Rails.env.production? %>			\
+							<%= 'https://geobox.herokuapp.com' %> 	\
+						  <% else %>								\
+						  	<%= 'http://localhost:3000' %> 			\
+						  <% end %>".trim();
 
 	doc_service.getDocs = function(){
 		$http({
