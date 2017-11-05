@@ -5,10 +5,10 @@
 angular.module('GeoBox')
 .controller('MapController', MapController);
 
-MapController.$inject = ['DocumentService']; 
+MapController.$inject = ['DocumentService'];
 function MapController(DocumentService){
 	var $ctrl = this;
- 
+
 	$ctrl.$onInit = function(){
 	  var hours = (new Date()).getHours();
 	  var mapStyle;
@@ -46,17 +46,18 @@ function MapController(DocumentService){
 	    }}, function(){
 	        // be aware chrome >= 50 requires https for geolocation to work
 	        if(navigator.geolocation)
-	            navigator.geolocation.getCurrentPosition(displayOnMap);
+	            navigator.geolocation.getCurrentPosition(displayOnMapWithSend);
 	    });
 	}
 
-	function displayOnMap(position){
+	function displayOnMapWithSend(position){
         var marker = $ctrl.handler.addMarker({
             lat: position.coords.latitude,
             lng: position.coords.longitude
         });
         $ctrl.handler.map.centerOn(marker);
-    }
+				DocumentService.sendLoc(position.coords.latitude.toString(), position.coords.longitude.toString());
+  }
 }
 
 })();

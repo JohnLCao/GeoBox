@@ -1,7 +1,7 @@
 class DocumentsController < ApplicationController
   before_action :set_document, only: [:show, :edit, :update, :destroy]
   before_action :ensure_admin, only: :index
-  before_action :ensure_not_guest, only: [:new, :create] 
+  before_action :ensure_not_guest, only: [:new, :create]
 
   # GET /documents
   # GET /documents.json
@@ -26,11 +26,13 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    user = User.find(session[:user_id])
-    document_params[:user] = user
-
     @document = Document.new(document_params)
+    @document[:user_id] = session[:user_id]
+    @document[:filename] = @document.attachment.file.filename
+    @document[:latitude] = current_user.getCurrLatlng[:lat]
+    @document[:longitude] = current_user.getCurrLatlng[:lng]
 
+    print(@document.attachment)
     respond_to do |format|
       if @document.save
         format.html { redirect_to root_path, success: 'Document was successfully created.' }
@@ -61,6 +63,7 @@ class DocumentsController < ApplicationController
   def destroy
 
     # We need to delete the file off of the server at this point
+    @document.remove_attachment
 
     @document.destroy
     respond_to do |format|
@@ -77,6 +80,6 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:filename, :description, :latitude, :longitude, :cloudKey, :user)
+      params.require(:document).permit(:description, :attachment)
     end
 end

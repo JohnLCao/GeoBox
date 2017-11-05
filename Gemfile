@@ -6,6 +6,7 @@ gem 'bootstrap', '~> 4.0.0.beta2.1'
 gem 'underscore-rails'
 gem 'toastr-rails'
 gem 'font-awesome-sass'
+gem 'carrierwave', '~> 1.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
 # Use postgresl as the database for Active Record

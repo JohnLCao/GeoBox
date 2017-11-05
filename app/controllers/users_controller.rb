@@ -2,11 +2,29 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_admin, only: :index
   skip_before_action :ensure_login, only: [:new, :create]
+  skip_before_action :verify_authenticity_token, only: [:setCurrLatlng, :getCurrLatlng, :getNearByDocs]
+
+  include DocumentsHelper
+
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+  end
+
+  # TODO tobe parametized later
+  def setCurrLatlng
+    @user = User.find(current_user.id)
+    @user.setCurrLatlng({lat: loc_params[:lat], lng: loc_params[:lng]})
+    redirect_to root_path
+  end
+
+
+  # GET /nearbydocs/
+  def getNearByDocs
+    @user = User.find(current_user.id)
+    render json: DocumentsHelper.fetchfiles(@user.getCurrLatlng)
   end
 
   # GET /users/1
@@ -74,5 +92,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    end
+
+    def loc_params
+      params.permit(:lat, :lng)
     end
 end
