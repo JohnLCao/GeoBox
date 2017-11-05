@@ -65,7 +65,7 @@ function MapController(DocumentService, $scope){
 	}
 
 	function stripMarkerShadow(){
-		if ($('.marker_container').length != DocumentService.docs.length){
+		if ($('.marker_container').length != DocumentService.docs.length + 1){
 			setTimeout(stripMarkerShadow, 100);
 		}
 		$('.marker_container').parent().parent().css('box-shadow', 'none');
