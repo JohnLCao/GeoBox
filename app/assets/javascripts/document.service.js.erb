@@ -3,11 +3,10 @@
 'use strict';
 
 angular.module('GeoBox')
-.service('DocumentService', DocumentService)
-.constant('DevBaseUrl', 'http://localhost:3000');
+.service('DocumentService', DocumentService);
 
-DocumentService.$inject = ['$http', 'DevBaseUrl', '$rootScope'] //$resources or $http would likely go here.
-function DocumentService($http, DevBaseUrl, $rootScope){
+DocumentService.$inject = ['$http', '$rootScope'] //$resources or $http would likely go here.
+function DocumentService($http, $rootScope){
 	var doc_service = this;
 	doc_service.docs = {};
 
