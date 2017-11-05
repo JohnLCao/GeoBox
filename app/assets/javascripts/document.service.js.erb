@@ -1,0 +1,58 @@
+(function(){
+
+'use strict';
+
+angular.module('GeoBox')
+.service('DocumentService', DocumentService);
+
+DocumentService.$inject = ['$http', '$rootScope'] //$resources or $http would likely go here.
+function DocumentService($http, $rootScope){
+	var doc_service = this;
+	doc_service.docs = {};
+
+	doc_service.baseUrl = "<% if Rails.env.production? %>			\
+							<%= 'https://geobox.herokuapp.com' %> 	\
+						  <% else %>								\
+						  	<%= 'http://localhost:3000' %> 			\
+						  <% end %>".trim();
+
+	doc_service.getDocs = function(){
+		$http({
+			method: 'GET',
+			url: doc_service.baseUrl + '/get_docs',
+		})
+		.then(function(response){
+			doc_service.docs = response.data;
+			$rootScope.$broadcast('documents:ready');
+		})
+		.catch(function(error){
+			console.log(error);
+		})
+	}
+
+
+
+	doc_service.sendLoc = function(browser_lat, browser_lng){
+		return $http({
+			method: 'POST',
+			url: doc_service.baseUrl + '/set_location',
+			params: {
+				lat: browser_lat,
+				lng: browser_lng
+			}
+		})
+		.then(function(response){
+			doc_service.getDocs();
+		})
+		.catch(function(error){
+			console.log(error);
+		})
+	}
+
+	doc_service.setCurrentLocation = function(lat, lng){
+		doc_service.loc.lat = lat;
+		doc_service.loc.lng = lng;
+	}
+}
+
+})();
