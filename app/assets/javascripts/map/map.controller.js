@@ -5,8 +5,8 @@
 angular.module('GeoBox')
 .controller('MapController', MapController);
 
-MapController.$inject = ['DocumentService'];
-function MapController(DocumentService){
+MapController.$inject = ['DocumentService', '$scope'];
+function MapController(DocumentService, $scope){
 	var $ctrl = this;
 
 	$ctrl.$onInit = function(){
@@ -49,6 +49,15 @@ function MapController(DocumentService){
 	            navigator.geolocation.getCurrentPosition(displayOnMapWithSend);
 	    });
 	}
+
+	$scope.$on('documents:ready', function(e, data){
+		DocumentService.docs.forEach(function(doc){
+			var marker = $ctrl.handler.addMarker({
+					lat: doc.latitude,
+					lng: doc.longitude
+			});
+		})
+	})
 
 	function displayOnMapWithSend(position){
         var marker = $ctrl.handler.addMarker({

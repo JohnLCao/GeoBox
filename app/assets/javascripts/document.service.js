@@ -6,8 +6,8 @@ angular.module('GeoBox')
 .service('DocumentService', DocumentService)
 .constant('DevBaseUrl', 'http://localhost:3000');
 
-DocumentService.$inject = ['$http', 'DevBaseUrl'] //$resources or $http would likely go here.
-function DocumentService($http, DevBaseUrl){
+DocumentService.$inject = ['$http', 'DevBaseUrl', '$rootScope'] //$resources or $http would likely go here.
+function DocumentService($http, DevBaseUrl, $rootScope){
 	var doc_service = this;
 	doc_service.docs = {};
 
@@ -18,7 +18,7 @@ function DocumentService($http, DevBaseUrl){
 		})
 			.then(function(response){
 				doc_service.docs = response.data;
-				console.log(doc_service.docs);
+				$rootScope.$broadcast('documents:ready');
 			})
 			.catch(function(error){
 				console.log(error);
@@ -28,7 +28,7 @@ function DocumentService($http, DevBaseUrl){
 
 
 	doc_service.sendLoc = function(browser_lat, browser_lng){
-		$http({
+		return $http({
 			method: 'POST',
 			url: DevBaseUrl + '/set_location.json',
 			params: {
