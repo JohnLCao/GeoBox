@@ -11,10 +11,16 @@ function DocumentService($http, DevBaseUrl, $rootScope){
 	var doc_service = this;
 	doc_service.docs = {};
 
+	doc_service.baseUrl = `<% if Rails.env.production? %>	
+							<%= 'https://geobox.herokuapp.com' %> 
+						  <% else %>
+						  	<%= 'http://localhost:3000' %>
+						  <% end %>`.trim();
+
 	doc_service.getDocs = function(){
 		$http({
 			method: 'GET',
-			url: DevBaseUrl + '/get_docs',
+			url: doc_service.baseUrl + '/get_docs',
 		})
 		.then(function(response){
 			doc_service.docs = response.data;
@@ -30,7 +36,7 @@ function DocumentService($http, DevBaseUrl, $rootScope){
 	doc_service.sendLoc = function(browser_lat, browser_lng){
 		return $http({
 			method: 'POST',
-			url: DevBaseUrl + '/set_location',
+			url: doc_service.baseUrl + '/set_location',
 			params: {
 				lat: browser_lat,
 				lng: browser_lng
