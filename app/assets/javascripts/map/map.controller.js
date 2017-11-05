@@ -35,7 +35,7 @@ function MapController(DocumentService, $scope){
 	    ]
 	  }
 
-	    $ctrl.handler = Gmaps.build('Google');
+	    $ctrl.handler = Gmaps.build('Google', {builders: {Marker: RichMarkerBuilder}});
 	    $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
 	        zoom: 19,
 	        styles: mapStyle,
@@ -50,23 +50,51 @@ function MapController(DocumentService, $scope){
 	    });
 	}
 
-	$scope.$on('documents:ready', function(e, data){
+	$scope.$on('documents:ready', updateMarkers);
+
+	function updateMarkers(e,data){
 		DocumentService.docs.forEach(function(doc){
 			var marker = $ctrl.handler.addMarker({
-					lat: doc.latitude,
-					lng: doc.longitude
+				lat: Number(doc.latitude),
+				lng: Number(doc.longitude),
+				marker: "<img src='images/file.png' width='35' height='35'>"
 			});
-		})
-	})
+		});
+
+		stripMarkerShadow();
+	}
+
+	function stripMarkerShadow(){
+		if ($('.marker_container').length != DocumentService.docs.length){
+			setTimeout(stripMarkerShadow, 100);
+		}
+		$('.marker_container').parent().parent().css('box-shadow', 'none');
+	}
 
 	function displayOnMapWithSend(position){
         var marker = $ctrl.handler.addMarker({
             lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lng: position.coords.longitude,
+            marker: "<img src='images/user.png' width='50' height= '50'>"
         });
         $ctrl.handler.map.centerOn(marker);
-				DocumentService.sendLoc(position.coords.latitude.toString(), position.coords.longitude.toString());
-  }
+		DocumentService.sendLoc(position.coords.latitude.toString(), position.coords.longitude.toString());
+  	}
+
+	class RichMarkerBuilder extends Gmaps.Google.Builders.Marker { //inherit from builtin builder
+	  //override create_marker method
+	  create_marker() {
+	    const options = _.extend(this.marker_options(), this.rich_marker_options());
+	    return this.serviceObject = new RichMarker(options); //assign marker to @serviceObject
+	  }
+
+	  rich_marker_options() {
+	    const marker = document.createElement("div");
+	    marker.setAttribute('class', 'marker_container');
+	    marker.innerHTML = this.args.marker;
+	    return { content: marker };
+	  }
+	}
 }
 
 })();

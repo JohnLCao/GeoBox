@@ -16,13 +16,13 @@ function DocumentService($http, DevBaseUrl, $rootScope){
 			method: 'GET',
 			url: DevBaseUrl + '/get_docs',
 		})
-			.then(function(response){
-				doc_service.docs = response.data;
-				$rootScope.$broadcast('documents:ready');
-			})
-			.catch(function(error){
-				console.log(error);
-			})
+		.then(function(response){
+			doc_service.docs = response.data;
+			$rootScope.$broadcast('documents:ready');
+		})
+		.catch(function(error){
+			console.log(error);
+		})
 	}
 
 
@@ -30,7 +30,7 @@ function DocumentService($http, DevBaseUrl, $rootScope){
 	doc_service.sendLoc = function(browser_lat, browser_lng){
 		return $http({
 			method: 'POST',
-			url: DevBaseUrl + '/set_location.json',
+			url: DevBaseUrl + '/set_location',
 			params: {
 				lat: browser_lat,
 				lng: browser_lng
