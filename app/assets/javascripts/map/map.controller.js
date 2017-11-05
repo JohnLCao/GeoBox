@@ -48,16 +48,21 @@ function MapController(DocumentService, $scope){
 	        if(navigator.geolocation)
 	            navigator.geolocation.getCurrentPosition(displayOnMapWithSend);
 	    });
-	}
+	};
 
 	$scope.$on('documents:ready', function(e, data){
 		DocumentService.docs.forEach(function(doc){
 			var marker = $ctrl.handler.addMarker({
 					lat: doc.latitude,
-					lng: doc.longitude
+					lng: doc.longitude,
+                    picture: {
+                        url: 'assets/map_marker.png',
+                        width: 40,
+                        height: 40
+                    }
 			});
 		})
-	})
+	});
 
 	function displayOnMapWithSend(position){
         var marker = $ctrl.handler.addMarker({
