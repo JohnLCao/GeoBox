@@ -24,7 +24,9 @@
             Full Name: {{myCtrl.firstName + " " + myCtrl.lastName}}
           </div> -->
         <!-- dynamic -->
-        <a ng-repeat="doc in $ctrl.docs" href={{doc.attachment.url}} class="list-group-item list-group-item-action flex-column align-items-start">
+
+        <a ng-repeat="doc in $ctrl.docs" href="{{doc.attachment.url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{doc.filename}}</h5>
             <small class="text-muted">x days ago</small>
@@ -35,7 +37,7 @@
       </div>
 
     </div>
-
+  
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
     </div>

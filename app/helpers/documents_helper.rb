@@ -4,14 +4,10 @@ module DocumentsHelper
 
 
   def self.fetchfiles(latlng)
-    ds = Document.all.select{|doc| mutualRadius?(latlng, doc.latitude, doc.longitude)}
-    puts "docs fetched: " + ds.to_s
-    return ds
+    Document.all.select{|doc| mutualRadius?(latlng, doc.latitude, doc.longitude)}
   end
 
   def self.mutualRadius?(userCurrentLatlng, doc_lat, doc_lng)
-    puts "Something here."
-    puts userCurrentLatlng[:lat].to_s
     userlat = userCurrentLatlng[:lat].to_f
     userlng = userCurrentLatlng[:lng].to_f
     deltaLat = userlat - doc_lat.to_f
