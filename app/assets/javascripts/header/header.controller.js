@@ -12,7 +12,7 @@ function HeaderController($scope){
 
 	$scope.$on('login:login', function(e, args){
 		$ctrl.logged_in = true;
-	})
+	});
 
 	$ctrl.onLogout = function(){
 		$ctrl.logged_in = false;
