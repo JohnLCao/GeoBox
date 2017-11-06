@@ -1,29 +1,16 @@
 <%= form_for @document, html: { multipart: true } do |f| %>
-  <% if @document.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
-
-      <ul>
-      <% @document.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div class="field form-group">
     <%= f.label :description %><br>
     <%= f.text_area :description, class: 'form-control', placeholder: 'A brief description of your file' %>
   </div>
 
-  <div class="row">
-    <div class="form-group col-md-6">
-      <%= f.label :attachment %>
-      <%= f.file_field :attachment %>
-    </div>
-    <div class="actions col-md-6">
-      <%= f.submit :Submit, {class: 'btn btn-primary'} %>
-    </div>
+  <div class="form-group">
+    <%= f.label :attachment %>
+    <%= f.file_field :attachment %>
   </div>
 
+  <div class="actions">
+    <%= f.submit :Submit, {class: 'btn btn-primary'} %>
+  </div><br>
 <% end %>

@@ -48,7 +48,7 @@ function MapController(DocumentService, $scope){
 	        if(navigator.geolocation)
 	            navigator.geolocation.getCurrentPosition(displayOnMapWithSend);
 	    });
-	}
+	};
 
 	$scope.$on('documents:ready', updateMarkers);
 

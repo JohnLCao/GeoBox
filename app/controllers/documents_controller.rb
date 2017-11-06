@@ -28,7 +28,11 @@ class DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     @document[:user_id] = session[:user_id]
-    @document[:filename] = @document.attachment.file.filename
+    if @document.attachment.file
+      @document[:filename] = @document.attachment.file.filename
+    else
+      @document[:filename] = 'error'
+    end
     @document[:latitude] = current_user.getCurrLatlng[:lat]
     @document[:longitude] = current_user.getCurrLatlng[:lng]
 
@@ -38,6 +42,7 @@ class DocumentsController < ApplicationController
         format.html { redirect_to root_path, success: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
+        flash[:danger] = @document.errors.collect { |key, value| "#{key.capitalize} #{value}" }.first
         format.html { render :new }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
