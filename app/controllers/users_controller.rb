@@ -15,16 +15,24 @@ class UsersController < ApplicationController
 
   # TODO tobe parametized later
   def setCurrLatlng
-    @user = User.find(current_user.id)
-    @user.setCurrLatlng({lat: loc_params[:lat], lng: loc_params[:lng]})
+    unless current_user.nil?
+      @user = User.find(current_user.id)
+      @user.setCurrLatlng({lat: loc_params[:lat], lng: loc_params[:lng]})
+    else
+      $guest_loc = {lat: loc_params[:lat], lng: loc_params[:lng]}
+    end
     redirect_to root_path
   end
 
 
   # GET /nearbydocs/
   def getNearByDocs
-    @user = User.find(current_user.id)
-    render json: DocumentsHelper.fetchfiles(@user.getCurrLatlng)
+    unless current_user.nil?
+      @user = User.find(current_user.id)
+      render json: DocumentsHelper.fetchfiles(@user.getCurrLatlng)
+    else
+      render json: DocumentsHelper.fetchfiles($guest_loc)
+    end
   end
 
   # GET /users/1
