@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :ensure_login
   helper_method :logged_in?, :current_user, :is_admin?, :ensure_admin, :ensure_not_guest # these will be available in views erb
 
+
   protected
   	def ensure_login
   		redirect_to login_path unless (session[:user_id] || session[:guest])
@@ -21,8 +22,11 @@ class ApplicationController < ActionController::Base
   	end
 
   	def current_user
-      # behaviour not well defined for guest user.
-  		@current_user ||= User.find(session[:user_id])
+      unless (session[:user_id])
+        return nil
+      else
+  		  @current_user ||= User.find(session[:user_id])
+      end
   	end
 
     def is_admin?

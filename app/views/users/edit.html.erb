@@ -1,6 +1,12 @@
-<h1>Editing User</h1>
+<div class="container cntr">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 sm-offset-2 col-md-6 md-offset-3 col-lg-4 lg-offset-4 container-color">
+      <h1>Editing User</h1>
+      <%= render 'form' %>
+      <br>
+      <%= link_to 'Back', users_path %>
+    </div>
+  </div>
+</div>
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
