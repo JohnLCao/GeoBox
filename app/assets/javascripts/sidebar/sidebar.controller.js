@@ -14,12 +14,12 @@ function SidebarController($rootScope, DocumentService, $scope){
 	$ctrl.$onInit = function(){
 		$rootScope.$broadcast('login:login', {}); // we can consider adding data to this event
 		var sidebar = $('#sidebar').sidebar();
-	}
+	};
 
 	$ctrl.getDocs = function(e,d){
 		// console.log("from sidebar controller:   ", DocumentService.docs)
 		$ctrl.docs = DocumentService.docs;
-	}
+	};
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
 

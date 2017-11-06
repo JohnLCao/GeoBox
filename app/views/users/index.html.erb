@@ -1,33 +1,34 @@
-
 <div class="container">
-  <p id="notice"><%= notice %></p>
-
-  <h1>Listing Users</h1>
-
-  <table class="table table-hover table-responsive">
-    <thead>
-    <tr>
-      <th>Username</th>
-      <th>Email</th>
-      <th colspan="3"></th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <% @users.each do |user| %>
+  <div class="row justify-content-center">
+    <div class="container-color col-11">
+      <p id="notice"><%= notice %></p>
+      <h1>Listing Users</h1>
+      <table class="table table-responsive table-hover" style="background-color: #ffffff">
+        <thead>
         <tr>
-          <td><%= user.username %></td>
-          <td><%= user.email %></td>
-          <td><%= link_to 'Show', user, class: 'btn btn-primary' %></td>
-          <td><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-warning'  %></td>
-          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %></td>
+          <th>Username</th>
+          <th>Email</th>
+          <th colspan="3"></th>
         </tr>
-    <% end %>
-    </tbody>
-  </table>
-
-  <br>
-
-  <%= link_to 'New User', new_user_path %>
+        </thead>
+        <tbody>
+        <% @users.each do |user| %>
+            <tr>
+              <td><%= user.username %></td>
+              <td><%= user.email %></td>
+<!--
+              <td><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-warning'  %></td>
+-->
+              <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <br>
+      <%= link_to 'New User', new_user_path %>
+      <br>
+      <%= link_to 'Back', admin_root_path %>
+    </div>
+  </div>
 </div>
 
