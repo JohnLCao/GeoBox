@@ -16,6 +16,8 @@ User.create!([
 ])
 
 # Document.destroy_all
+
+# Document.destroy_all
 # Document.create!([
 # 	{
 # 		filename: "thefirst",
