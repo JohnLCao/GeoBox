@@ -80,7 +80,7 @@ function MapController(DocumentService, $scope){
             marker: "<img src='images/user.png' width='50' height= '50'>"
         });
         $ctrl.handler.map.centerOn(marker);
-		DocumentService.sendLoc(position.coords.latitude.toString(), position.coords.longitude.toString());
+		DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
   	}
 
 	class RichMarkerBuilder extends Gmaps.Google.Builders.Marker { //inherit from builtin builder

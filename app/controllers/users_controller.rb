@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_admin, only: :index
   skip_before_action :ensure_login, only: [:new, :create]
-  skip_before_action :verify_authenticity_token, only: [:setCurrLatlng, :getCurrLatlng, :getNearByDocs]
+  skip_before_action :verify_authenticity_token, only: :updateLocation
 
   include DocumentsHelper
 
@@ -13,26 +13,8 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # TODO tobe parametized later
-  def setCurrLatlng
-    unless current_user.nil?
-      @user = User.find(current_user.id)
-      @user.setCurrLatlng({lat: loc_params[:lat], lng: loc_params[:lng]})
-    else
-      $guest_loc = {lat: loc_params[:lat], lng: loc_params[:lng]}
-    end
-    redirect_to root_path
-  end
-
-
-  # GET /nearbydocs/
-  def getNearByDocs
-    unless current_user.nil?
-      @user = User.find(current_user.id)
-      render json: DocumentsHelper.fetchfiles(@user.getCurrLatlng)
-    else
-      render json: DocumentsHelper.fetchfiles($guest_loc)
-    end
+  def updateLocation
+    render json: DocumentsHelper.fetchfiles({lat: loc_params[:lat], lng: loc_params[:lng]})
   end
 
   # GET /users/1
