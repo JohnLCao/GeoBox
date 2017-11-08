@@ -5,9 +5,11 @@
 angular.module('GeoBox')
 .controller('MapController', MapController);
 
-MapController.$inject = ['DocumentService', '$scope'];
-function MapController(DocumentService, $scope){
+MapController.$inject = ['DocumentService', '$scope', '$interval'];
+function MapController(DocumentService, $scope, $interval){
 	var $ctrl = this;
+	$ctrl.doc_markers = [];
+	$ctrl.user_marker = [];
 
 	$ctrl.$onInit = function(){
 	  var hours = (new Date()).getHours();
@@ -43,22 +45,37 @@ function MapController(DocumentService, $scope){
 	        tilt: 45,
 	        streetViewControl: false,
 	        fullscreenControl: false
-	    }}, function(){
-	        // be aware chrome >= 50 requires https for geolocation to work
-	        if(navigator.geolocation)
-	            navigator.geolocation.getCurrentPosition(displayOnMapWithSend);
-	    });
+	    }}, updateLocation);
 	};
 
 	$scope.$on('documents:ready', updateMarkers);
 
+	$ctrl.locUpdater = $interval(function(){
+		if ($ctrl.handler){	
+			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker));		
+			updateLocation();
+		}
+	}, 2500) // currently updates every 2.5 seconds
+
+	$ctrl.$onDestroy = function(){
+		$interval.cancel($ctrl.locUpdater);
+	}
+
+	function updateLocation(){
+		if(navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(displayOnMapWithSend);
+		}
+	}
+
 	function updateMarkers(e,data){
+		$ctrl.doc_markers = [];
 		DocumentService.docs.forEach(function(doc){
-			var marker = $ctrl.handler.addMarker({
+			var new_marker = $ctrl.handler.addMarker({
 				lat: Number(doc.latitude),
 				lng: Number(doc.longitude),
 				marker: "<img src='images/file.png' width='35' height='35'>"
 			});
+			$ctrl.doc_markers.push(new_marker);
 		});
 
 		stripMarkerShadow();
@@ -74,12 +91,12 @@ function MapController(DocumentService, $scope){
 	}
 
 	function displayOnMapWithSend(position){
-        var marker = $ctrl.handler.addMarker({
+        $ctrl.user_marker = $ctrl.handler.addMarker({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
             marker: "<img src='images/user.png' width='50' height= '50'>"
         });
-        $ctrl.handler.map.centerOn(marker);
+        $ctrl.handler.map.centerOn($ctrl.user_marker);
 		DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
   	}
 
