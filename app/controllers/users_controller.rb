@@ -14,6 +14,8 @@ class UsersController < ApplicationController
   end
 
   def updateLocation
+    session[:latitude] = loc_params[:lat]
+    session[:longitude] = loc_params[:lng] 
     render json: DocumentsHelper.fetchfiles({lat: loc_params[:lat], lng: loc_params[:lng]})
   end
 
