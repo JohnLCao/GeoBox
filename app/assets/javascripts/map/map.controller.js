@@ -12,40 +12,29 @@ function MapController(DocumentService, $scope, $interval){
 	$ctrl.user_marker = [];
 
 	$ctrl.$onInit = function(){
-	  var hours = (new Date()).getHours();
-	  var mapStyle;
+      var hours = (new Date()).getHours();
+      var mapStyle;
 
-	  if (hours > 6 && hours < 20) {
-	    mapStyle = [
-	        {"featureType": "administrative", "stylers": [{"visibility": "off"}]},
-	        {"featureType": "poi", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "road", "elementType": "labels", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "water", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "transit", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "landscape", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "road.highway", "stylers": [{"visibility": "off"}]},
-	        {"featureType": "road.local", "stylers": [{"visibility": "on"}]},
-	        {"featureType": "road.highway", "elementType": "geometry", "stylers": [{"visibility": "on"}]},
-	        {"featureType": "water", "stylers": [{"color": "#84afa3"}, {"lightness": 52}]},
-	        {"stylers": [{"saturation": -17}, {"gamma": 0.36}]},
-	        {"featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#3f518c"}]}
-	    ];
-	  } else {
-	    mapStyle = [
-	        {"stylers": [{"hue": "#ff1a00"}, {"invert_lightness": true}, {"saturation": -100}, {"lightness": 33}, {"gamma": 0.5}]},
-	        {"featureType": "water", "elementType": "geometry", "stylers": [{"color": "#2D333C"}]}
-	    ]
-	  }
+      if (hours > 6 && hours < 20) {
+        mapStyle = 'assets/retroMode.js';
+      } else {
+        mapStyle = 'assets/nightMode.js';
+      }
 
-	    $ctrl.handler = Gmaps.build('Google', {builders: {Marker: RichMarkerBuilder}});
-	    $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
-	        zoom: 19,
-	        styles: mapStyle,
-	        heading: 90,
-	        tilt: 45,
-	        streetViewControl: false,
-	        fullscreenControl: false
-	    }}, updateLocation);
+      $ctrl.handler = Gmaps.build('Google', {builders: {Marker: RichMarkerBuilder}});
+
+      $.get(mapStyle, function(data){
+          if (data) {
+              var style = JSON.parse(data);
+              $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
+                  zoom: 19,
+                  styles: style,
+                  heading: 90,
+                  streetViewControl: false,
+                  fullscreenControl: false
+              }}, updateLocation);
+          }
+      });
 	};
 
 	$scope.$on('documents:ready', updateMarkers);
@@ -55,11 +44,11 @@ function MapController(DocumentService, $scope, $interval){
 			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker));		
 			updateLocation();
 		}
-	}, 2500) // currently updates every 2.5 seconds
+	}, 2500); // currently updates every 2.5 seconds
 
 	$ctrl.$onDestroy = function(){
 		$interval.cancel($ctrl.locUpdater);
-	}
+	};
 
 	function updateLocation(){
 		if(navigator.geolocation) {
