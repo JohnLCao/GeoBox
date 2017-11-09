@@ -10,5 +10,6 @@
       <span ng-if="$ctrl.logged_in" ng-click="$ctrl.onLogout()">
         <%= link_to 'Logout', logout_path, {method: :delete, class: 'btn'} %>
       </span>
+      <span ng-if="$ctrl.is_admin" style="color:white;">I am an ADMIN!</span>
     </span>
 </nav>

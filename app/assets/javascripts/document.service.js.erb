@@ -16,33 +16,18 @@ function DocumentService($http, $rootScope){
 						  	<%= 'http://localhost:3000' %> 			\
 						  <% end %>".trim();
 
-	doc_service.getDocs = function(){
-		$http({
-			method: 'GET',
-			url: doc_service.baseUrl + '/get_docs',
-		})
-		.then(function(response){
-			doc_service.docs = response.data;
-			$rootScope.$broadcast('documents:ready');
-		})
-		.catch(function(error){
-			console.log(error);
-		})
-	}
-
-
-
-	doc_service.sendLoc = function(browser_lat, browser_lng){
+	doc_service.updateLocation = function(browser_lat, browser_lng){
 		return $http({
 			method: 'POST',
-			url: doc_service.baseUrl + '/set_location',
+			url: doc_service.baseUrl + '/update_location',
 			params: {
 				lat: browser_lat,
 				lng: browser_lng
 			}
 		})
 		.then(function(response){
-			doc_service.getDocs();
+			doc_service.docs = response.data;
+			$rootScope.$broadcast('documents:ready');
 		})
 		.catch(function(error){
 			console.log(error);
