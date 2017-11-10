@@ -44,7 +44,7 @@ function MapController(DocumentService, $scope, $interval){
 			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker));		
 			updateLocation();
 		}
-	}, 2500); // currently updates every 2.5 seconds
+	}, 10000); // currently updates every 10 seconds
 
 	$ctrl.$onDestroy = function(){
 		$interval.cancel($ctrl.locUpdater);
