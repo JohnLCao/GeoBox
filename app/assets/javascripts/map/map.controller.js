@@ -21,7 +21,7 @@ function MapController(DocumentService, $scope, $interval){
         mapStyle = 'assets/nightMode.js';
       }
 
-      $ctrl.handler = Gmaps.build('Google', {builders: {Marker: RichMarkerBuilder}});
+      $ctrl.handler = Gmaps.build('Google');
 
       $.get(mapStyle, function(data){
           if (data) {
@@ -52,7 +52,7 @@ function MapController(DocumentService, $scope, $interval){
 
 	function updateLocation(){
 		if(navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(displayOnMapWithSend);
+	        navigator.geolocation.getCurrentPosition(displayMapCallback);
 		}
 	}
 
@@ -62,47 +62,30 @@ function MapController(DocumentService, $scope, $interval){
 			var new_marker = $ctrl.handler.addMarker({
 				lat: Number(doc.latitude),
 				lng: Number(doc.longitude),
-				marker: "<img src='images/file.png' width='35' height='35'>"
+				picture: {
+					url: 'assets/file.png',
+					width: 45,
+					height: 45
+				},
+				infowindow: doc.description
 			});
 			$ctrl.doc_markers.push(new_marker);
 		});
-
-		stripMarkerShadow();
 	}
 
-	function stripMarkerShadow(){
-		if ($('.marker_container').length != DocumentService.docs.length + 1){
-			setTimeout(stripMarkerShadow, 100);
-		}
-		else {
-			$('.marker_container').parent().parent().css('box-shadow', 'none');
-		}
-	}
-
-	function displayOnMapWithSend(position){
+	function displayMapCallback(position){
         $ctrl.user_marker = $ctrl.handler.addMarker({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-            marker: "<img src='images/user.png' width='50' height= '50'>"
+            picture: {
+            	url: 'assets/user.png', 
+            	width: 60, 
+            	height: 60
+            }
         });
         $ctrl.handler.map.centerOn($ctrl.user_marker);
 		DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
   	}
-
-	class RichMarkerBuilder extends Gmaps.Google.Builders.Marker { //inherit from builtin builder
-	  //override create_marker method
-	  create_marker() {
-	    const options = _.extend(this.marker_options(), this.rich_marker_options());
-	    return this.serviceObject = new RichMarker(options); //assign marker to @serviceObject
-	  }
-
-	  rich_marker_options() {
-	    const marker = document.createElement("div");
-	    marker.setAttribute('class', 'marker_container');
-	    marker.innerHTML = this.args.marker;
-	    return { content: marker };
-	  }
-	}
 }
 
 })();
