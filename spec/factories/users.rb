@@ -4,5 +4,10 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password "simple"
     password_confirmation "simple"
+    user_class "regular"
+
+    factory :amdin do
+      user_class "amdin"
+    end
   end
 end
