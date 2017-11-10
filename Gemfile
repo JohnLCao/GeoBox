@@ -13,7 +13,7 @@ gem 'rails', '4.2.8'
 # Gems for rspec (testing)
 group :development, :test do
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
 end
 
 group :test do
