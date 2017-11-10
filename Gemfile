@@ -7,6 +7,8 @@ gem 'underscore-rails'
 gem 'toastr-rails'
 gem 'font-awesome-sass'
 gem 'carrierwave', '~> 1.0'
+gem 'fog-google'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
 # Use postgresl as the database for Active Record
