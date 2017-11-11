@@ -33,8 +33,8 @@ class DocumentsController < ApplicationController
     else
       @document[:filename] = 'error'
     end
-    @document[:latitude] = current_user.getCurrLatlng[:lat]
-    @document[:longitude] = current_user.getCurrLatlng[:lng]
+    @document[:latitude] = session[:latitude]
+    @document[:longitude] = session[:longitude]
 
     print(@document.attachment)
     respond_to do |format|

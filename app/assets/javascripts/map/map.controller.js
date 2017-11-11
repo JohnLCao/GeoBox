@@ -5,98 +5,87 @@
 angular.module('GeoBox')
 .controller('MapController', MapController);
 
-MapController.$inject = ['DocumentService', '$scope'];
-function MapController(DocumentService, $scope){
+MapController.$inject = ['DocumentService', '$scope', '$interval'];
+function MapController(DocumentService, $scope, $interval){
 	var $ctrl = this;
+	$ctrl.doc_markers = [];
+	$ctrl.user_marker = [];
 
 	$ctrl.$onInit = function(){
-	  var hours = (new Date()).getHours();
-	  var mapStyle;
+      var hours = (new Date()).getHours();
+      var mapStyle;
 
-	  if (hours > 6 && hours < 20) {
-	    mapStyle = [
-	        {"featureType": "administrative", "stylers": [{"visibility": "off"}]},
-	        {"featureType": "poi", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "road", "elementType": "labels", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "water", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "transit", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "landscape", "stylers": [{"visibility": "simplified"}]},
-	        {"featureType": "road.highway", "stylers": [{"visibility": "off"}]},
-	        {"featureType": "road.local", "stylers": [{"visibility": "on"}]},
-	        {"featureType": "road.highway", "elementType": "geometry", "stylers": [{"visibility": "on"}]},
-	        {"featureType": "water", "stylers": [{"color": "#84afa3"}, {"lightness": 52}]},
-	        {"stylers": [{"saturation": -17}, {"gamma": 0.36}]},
-	        {"featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#3f518c"}]}
-	    ];
-	  } else {
-	    mapStyle = [
-	        {"stylers": [{"hue": "#ff1a00"}, {"invert_lightness": true}, {"saturation": -100}, {"lightness": 33}, {"gamma": 0.5}]},
-	        {"featureType": "water", "elementType": "geometry", "stylers": [{"color": "#2D333C"}]}
-	    ]
-	  }
+      if (hours > 6 && hours < 20) {
+        mapStyle = 'assets/retroMode.js';
+      } else {
+        mapStyle = 'assets/nightMode.js';
+      }
 
-	    $ctrl.handler = Gmaps.build('Google', {builders: {Marker: RichMarkerBuilder}});
-	    $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
-	        zoom: 19,
-	        styles: mapStyle,
-	        heading: 90,
-	        tilt: 45,
-	        streetViewControl: false,
-	        fullscreenControl: false
-	    }}, function(){
-	        // be aware chrome >= 50 requires https for geolocation to work
-	        if(navigator.geolocation)
-	            navigator.geolocation.getCurrentPosition(displayOnMapWithSend);
-	    });
+      $ctrl.handler = Gmaps.build('Google');
+
+      $.get(mapStyle, function(data){
+          if (data) {
+              var style = JSON.parse(data);
+              $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
+                  zoom: 19,
+                  styles: style,
+                  heading: 90,
+                  streetViewControl: false,
+                  fullscreenControl: false
+              }}, updateLocation);
+          }
+      });
 	};
 
 	$scope.$on('documents:ready', updateMarkers);
 
+	$ctrl.locUpdater = $interval(function(){
+		if ($ctrl.handler){	
+			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker));		
+			updateLocation();
+		}
+	}, 10000); // currently updates every 10 seconds
+
+	$ctrl.$onDestroy = function(){
+		$interval.cancel($ctrl.locUpdater);
+	};
+
+	function updateLocation(){
+		if(navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(displayMapCallback);
+		}
+	}
+
 	function updateMarkers(e,data){
+		$ctrl.doc_markers = [];
 		DocumentService.docs.forEach(function(doc){
-			var marker = $ctrl.handler.addMarker({
+			var new_marker = $ctrl.handler.addMarker({
 				lat: Number(doc.latitude),
 				lng: Number(doc.longitude),
-				marker: "<img src='images/file.png' width='35' height='35'>"
+				picture: {
+					url: 'assets/file.png',
+					width: 45,
+					height: 45
+				},
+				infowindow: doc.description
 			});
+			$ctrl.doc_markers.push(new_marker);
 		});
-
-		stripMarkerShadow();
 	}
 
-	function stripMarkerShadow(){
-		if ($('.marker_container').length != DocumentService.docs.length + 1){
-			setTimeout(stripMarkerShadow, 100);
-		}
-		else {
-			$('.marker_container').parent().parent().css('box-shadow', 'none');
-		}
-	}
-
-	function displayOnMapWithSend(position){
-        var marker = $ctrl.handler.addMarker({
+	function displayMapCallback(position){
+        $ctrl.user_marker = $ctrl.handler.addMarker({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
-            marker: "<img src='images/user.png' width='50' height= '50'>"
+            picture: {
+            	url: 'assets/user.png', 
+            	width: 60, 
+            	height: 60
+            }
         });
-        $ctrl.handler.map.centerOn(marker);
-		DocumentService.sendLoc(position.coords.latitude.toString(), position.coords.longitude.toString());
+        $ctrl.handler.map.centerOn($ctrl.user_marker);
+		DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
   	}
-
-	class RichMarkerBuilder extends Gmaps.Google.Builders.Marker { //inherit from builtin builder
-	  //override create_marker method
-	  create_marker() {
-	    const options = _.extend(this.marker_options(), this.rich_marker_options());
-	    return this.serviceObject = new RichMarker(options); //assign marker to @serviceObject
-	  }
-
-	  rich_marker_options() {
-	    const marker = document.createElement("div");
-	    marker.setAttribute('class', 'marker_container');
-	    marker.innerHTML = this.args.marker;
-	    return { content: marker };
-	  }
-	}
 }
 
 })();
