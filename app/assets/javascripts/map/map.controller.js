@@ -40,11 +40,10 @@ function MapController(DocumentService, $scope, $interval){
 	$scope.$on('documents:ready', updateMarkers);
 
 	$ctrl.locUpdater = $interval(function(){
-		if ($ctrl.handler){	
-			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker));		
+		if ($ctrl.handler){		
 			updateLocation();
 		}
-	}, 10000); // currently updates every 10 seconds
+	}, 7500); // currently updates every 7.5 seconds
 
 	$ctrl.$onDestroy = function(){
 		$interval.cancel($ctrl.locUpdater);
@@ -74,18 +73,35 @@ function MapController(DocumentService, $scope, $interval){
 	}
 
 	function displayMapCallback(position){
-        $ctrl.user_marker = $ctrl.handler.addMarker({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-            picture: {
-            	url: 'assets/user.png', 
-            	width: 60, 
-            	height: 60
-            }
-        });
-        $ctrl.handler.map.centerOn($ctrl.user_marker);
-		DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
+		if (shouldUpdate(position.coords)){
+			$ctrl.user_location = position.coords;
+			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker));
+			$ctrl.user_marker = $ctrl.handler.addMarker({
+	            lat: position.coords.latitude,
+	            lng: position.coords.longitude,
+	            picture: {
+	            	url: 'assets/user.png', 
+	            	width: 60, 
+	            	height: 60
+	            }
+	        });
+
+	        $ctrl.handler.map.centerOn($ctrl.user_marker);
+			DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
+		}
   	}
+
+  	function shouldUpdate(coordinates){
+		if (!$ctrl.user_location) // should update when first rendering map.
+			return true;
+		else {
+			let distance = google.maps.geometry.spherical.computeDistanceBetween(
+				new google.maps.LatLng(coordinates.latitude, coordinates.longitude),
+				new google.maps.LatLng($ctrl.user_location.latitude, $ctrl.user_location.longitude)
+			);
+			return distance > 20; // magikle
+		}
+	}
 }
 
 })();
