@@ -1,32 +1,36 @@
-<div class="cntr">
-  <div class="container container-color">
-    <h1>Login</h1>
-
-    <%= form_for(:user, url: sessions_path) do |f| %>
-
-        <div class="field form-group">
-          <%= f.label :username %>
-          <div class="input-group">
-            <span class="input-group-addon" aria-hidden="true"><i class="fa fa-user-circle-o"></i></span>
-            <%= f.text_field :username, class: 'form-control', placeholder: 'Your name' %>
-          </div>
-        </div>
-
-        <div class="field form-group">
-          <%= f.label :password %>
-          <div class="input-group">
-            <span class="input-group-addon" aria-hidden="true"><i class="fa fa-lock"></i></span>
-            <%= f.password_field :password, class: 'form-control', placeholder: 'Your password' %>
-          </div>
-
-        </div>
-
-        <div>
-          <%= f.submit "Login", class: 'btn btn-primary' %>
-        </div>
-
-    <% end %>
-    <br>
-    <%= link_to "Sign Up", new_user_path %> | <%= link_to "Guest Login", guest_login_path, method: :get  %>
+<div class="container-fluid cntr">
+  <div class="row justify-content-center">
+    <%= image_tag 'logo.png', size: '170x170' %>
   </div>
+  <div class="row justify-content-center">
+    <h1>GeoBox</h1>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-sm-8 sm-offset-2 col-md-6 md-offset-3 col-lg-4 lg-offset-4 container-color">
+      <h1>Login</h1>
+      <%= form_for(:user, url: sessions_path) do |f| %>
+          <div class="field form-group">
+            <%= f.label :username %>
+            <div class="input-group">
+              <span class="input-group-addon" aria-hidden="true"><i class="fa fa-user-circle-o"></i></span>
+              <%= f.text_field :username, class: 'form-control', placeholder: 'Your name' %>
+            </div>
+          </div>
+          <div class="field form-group">
+            <%= f.label :password %>
+            <div class="input-group">
+              <span class="input-group-addon" aria-hidden="true"><i class="fa fa-lock"></i></span>
+              <%= f.password_field :password, class: 'form-control', placeholder: 'Your password' %>
+            </div>
+          </div>
+          <div>
+            <%= f.submit "Login", class: 'btn btn-primary' %>
+          </div>
+      <% end %>
+      <br>
+      <%= link_to "Sign Up", new_user_path %> | <%= link_to "Guest Login", guest_login_path  %>
+    </div>
+  </div>
+
+
 </div>

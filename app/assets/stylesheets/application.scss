@@ -17,23 +17,22 @@
 @import "font-awesome";
 @import "sidebar";
 
-.cntr{
-  margin: auto;
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-50%);
+body {
+  margin-top: 56px;
 }
+
+.cntr{
+  text-align: center;
+}
+
 .container-color {
   background-color: #eaf1f3;
   border-radius: 5px;
   border: 1px solid #d5e5ea;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-left: 40px;
-  padding-right: 40px;
+  padding: 20px;
+  margin: 20px;
 }
+
 .btn:visited { color:#FFF; }
 
 .input-group-addon {
@@ -41,14 +40,4 @@
   text-align:center;
 }
 
-#geolocation {position: relative;}
-
-#geolocation {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
-
-#geolocation {
-  height: 100%;
-  width: 100%;
-  left: 0;
-  position: relative;
-  top: 0;
-}
+#geolocation {position: absolute; top: 56px; right: 0; bottom: 0; left: 0;}

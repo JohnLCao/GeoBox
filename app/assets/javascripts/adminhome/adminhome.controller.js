@@ -11,6 +11,7 @@ function AdminHomeController($rootScope){
 
 	$ctrl.$onInit = function(){
 		$rootScope.$broadcast('login:login', {}); // we can consider adding data to this event
+		$rootScope.$broadcast('login:admin', {});
 	}
 }
 

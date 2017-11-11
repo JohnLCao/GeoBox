@@ -1,9 +1,15 @@
-<div class="cntr container-color">
-	<h1>New User</h1>
-
-	<%= render 'form' %>
-
-  <br>
-
-	<%= link_to 'Back', users_path %>
+<div class="container cntr">
+  <div class="row justify-content-center">
+    <div class="col-sm-8 sm-offset-2 col-md-6 md-offset-3 col-lg-4 lg-offset-4 container-color">
+      <p id="notice"><%= notice %></p>
+      <h1>New User</h1>
+      <%= render 'form' %>
+      <br>
+      <% if is_admin? %>
+          <%= link_to 'Back', users_path %>
+      <% else %>
+          <%= link_to 'Back', login_path %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -1,18 +1,19 @@
 module DocumentsHelper
-  mockRadius = 0.00001497678
-  setRadius = mockRadius
+  # mockRadius = 0.00001497678
+  # setRadius = mockRadius
 
-  def fetchfiles(latlng)
+
+  def self.fetchfiles(latlng)
     Document.all.select{|doc| mutualRadius?(latlng, doc.latitude, doc.longitude)}
   end
 
-  def mutualRadius?(userCurrentLatlng, doc_lat, doc_lng)
-    userlat = userCurrentLatlng.split(',')[0].to_i
-    userlng = userCurrentLatlng.split(',')[1].to_i
-    deltaLat = userlat - doc_lat.to_i
-    deltaLng = userlng - doc_lng.to_i
+  def self.mutualRadius?(userCurrentLatlng, doc_lat, doc_lng)
+    userlat = userCurrentLatlng[:lat].to_f
+    userlng = userCurrentLatlng[:lng].to_f
+    deltaLat = userlat - doc_lat.to_f
+    deltaLng = userlng - doc_lng.to_f
     distanceInDeg = (deltaLat * deltaLat + deltaLng * deltaLng) ** 0.5 #pythag hypotenuse
-    return (distanceInDeg < setRadius)
+    return (distanceInDeg < 0.001497678) #magik , about 166 meters
   end
 
 end

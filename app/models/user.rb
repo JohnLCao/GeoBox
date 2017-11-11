@@ -12,15 +12,15 @@ class User < ActiveRecord::Base
 	                  uniqueness: { case_sensitive: false }
 	validates :user_class, presence: true, inclusion: {:in => ['admin', 'regular']}
 
-	$curr_latlng = '49.2776421,-122.9170006'
+	# $curr_latlng = {lat: '49.2776421', lng: '-122.9170006'}
 
-	# TODO tobe parametized later
-	def setCurrLatlng(latlng)
-		$curr_latlng = latlng
-	end
+	# # TODO tobe parametized later
+	# def setCurrLatlng(latlng)
+	# 	$curr_latlng = latlng
+	# end
 
-	def getCurrLatlng
-		$curr_latlng
-	end
+	# def getCurrLatlng
+	# 	$curr_latlng
+	# end
 
 end

@@ -1,0 +1,53 @@
+<div id="sidebar" class="sidebar collapsed">
+  <!-- Nav tabs -->
+  <div class="sidebar-tabs">
+    <ul role="tablist">
+      <li><a ng-click="$ctrl.getDocs()" href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+    </ul>
+
+    <ul role="tablist">
+      <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+    </ul>
+  </div>
+
+  <!-- Tab panes -->
+  <div class="sidebar-content">
+    <div class="sidebar-pane" id="home">
+      <h1 class="sidebar-header">
+        Files
+        <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+      </h1>
+
+      <div class="list-group">
+          <!-- <div ng-app="myApp" ng-controller="myCtrl">
+            Full Name: {{myCtrl.firstName + " " + myCtrl.lastName}}
+          </div> -->
+        <!-- dynamic -->
+
+        <a ng-repeat="doc in $ctrl.docs" href="{{doc.attachment.url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{doc.filename}}</h5>
+            <small class="text-muted">x days ago</small>
+          </div>
+          <p class="mb-1">{{doc.description}}</p>
+          <small class="text-muted">user information</small>
+        </a>
+      </div>
+
+    </div>
+  
+    <div class="sidebar-pane" id="profile">
+      <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+    </div>
+
+    <div class="sidebar-pane" id="messages">
+      <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+    </div>
+
+    <div class="sidebar-pane" id="settings">
+      <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+    </div>
+  </div>
+</div>

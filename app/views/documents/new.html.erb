@@ -1,11 +1,16 @@
-<br><br>
-<div class="container container-color">
-  <h1>New Document</h1>
-  <%= render 'form' %>
-  <% if is_admin? %>
-  	<%= link_to 'Back', documents_path %>
-  <% else %>
-  	<%= link_to 'Back', root_path, method: :get %>
-  <% end %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-11 container-color">
+      <p id="notice"><%= notice %></p>
+      <h1>New Document</h1>
+      <%= render 'form' %>
+      <br>
+      <% if is_admin? %>
+          <%= link_to 'Back', documents_path %>
+      <% else %>
+          <%= link_to 'Back', root_path %>
+      <% end %>
+    </div>
+  </div>
 </div>
 

@@ -2,10 +2,10 @@
 <html>
 <head>
   <title>GeoBox</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
 </head>
 
@@ -17,17 +17,4 @@
 <%= yield %>
 
 </body>
-
-<style>
-  html, body {
-    height: 100%;
-    width: 100%;
-  }
-  body {
-    padding-top: 50px;
-  }
-</style>
-<script >
-
-</script>
 </html>
