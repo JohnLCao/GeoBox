@@ -11,6 +11,21 @@ gem 'fog-google'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
+
+# Gems for rspec (testing)
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+end
+
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+end
+
 # Use postgresl as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets

@@ -1,0 +1,38 @@
+(function(){
+
+'use strict';
+
+angular.module('GeoBox')
+.controller('HeaderController', HeaderController);
+
+HeaderController.$inject = ['$scope']; 
+function HeaderController($scope){
+	var $ctrl = this;
+
+	$ctrl.$onInit = function(){
+		$ctrl.updateStatus();
+	}
+
+	$ctrl.updateStatus = function(){
+		$ctrl.logged_in = sessionStorage.getItem('logged_in');
+		$ctrl.is_admin = sessionStorage.getItem('admin');
+	}
+
+	$scope.$on('login:login', function(e, args){
+		if (!sessionStorage.getItem('logged_in'))
+			sessionStorage.setItem('logged_in', true);
+		$ctrl.updateStatus();
+	});
+
+	$scope.$on('login:admin', function(e, args){
+		sessionStorage.setItem('admin', true);
+		$ctrl.updateStatus();
+	});
+
+	$ctrl.onLogout = function(){
+		sessionStorage.clear();
+		$ctrl.updateStatus();
+	}
+}
+
+})();
