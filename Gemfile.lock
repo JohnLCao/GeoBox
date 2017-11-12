@@ -303,10 +303,10 @@ DEPENDENCIES
   capybara
   carrierwave (~> 1.0)
   coffee-rails (~> 4.1.0)
-  fog-google
   database_cleaner
   factory_bot_rails
   faker
+  fog-google
   font-awesome-sass
   gmaps4rails
   google-cloud-storage
