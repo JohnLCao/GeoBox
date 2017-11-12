@@ -13,7 +13,7 @@ module DocumentsHelper
     deltaLat = userlat - doc_lat.to_f
     deltaLng = userlng - doc_lng.to_f
     distanceInDeg = (deltaLat * deltaLat + deltaLng * deltaLng) ** 0.5 #pythag hypotenuse
-    return (distanceInDeg < 0.0001497678) #magik
+    return (distanceInDeg < 0.001497678) #magik , about 166 meters
   end
 
 end

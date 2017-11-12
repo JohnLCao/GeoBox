@@ -15,6 +15,8 @@ User.create!([
 	{username: "bobby", email: "l@m.e", password: "prof", password_confirmation: "prof", user_class: 'regular'}
 ])
 
+Document.destroy_all
+
 # Document.destroy_all
 # Document.create!([
 # 	{
