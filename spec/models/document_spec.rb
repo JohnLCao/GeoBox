@@ -25,10 +25,6 @@ RSpec.describe Document, type: :model do
     expect(document2.errors[:filename]).to include ("has already been taken")
   end
 
-  it "has a valid factory" do
-    expect(build(:user)).to be_valid
-  end
-
   it "generates assocated data from a user" do
     document = create(:document)
     expect(document.user.username).to include("user")
