@@ -8,11 +8,10 @@ Rails.application.routes.draw do
   get "/guest_login" => "sessions#guest", as: :guest_login
 
   #TO BE CHANGED
-  root to: "dummy#home"
-  get "/angular_example" => "dummy#angular_example"
+  root to: "home#home"
   #TO BE CHANGED
 
-  get "/admin_root" => "dummy#admin_home", as: :admin_root
+  get "/admin_root" => "home#admin_home", as: :admin_root
 
   post "/update_location" => "users#updateLocation"
 

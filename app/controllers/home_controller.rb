@@ -1,4 +1,4 @@
-class DummyController < ApplicationController
+class HomeController < ApplicationController
 	before_action :ensure_admin, only: :admin_home
 
 	def home
