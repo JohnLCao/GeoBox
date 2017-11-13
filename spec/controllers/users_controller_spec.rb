@@ -11,7 +11,7 @@ RSpec.describe UsersController, type: :controller do
     it "responds unsucessfully for regular user" do
       login(FactoryBot.create(:user))
       get :index
-      expect(response).not_to be_success
+      expect(response).to_not be_success
     end
   end
 end

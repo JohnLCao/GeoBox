@@ -15,6 +15,4 @@ RSpec.describe "Session controller", :type => :request do
       post "/sessions", { user: { username: admin.username, password: admin.password } }
       expect(response).to redirect_to :admin_root
     end
-
-
 end
