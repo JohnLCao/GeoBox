@@ -1,5 +1,9 @@
 require "rails_helper"
 
+def sign_in_as(user)
+  session[:user_id] = user.id
+end
+
 RSpec.describe "Session controller", :type => :request do
     it "allows user access login page" do
       get "/login"
@@ -11,4 +15,6 @@ RSpec.describe "Session controller", :type => :request do
       post "/sessions", { user: { username: admin.username, password: admin.password } }
       expect(response).to redirect_to :admin_root
     end
+
+
 end
