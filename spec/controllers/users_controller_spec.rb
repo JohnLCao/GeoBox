@@ -48,6 +48,27 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
+  describe "#create" do
+    context "with valid input" do
+      it "adds a new user" do
+        user_params = { username: "new_user_name", email: "new_email@geobox.com", password: "simple", password_confirmation: "simple" }
+        expect {
+          post :create, {user: user_params}
+        }.to change(User.all, :count).by(1)
+        expect(flash[:success]).to eq "User was successfully created."
+      end
+    end
+
+    context "with invalid input" do
+      it "does not add a new user" do
+        user_params = { username: "new_user_name", email: "invalid_email", password: "simple", password_confirmation: "simple" }
+        expect {
+          post :create, {user: user_params}
+        }.not_to change(User.all, :count)
+      end
+    end
+  end
+
   describe "#update" do
     context "as an authorized user" do
       before do
