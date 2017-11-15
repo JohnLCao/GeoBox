@@ -1,0 +1,2 @@
+export google_storage_access_key_id=GOOGYWB53C7IH2RNJ7GG
+export google_storage_secret_access_key=kIRXrpOs+XeoNCKAqMbT75xmVE1SLAOrVTHfI5t4
