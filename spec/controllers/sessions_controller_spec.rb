@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe SessionsController, type: :controller do
   describe "#create" do
-    context "login as regular user" do
+    context "login as a regular user" do
       before do
         @user = FactoryBot.create(:user)
       end
