@@ -5,27 +5,12 @@
 angular.module('GeoBox')
 .controller('MapController', MapController);
 
-MapController.$inject = ['DocumentService', '$scope', '$interval'];
-function MapController(DocumentService, $scope, $interval){
+MapController.$inject = ['DocumentService', '$scope', '$interval', 'retroMode','nightMode'];
+function MapController(DocumentService, $scope, $interval, retroMode, nightMode){
 	var $ctrl = this;
 	$ctrl.doc_markers = [];
 	$ctrl.user_marker = [];
 
-	var retroMode = [{"featureType": "administrative", "stylers": [{"visibility": "off"}]},
-	  {"featureType": "poi", "stylers": [{"visibility": "simplified"}]},
-	  {"featureType": "road", "elementType": "labels", "stylers": [{"visibility": "simplified"}]},
-	  {"featureType": "water", "stylers": [{"visibility": "simplified"}]},
-	  {"featureType": "transit", "stylers": [{"visibility": "simplified"}]},
-	  {"featureType": "landscape", "stylers": [{"visibility": "simplified"}]},
-	  {"featureType": "road.highway", "stylers": [{"visibility": "off"}]},
-	  {"featureType": "road.local", "stylers": [{"visibility": "on"}]},
-	  {"featureType": "road.highway", "elementType": "geometry", "stylers": [{"visibility": "on"}]},
-	  {"featureType": "water", "stylers": [{"color": "#84afa3"}, {"lightness": 52}]},
-	  {"stylers": [{"saturation": -17}, {"gamma": 0.36}]},
-	  {"featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#3f518c"}]}];
-
-	var nightMode = [{"stylers": [{"hue": "#ff1a00"}, {"invert_lightness": true}, {"saturation": -100}, {"lightness": 33}, {"gamma": 0.5}]},
-	  {"featureType": "water", "elementType": "geometry", "stylers": [{"color": "#2D333C"}]}];
 
 	$ctrl.$onInit = function(){
       var hours = (new Date()).getHours();
@@ -41,7 +26,7 @@ function MapController(DocumentService, $scope, $interval){
 
       $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
           zoom: 19,
-          styles: mapStyle,
+          styles: JSON.parse(mapStyle),
           heading: 90,
           streetViewControl: false,
           fullscreenControl: false
