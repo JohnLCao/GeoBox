@@ -17,21 +17,19 @@ function SidebarController($rootScope, DocumentService, $scope){
 	};
 
 	$ctrl.getDocs = function(e,d){
-		// console.log("from sidebar controller:   ", DocumentService.docs)
-		$ctrl.docs = DocumentService.docs;
+		$ctrl.docs = processDocuments(DocumentService.docs);
+		console.log($ctrl.docs);
 	};
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
 
-}
+	function processDocuments(documents){
+		documents.forEach(function(d){
+			d.created_at = moment(new Date(d.created_at_ms * 1000)).fromNow();
+		});
 
-// var app = angular.module('myApp', []);
-// app.controller('myCtrl', function() {
-// 		var $ctrl = this;
-// 		$ctrl.firstName = "John";
-// 		$ctrl.lastName = "Doe";
-// //    $scope.firstName= "John";
-// //    $scope.lastName= "Doe";
-// });
+		return documents;
+	}
+}
 
 })();
