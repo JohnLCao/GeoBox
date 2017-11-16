@@ -1,0 +1,26 @@
+{
+  "name": "geobox",
+  "version": "1.0.0",
+  "description": "geolocation file sharing",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digitalSalt/GeoBox.git"
+  },
+  "author": "john cao, brendin green, angelina xi, kai zhang, dat nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/digitalSalt/GeoBox/issues"
+  },
+  "homepage": "https://github.com/digitalSalt/GeoBox#readme",
+  "dependencies": {
+    "moment": "^2.19.2"
+  }
+}
