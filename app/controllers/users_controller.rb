@@ -19,7 +19,8 @@ class UsersController < ApplicationController
     render json: DocumentsHelper.fetchfiles({lat: loc_params[:lat], lng: loc_params[:lng]})
                                 .map{|doc| doc.attributes.merge({
                                   created_at_ms: doc.created_at.to_f,
-                                  username: User.find(doc.user_id).username
+                                  username: User.find(doc.user_id).username,
+                                  download_url: doc.attachment.url
                                 })}
   end
 
