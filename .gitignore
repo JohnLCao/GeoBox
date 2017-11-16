@@ -23,4 +23,12 @@
 #ignore MACOS bs
 .DS_Store
 
+# Ignore static file uploads in dev, test environments
 /public/uploads/*
+<<<<<<< HEAD
+=======
+
+# Ignore node modules
+/node_modules/*
+
+>>>>>>> 4349bc62d8d54809c06483495231c7d74555d5fa

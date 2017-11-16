@@ -6,7 +6,7 @@ module LoginSupport
 
   def login_as_admin
     admin = FactoryBot.create(:admin)
-    sign_in_as(admin)
+    login(admin)
   end
 
 end

@@ -3,10 +3,11 @@
 'use strict';
 
 angular.module('GeoBox')
-.controller('HeaderController', HeaderController);
+.controller('HeaderController', HeaderController)
+.constant('ObfuscatedAdminProp', "+?r~US:j._S[;MT`V.ig<;rq@Uy{O%-G(ZB;MI!#(:HtA51]:0PEyM.w;e%:'*5");
 
-HeaderController.$inject = ['$scope']; 
-function HeaderController($scope){
+HeaderController.$inject = ['$scope', 'ObfuscatedAdminProp']; 
+function HeaderController($scope, ObfuscatedAdminProp){
 	var $ctrl = this;
 
 	$ctrl.$onInit = function(){
@@ -15,7 +16,7 @@ function HeaderController($scope){
 
 	$ctrl.updateStatus = function(){
 		$ctrl.logged_in = sessionStorage.getItem('logged_in');
-		$ctrl.is_admin = sessionStorage.getItem('admin');
+		$ctrl.is_admin = sessionStorage.getItem(ObfuscatedAdminProp);
 	}
 
 	$scope.$on('login:login', function(e, args){
@@ -25,7 +26,7 @@ function HeaderController($scope){
 	});
 
 	$scope.$on('login:admin', function(e, args){
-		sessionStorage.setItem('admin', true);
+		sessionStorage.setItem(ObfuscatedAdminProp, true);
 		$ctrl.updateStatus();
 	});
 
