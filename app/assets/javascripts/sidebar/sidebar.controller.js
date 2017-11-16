@@ -18,7 +18,6 @@ function SidebarController($rootScope, DocumentService, $scope){
 
 	$ctrl.getDocs = function(e,d){
 		$ctrl.docs = processDocuments(DocumentService.docs);
-		console.log($ctrl.docs);
 	};
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
