@@ -1,5 +1,3 @@
-<% environment.context_class.instance_eval { include Rails.application.routes.url_helpers } %>
-<% environment.context_class.instance_eval { include ActionView::Helpers::UrlHelper } %>
 <div id="sidebar" class="sidebar collapsed">
   <!-- Nav tabs -->
   <div class="sidebar-tabs">
@@ -42,8 +40,6 @@
   
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-      <br>
-      <%= link_to 'Logout', logout_path, {method: :delete, class: 'btn btn-primary', style: 'width: 100%'} %>
     </div>
 
     <div class="sidebar-pane" id="settings">

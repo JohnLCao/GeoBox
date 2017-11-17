@@ -6,21 +6,17 @@
     GeoBox
   </a>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul ng-if="$ctrl.is_admin"  class="navbar-nav">
-      <li class="nav-item active">
-        <%= link_to 'Dashboard', admin_root_path, {class: 'nav-link'} %>
-      </li>
-    </ul>
 
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-      <%= link_to 'Upload', new_document_path, {class: 'nav-link'} %>
-      </li>
-    </ul>
   </div>
+
+  <span class="nav-item active">
+    <span ng-if="$ctrl.logged_in">
+      <%= link_to '', new_document_path, {class: 'fa fa-plus btn'} %>
+    </span>
+    <span ng-if="$ctrl.logged_in" ng-click="$ctrl.onLogout()">
+      <%= link_to 'Logout', logout_path, {method: :delete, class: 'btn'} %>
+    </span>
+  </span>
+
 </nav>
