@@ -9,7 +9,7 @@ module DocumentsHelper
 
   def self.mutualRadius?(userCurrentLatlng, doc_lat, doc_lng)
 
-    radiusInMeters = 150  # meters
+    radiusInMeters = 150.0  # meters
     radiusInDeg = radiusInMeters/111000 # Convert to degrees via dividing by rate of conversion from meter to degree
 
 

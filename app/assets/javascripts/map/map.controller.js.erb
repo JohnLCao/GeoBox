@@ -59,7 +59,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 				lat: Number(doc.latitude),
 				lng: Number(doc.longitude),
 				picture: {
-					url: "<%= image_path 'file.png'%>",
+					url: "<%= image_path 'map_marker.png'%>",
 					width: 45,
 					height: 45
 				},
@@ -78,8 +78,8 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	            lng: position.coords.longitude,
 	            picture: {
 	            	url: "<%= image_path 'user.png'%>",
-	            	width: 60,
-	            	height: 60
+	            	width: 65,
+	            	height: 65
 	            }
       });
 
