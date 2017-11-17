@@ -26,7 +26,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
       $ctrl.handler = Gmaps.build('Google');
 
       $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
-          zoom: 19,
+          zoom: 17,
           styles: JSON.parse(mapStyle),
           heading: 90,
           streetViewControl: false,
@@ -84,10 +84,16 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
       });
 
 			$ctrl.radius_marker = $ctrl.handler.addCircles(
-            [{ lat: position.coords.latitude,
-                lng: position.coords.longitude,
-                radius: 150 }],
-            { strokeColor: '#6ec7ee'}
+          [{
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+              radius: 150
+          }],
+          {
+              strokeColor: '#6ec7ee',
+              fillColor: '#6ec7ee',
+              strokeWeight: 2
+          }
         );
 
 			$ctrl.handler.map.centerOn($ctrl.user_marker);
