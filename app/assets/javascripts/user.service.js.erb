@@ -17,7 +17,7 @@ function UserService($http, $rootScope){
 						  	<% end %>".trim();
 	user_service.getUserInfo = function(){
 		return $http({
-			method: 'POST',
+			method: 'GET',
 			url: user_service.baseUrl + '/user_info'
 		})
 		.then(function(response){
