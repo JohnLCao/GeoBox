@@ -23,10 +23,9 @@
         Files
         <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
       </h1>
-
+      <br>
       <div class="list-group">
         <a ng-repeat="doc in $ctrl.docs" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
-
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{doc.filename}}</h5>
             <small class="text-muted">{{doc.created_at}}</small>
@@ -35,24 +34,37 @@
           <small class="text-muted">uploaded by {{doc.username}}</small>
         </a>
       </div>
-
     </div>
   
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       <div ng-if="!$ctrl.user.guest">
-        <span>Username: {{$ctrl.user.username}}</span><br>
-        <span>Email: {{$ctrl.user.email}}</span><br>
-        <span>Active Since: {{$ctrl.user.created_at}}</span> <br>
-        <span>Last Profile Edit: {{$ctrl.user.updated_at}}</span> <br>
-        <span>Owned Files: </span> <br>
-        <ul>
-          <li ng-repeat="doc in $ctrl.user.owned_documents">{{doc}}</li>
+
+        <br>
+
+        <ul class="list-group">
+          <li class="list-group-item active">User Information</li>
+          <li class="list-group-item">Username: {{$ctrl.user.username}}</li>
+          <li class="list-group-item">Email: {{$ctrl.user.email}}</li>
+          <li class="list-group-item">Active Since: {{$ctrl.user.created_at}}</li>
+          <li class="list-group-item">Last Profile Edit: {{$ctrl.user.updated_at}}</li>
+          <li class="list-group-item">Active Since: {{$ctrl.user.created_at}}</li>
         </ul>
+
+        <br>
+
+        <ul class="list-group">
+          <li class="list-group-item active">Owned Files: </li>
+          <li class="list-group-item" ng-repeat="doc in $ctrl.user.owned_documents"><a href="{{doc.attachment.url}}"><i class="fa fa-cloud-download" style="color: rgb(110, 199, 238)"></i></a>&nbsp &nbsp{{doc.filename}}</li>
+        </ul>
+
       </div>
+
       <div ng-if="$ctrl.user.guest">
-        <a href="{{$ctrl.base_url}}/login">Login</a>
+        <br>
+        <a class="btn btn-primary" style="width: 100%" href="{{$ctrl.base_url}}/login">Login Now!</a>
       </div>
+
     </div>
 
     <div class="sidebar-pane" id="settings">

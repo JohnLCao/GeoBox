@@ -32,7 +32,7 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 			d.created_at = moment(new Date(d.created_at_ms * 1000)).fromNow();
 		});
 		return documents;
-	};
+	}
 
 	function processUser(user){
 		if (!user.guest){
@@ -40,7 +40,7 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 			user.updated_at = moment(new Date(user.updated_at_ms * 1000)).fromNow();
 		}
 		return user;
-	};
+	}
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
 	$scope.$on('user:ready', $ctrl.getUser);
