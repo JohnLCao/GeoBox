@@ -10,6 +10,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	var $ctrl = this;
 	$ctrl.doc_markers = [];
 	$ctrl.user_marker = [];
+	$ctrl.radius_marker = [];
 
 
 	$ctrl.$onInit = function(){
@@ -25,14 +26,12 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
       $ctrl.handler = Gmaps.build('Google');
 
       $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
-          zoom: 19,
+          zoom: 17,
           styles: JSON.parse(mapStyle),
           heading: 90,
           streetViewControl: false,
           fullscreenControl: false
           }}, updateLocation);
-
-
 	};
 
 	$scope.$on('documents:ready', updateMarkers);
@@ -60,7 +59,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 				lat: Number(doc.latitude),
 				lng: Number(doc.longitude),
 				picture: {
-					url: "<%= image_path 'file.png'%>",
+					url: "<%= image_path 'map_marker.png'%>",
 					width: 45,
 					height: 45
 				},
@@ -73,23 +72,37 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	function displayMapCallback(position){
 		if (shouldUpdate(position.coords)){
 			$ctrl.user_location = position.coords;
-			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker));
+			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker).concat($ctrl.radius_marker));
 			$ctrl.user_marker = $ctrl.handler.addMarker({
 	            lat: position.coords.latitude,
 	            lng: position.coords.longitude,
 	            picture: {
 	            	url: "<%= image_path 'user.png'%>",
-	            	width: 60,
-	            	height: 60
+	            	width: 65,
+	            	height: 65
 	            }
-	        });
+      });
 
-	        $ctrl.handler.map.centerOn($ctrl.user_marker);
+			$ctrl.radius_marker = $ctrl.handler.addCircles(
+          [{
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+              radius: 150
+          }],
+          {
+              strokeColor: '#6ec7ee',
+              fillColor: '#6ec7ee',
+              strokeWeight: 2
+          }
+        );
+
+			$ctrl.handler.map.centerOn($ctrl.user_marker);
+
 			DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
 		}
-  	}
+  }
 
-  	function shouldUpdate(coordinates){
+  function shouldUpdate(coordinates){
 		if (!$ctrl.user_location) // should update when first rendering map.
 			return true;
 		else {
