@@ -33,6 +33,14 @@ body {
   margin: 20px;
 }
 
+.container-color-no-margin {
+  background-color: rgba(110, 199, 238, 0.3);
+  border-radius: 5px;
+  border: 2px solid rgb(110, 199, 238);
+  padding: 20px;
+}
+
+
 .btn:visited { color:#FFF; }
 
 .input-group-addon {
