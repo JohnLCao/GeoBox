@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :ensure_admin, only: :index
   skip_before_action :ensure_login, only: [:new, :create]
-  skip_before_action :verify_authenticity_token, only: :updateLocation
+  skip_before_action :verify_authenticity_token, only: [:updateLocation, :userInfo]
 
   include DocumentsHelper
 
@@ -22,6 +22,23 @@ class UsersController < ApplicationController
                                   username: User.find(doc.user_id).username,
                                   download_url: doc.attachment.url
                                 })}
+  end
+
+  def userInfo
+    if session[:user_id]
+      user = User.find(session[:user_id])
+      censored = ["id", "password_digest"] + (user.user_class=='admin' ? [] : ["user_class"])
+      user_data = user.attributes
+                  .except(*censored)
+                  .merge({
+                    created_at_ms: user.created_at.to_f,
+                    updated_at_ms: user.updated_at.to_f,
+                    owned_documents: user.documents
+                  })
+    else
+      user_data = {guest: true}
+    end
+    render json: user_data
   end
 
   # GET /users/1

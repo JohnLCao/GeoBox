@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/admin_root" => "home#admin_home", as: :admin_root
 
   post "/update_location" => "users#updateLocation"
+  get "/user_info" => "users#userInfo"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

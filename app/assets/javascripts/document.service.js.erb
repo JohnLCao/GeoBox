@@ -33,11 +33,6 @@ function DocumentService($http, $rootScope){
 			console.log(error);
 		})
 	}
-
-	doc_service.setCurrentLocation = function(lat, lng){
-		doc_service.loc.lat = lat;
-		doc_service.loc.lng = lng;
-	}
 }
 
 })();

@@ -19,10 +19,19 @@ RSpec.describe Document, type: :model do
   end
 
   it "is invalid with a duplicate file name" do
-    document1 = create(:document)
-    document2 = build(:document, filename: document1.filename)
+    user = FactoryBot.create(:user)
+    document1 = create(:document, user_id: user.id)
+    document2 = build(:document, filename: document1.filename, user_id: user.id)
     document2.valid?
     expect(document2.errors[:filename]).to include ("has already been taken")
+  end
+
+  it "is valid with a duplicate file name from different users" do
+    user1 = FactoryBot.create(:user)
+    user2 = FactoryBot.create(:user)
+    document1 = create(:document, user_id: user1.id)
+    document2 = build(:document, user_id: user2.id, filename: document1.filename)
+    expect(document2).to be_valid
   end
 
   it "generates assocated data from a user" do

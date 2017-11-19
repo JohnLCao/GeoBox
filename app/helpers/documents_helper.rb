@@ -8,12 +8,17 @@ module DocumentsHelper
   end
 
   def self.mutualRadius?(userCurrentLatlng, doc_lat, doc_lng)
+
+    radiusInMeters = 150.0  # meters
+    radiusInDeg = radiusInMeters/111000 # Convert to degrees via dividing by rate of conversion from meter to degree
+
+
     userlat = userCurrentLatlng[:lat].to_f
     userlng = userCurrentLatlng[:lng].to_f
     deltaLat = userlat - doc_lat.to_f
     deltaLng = userlng - doc_lng.to_f
     distanceInDeg = (deltaLat * deltaLat + deltaLng * deltaLng) ** 0.5 #pythag hypotenuse
-    return (distanceInDeg < 0.001497678) #magik , about 166 meters
+    return (distanceInDeg < radiusInDeg) #magik , about 150 meters
   end
 
 end
