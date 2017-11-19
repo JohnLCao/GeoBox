@@ -32,7 +32,7 @@ class UsersController < ApplicationController
                   .merge({
                     created_at_ms: user.created_at.to_f,
                     updated_at_ms: user.updated_at.to_f,
-                    owned_documents: user.documents.pluck(:filename)
+                    owned_documents: user.documents
                   })
     else
       user_data = {guest: true}
