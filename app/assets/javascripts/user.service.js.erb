@@ -23,6 +23,9 @@ function UserService($http, $rootScope){
 		.then(function(response){
 			user_service.user = response.data;
 			$rootScope.$broadcast('user:ready');
+			if (user_service.user.user_class=="admin"){
+				$rootScope.$broadcast('login:admin');
+			}
 		})
 		.catch(function(error){
 			console.warn(error);

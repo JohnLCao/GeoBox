@@ -27,8 +27,9 @@ class UsersController < ApplicationController
   def userInfo
     if session[:user_id]
       user = User.find(session[:user_id])
+      censored = ["id", "password_digest"] + (user.user_class=='admin' ? [] : ["user_class"])
       user_data = user.attributes
-                  .except('user_class','password_digest', 'id')
+                  .except(*censored)
                   .merge({
                     created_at_ms: user.created_at.to_f,
                     updated_at_ms: user.updated_at.to_f,
