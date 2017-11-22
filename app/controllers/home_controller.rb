@@ -3,9 +3,12 @@ class HomeController < ApplicationController
 	skip_before_action :ensure_login, only: :home
 
 	def home
-		session[:guest] = true unless session[:user_id] 
+		session[:guest] = true unless session[:user_id]
+		@documents = Document.all
 	end
+
 
 	def admin_home
 	end
+
 end
