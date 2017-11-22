@@ -1,0 +1,36 @@
+(function(){
+
+'use strict';
+
+angular.module('GeoBox')
+.service('UserService', UserService);
+
+UserService.$inject = ['$http', '$rootScope'];
+function UserService($http, $rootScope){
+	var user_service = this;
+	user_service.user = {};
+
+	user_service.baseUrl = "<% if Rails.env.production? %>			\
+								<%= 'https://geobox-staging.herokuapp.com' %> 	\
+						  	<% else %>								\
+						  		<%= 'http://localhost:3000' %> 			\
+						  	<% end %>".trim();
+	user_service.getUserInfo = function(){
+		return $http({
+			method: 'GET',
+			url: user_service.baseUrl + '/user_info'
+		})
+		.then(function(response){
+			user_service.user = response.data;
+			$rootScope.$broadcast('user:ready');
+			if (user_service.user.user_class=="admin"){
+				$rootScope.$broadcast('login:admin');
+			}
+		})
+		.catch(function(error){
+			console.warn(error);
+		});
+	}
+}
+
+})() //IIFE
