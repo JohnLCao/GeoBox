@@ -11,10 +11,10 @@ function DocumentService($http, $rootScope){
 	doc_service.docs = {};
 
 	doc_service.baseUrl = "<% if Rails.env.production? %>			\
-								<%= 'https://geobox-staging.herokuapp.com' %> 	\
-						   <% else %>	\
-						  		<%= 'http://localhost:3000' %> 			\
-						   <% end %>".trim();
+							<%= 'https://geobox.herokuapp.com' %> 	\
+						  <% else %>								\
+						  	<%= 'http://localhost:3000' %> 			\
+						  <% end %>".trim();
 
 	doc_service.updateLocation = function(browser_lat, browser_lng){
 		return $http({
