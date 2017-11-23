@@ -17,7 +17,7 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		  shouldSort: true,
 		  threshold: 0.6,
 		  location: 0,
-		  distance: 15,
+		  distance: 30,
 		  maxPatternLength: 32,
 		  minMatchCharLength: 1,
 		  keys: [
