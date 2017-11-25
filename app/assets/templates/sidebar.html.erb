@@ -24,8 +24,11 @@
         <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
       </h1>
       <br>
+      <input type="text" placeholder="Search for files..." 
+        ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">
+      <br>
       <div class="list-group">
-        <a ng-repeat="doc in $ctrl.docs" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a ng-repeat="doc in $ctrl.fuzzySearchResult" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{doc.filename}}</h5>
             <small class="text-muted">{{doc.created_at}}</small>
