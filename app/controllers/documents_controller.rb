@@ -7,6 +7,7 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     @documents = Document.all
+
   end
 
   # GET /documents/1
@@ -85,6 +86,6 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:description, :attachment)
+      params.require(:document).permit(:description, :attachment, :book_id)
     end
 end
