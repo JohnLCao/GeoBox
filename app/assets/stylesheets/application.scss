@@ -26,12 +26,20 @@ body {
 }
 
 .container-color {
-  background-color: #eaf1f3;
+  background-color: rgba(110, 199, 238, 0.3);
   border-radius: 5px;
-  border: 1px solid #d5e5ea;
+  border: 2px solid rgb(110, 199, 238);
   padding: 20px;
   margin: 20px;
 }
+
+.container-color-no-margin {
+  background-color: rgba(110, 199, 238, 0.3);
+  border-radius: 5px;
+  border: 2px solid rgb(110, 199, 238);
+  padding: 20px;
+}
+
 
 .btn:visited { color:#FFF; }
 

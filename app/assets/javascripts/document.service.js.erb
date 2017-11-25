@@ -11,7 +11,7 @@ function DocumentService($http, $rootScope){
 	doc_service.docs = {};
 
 	doc_service.baseUrl = "<% if Rails.env.production? %>			\
-							<%= 'https://geobox-staging.herokuapp.com' %> 	\
+							<%= 'https://geobox.herokuapp.com' %> 	\
 						  <% else %>								\
 						  	<%= 'http://localhost:3000' %> 			\
 						  <% end %>".trim();
@@ -32,11 +32,6 @@ function DocumentService($http, $rootScope){
 		.catch(function(error){
 			console.log(error);
 		})
-	}
-
-	doc_service.setCurrentLocation = function(lat, lng){
-		doc_service.loc.lat = lat;
-		doc_service.loc.lng = lng;
 	}
 }
 
