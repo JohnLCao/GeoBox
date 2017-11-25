@@ -22,6 +22,14 @@ class UsersController < ApplicationController
                                   username: User.find(doc.user_id).username,
                                   download_url: doc.attachment.url
                                 })}
+                 .concat(
+                  BooksHelper.fetchbooks({lat: loc_params[:lat], lng: loc_params[:lng]})
+                                .map{|book| book.attributes.merge({
+                                  is_book: true,
+                                  created_at_ms: book.created_at.to_f,
+                                  username: User.find(book.user_id).username
+                                })}
+                  )
   end
 
   def userInfo

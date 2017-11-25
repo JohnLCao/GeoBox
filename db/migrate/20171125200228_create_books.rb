@@ -1,13 +1,12 @@
-class CreateDocuments < ActiveRecord::Migration
+class CreateBooks < ActiveRecord::Migration
   def change
-    create_table :documents do |t|
-      t.string :filename
+    create_table :books do |t|
+      t.string :name
+      t.string :key
       t.text :description
       t.string :latitude
       t.string :longitude
-      t.string :cloudKey
       t.integer :user
-      t.integer :book
 
       t.timestamps null: false
     end

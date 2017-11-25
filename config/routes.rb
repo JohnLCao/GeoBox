@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :documents
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-
+  
   get "/login" => "sessions#new", as: :login
   delete "/logout" => "sessions#destroy", as: :logout
   get "/guest_login" => "sessions#guest", as: :guest_login
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   post "/update_location" => "users#updateLocation"
   get "/user_info" => "users#userInfo"
+  get "/book_test/:id" => "books#update"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

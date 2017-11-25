@@ -1,4 +1,6 @@
 <%= form_for @document, html: { multipart: true } do |f| %>
+  
+  <%= f.hidden_field :book_id %>
 
   <div class="field form-group">
     <%= f.label :description %><br>
