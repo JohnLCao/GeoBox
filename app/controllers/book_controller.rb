@@ -51,6 +51,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1.json
   #TODO: need to update with files
   def update
+    redirect_to controller: 'documents', action: 'new', book_id: @book.id
   end
 
   # DELETE /books/1

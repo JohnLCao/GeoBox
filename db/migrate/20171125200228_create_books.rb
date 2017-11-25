@@ -6,6 +6,7 @@ class CreateBooks < ActiveRecord::Migration
       t.text :description
       t.string :latitude
       t.string :longitude
+      t.integer :user
 
       t.timestamps null: false
     end
