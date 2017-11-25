@@ -4,9 +4,7 @@ class HomeController < ApplicationController
 
 	def home
 		session[:guest] = true unless session[:user_id]
-		@documents = Document.all
 	end
-
 
 	def admin_home
 	end
