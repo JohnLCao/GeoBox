@@ -8,7 +8,8 @@ angular.module('GeoBox')
 DocumentService.$inject = ['$http', '$rootScope'] //$resources or $http would likely go here.
 function DocumentService($http, $rootScope){
 	var doc_service = this;
-	doc_service.docs = {};
+	doc_service.docs = [];
+	doc_service.books = [];
 
 	doc_service.baseUrl = "<% if Rails.env.production? %>			\
 							<%= 'https://geobox.herokuapp.com' %> 	\
@@ -26,7 +27,14 @@ function DocumentService($http, $rootScope){
 			}
 		})
 		.then(function(response){
-			doc_service.docs = response.data;
+			doc_service.docs = response.data.filter(function(item){
+				return !item.is_book;
+			});
+			doc_service.books = response.data.filter(function(item){
+				return item.is_book;
+			});
+			console.log('documents', doc_service.docs);
+			console.log('books', doc_service.books);
 			$rootScope.$broadcast('documents:ready');
 		})
 		.catch(function(error){
