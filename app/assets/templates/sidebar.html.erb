@@ -24,7 +24,7 @@
         <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
       </h1>
       <br>
-      <input type="text" placeholder="Search for files..." 
+      <input type="text" placeholder="Search for files..."
         ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">
       <br>
       <div class="list-group">
@@ -38,7 +38,7 @@
         </a>
       </div>
     </div>
-  
+
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       <div ng-if="!$ctrl.user.guest">
