@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.wrap {
+  word-wrap: break-word;
+}
+
 /* append the notification badge after it */
 [data-notifications]:after {
   /* the burger */
