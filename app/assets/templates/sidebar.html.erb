@@ -2,12 +2,22 @@
   <!-- Nav tabs -->
   <div class="sidebar-tabs">
     <ul role="tablist">
+
+      <!-- FILES ICON -->
       <li>
         <a ng-click="$ctrl.getDocs()" href="#home" role="tab">
           <i data-notifications="{{$ctrl.docs.length}}" class="fa fa-file-text"></i>
         </a>
       </li>
 
+      <!-- BOOKS ICON -->
+      <li>
+        <a href="#books" role="tab">
+          <i data-notifications="{{$ctrl.books.length}}" class="fa fa-book"></i>
+        </a>
+      </li>
+
+      <!-- PROFILE ICON -->
       <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
     </ul>
 
@@ -18,6 +28,8 @@
 
   <!-- Tab panes -->
   <div class="sidebar-content">
+
+    <!-- FILES -->
     <div class="sidebar-pane" id="home">
       <h1 class="sidebar-header">
         Files
@@ -28,7 +40,6 @@
         <input class="form-control" id="search" type="text" placeholder="Search for files..."
                ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">
       </div>
-
       <div class="list-group">
         <a ng-repeat="doc in $ctrl.fuzzySearchResult" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
@@ -40,13 +51,37 @@
         </a>
       </div>
     </div>
-  
+
+
+    <!-- BOOKS -->
+    <div class="sidebar-pane" id="books">
+      <h1 class="sidebar-header">
+        Books
+        <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+      </h1>
+      <br>
+      <div class="form-group">
+        <!--<input class="form-control" id="search" type="text" placeholder="Search for books..."
+               ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">-->
+      </div>
+      <div class="list-group">
+        <!--<a ng-repeat="doc in $ctrl.fuzzySearchResult" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{doc.filename}}</h5>
+            <small class="text-muted">{{doc.created_at}}</small>
+          </div>
+          <p class="wrap">{{doc.description}}</p>
+          <small class="text-muted">uploaded by {{doc.username}}</small>
+        </a>-->
+      </div>
+    </div>
+
+
+    <!-- PROFILE -->
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       <div ng-if="!$ctrl.user.guest">
-
         <br>
-
         <ul class="list-group">
           <li class="list-group-item active">User Information</li>
           <li class="list-group-item">Username: {{$ctrl.user.username}}</li>
@@ -54,21 +89,16 @@
           <li class="list-group-item">Active Since: {{$ctrl.user.created_at}}</li>
           <li class="list-group-item">Last Profile Edit: {{$ctrl.user.updated_at}}</li>
         </ul>
-
         <br>
-
         <ul class="list-group">
           <li class="list-group-item active">Owned Files: </li>
           <li class="list-group-item" ng-repeat="doc in $ctrl.user.owned_documents"><a href="{{doc.attachment.url}}"><i class="fa fa-cloud-download" style="color: rgb(110, 199, 238)"></i></a>&nbsp &nbsp{{doc.filename}}</li>
         </ul>
-
       </div>
-
       <div ng-if="$ctrl.user.guest">
         <br>
         <a class="btn btn-primary" style="width: 100%" href="{{$ctrl.base_url}}/login">Login Now!</a>
       </div>
-
     </div>
 
     <div class="sidebar-pane" id="settings">
