@@ -41,6 +41,23 @@ function DocumentService($http, $rootScope){
 			console.log(error);
 		})
 	}
+
+	doc_service.fetchFilesInBook = function(book_id){
+		return $http({
+			method: 'GET',
+			url: doc_service.baseUrl + '/fetch_files_in_book',
+			params: {
+				id: book_id
+			}
+		})
+		.then(function(response){
+			doc_service.files_in_book = response.data;
+			$rootScope.$broadcast('files_in_book:ready');
+		})
+		.catch(function(error){
+			console.warn(error);
+		})
+	}
 }
 
 })();
