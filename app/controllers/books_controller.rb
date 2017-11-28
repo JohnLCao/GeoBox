@@ -43,8 +43,6 @@ class BooksController < ApplicationController
     @book[:longitude] = session[:longitude]
 
   #TODO: add files to book... ...
-
-    print(@book.attachment)
     respond_to do |format|
       if @book.save
         format.html { redirect_to root_path, success: 'Book was successfully created.' }

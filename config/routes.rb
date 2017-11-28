@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :documents
+  resources :books
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   
