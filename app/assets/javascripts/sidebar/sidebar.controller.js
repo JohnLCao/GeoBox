@@ -8,7 +8,8 @@ angular.module('GeoBox')
 SidebarController.$inject = ['$rootScope', 'DocumentService', '$scope', 'UserService'];
 function SidebarController($rootScope, DocumentService, $scope, UserService){
 	var $ctrl = this;
-	$ctrl.docs = {};
+	$ctrl.docs = [];
+	$ctrl.books = [];
 	$ctrl.user = {};
 	$ctrl.base_url = null;
 	$ctrl.fuzzySearchString = '';
@@ -36,6 +37,7 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$ctrl.getDocs = function(e,d){
 		$ctrl.docs = processDocuments(DocumentService.docs);
+		$ctrl.books = DocumentService.books;
 	};
 
 	$ctrl.getUser = function(e,d){

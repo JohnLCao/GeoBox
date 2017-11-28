@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :fetch_book_files]
   before_action :ensure_admin, only: :index
   before_action :ensure_not_guest, only: [:new, :create]
 
@@ -22,6 +22,16 @@ class BooksController < ApplicationController
 
   # GET /books/1/edit
   def edit
+  end
+
+  # GET /fetch_files_in_books/:id
+  def fetch_book_files
+    render json: @book.documents
+                      .map{|doc| doc.attributes.merge({
+                        created_at_ms: doc.created_at.to_f,
+                        username: User.find(doc.user_id).username,
+                        download_url: doc.attachment.url
+                      })}
   end
 
   # POST /books

@@ -18,6 +18,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    @document[:book_id] = params[:book_id]
   end
 
   # GET /documents/1/edit

@@ -7,7 +7,6 @@ class CreateDocuments < ActiveRecord::Migration
       t.string :longitude
       t.string :cloudKey
       t.integer :user
-      t.integer :book
 
       t.timestamps null: false
     end
