@@ -46,11 +46,13 @@ RSpec.describe DocumentsController, type: :controller do
     end
 
     context "as an unauthorized user" do
-      it "responds unsucessfully for not the owner" do
+      it "responds sucessfully for all users not the owner" do
         login(@user2)
         get :show, id: @document.id
-        expect(response).not_to be_success
-        expect(response).to redirect_to root_path
+        expect(response).to be_success
+        # This is because documents is viewable to all users
+        # expect(response).not_to be_success
+        # expect(response).to redirect_to root_path
         # will decide where it should redirect to
       end
 
