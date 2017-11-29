@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :documents
+  resources :books
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   
@@ -7,15 +8,17 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy", as: :logout
   get "/guest_login" => "sessions#guest", as: :guest_login
 
-  #TO BE CHANGED
   root to: "home#home"
+  #TO BE CHANGED
+  get "/book_test/:id" => "books#update"
   #TO BE CHANGED
 
   get "/admin_root" => "home#admin_home", as: :admin_root
 
   post "/update_location" => "users#updateLocation"
   get "/user_info" => "users#userInfo"
-  get "/book_test/:id" => "books#update"
+  get "/fetch_files_in_book" => "books#fetch_book_files"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -44,7 +44,9 @@ class DocumentsController < ApplicationController
         format.html { redirect_to root_path, success: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
-        flash[:danger] = @document.errors.collect { |key, value| "#{key.capitalize} #{value}" }.first
+        @document.errors.collect { |key, value| "#{key.capitalize} #{value}" }.each do |error|
+          flash[:danger] = error
+        end
         format.html { render :new }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
