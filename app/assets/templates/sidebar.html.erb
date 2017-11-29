@@ -28,7 +28,6 @@
         <input class="form-control" id="search" type="text" placeholder="Search for files..."
                ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">
       </div>
-
       <div class="list-group">
         <a ng-repeat="doc in $ctrl.fuzzySearchResult" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
@@ -40,7 +39,7 @@
         </a>
       </div>
     </div>
-  
+
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       <div ng-if="!$ctrl.user.guest">
