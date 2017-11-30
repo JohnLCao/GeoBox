@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   post "/update_location" => "users#updateLocation"
   get "/user_info" => "users#userInfo"
-  get "/fetch_files_in_book" => "books#fetch_book_files"
+  post "/fetch_files_in_book" => "books#fetch_book_files"
 
 
   # The priority is based upon order of creation: first created -> highest priority.

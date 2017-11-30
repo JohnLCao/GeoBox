@@ -37,7 +37,7 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$ctrl.getDocs = function(e,d){
 		$ctrl.docs = processDocuments(DocumentService.docs);
-		$ctrl.books = DocumentService.books;
+		$ctrl.books = processBooks(DocumentService.books);
 	};
 
 	$ctrl.getUser = function(e,d){
@@ -51,7 +51,7 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		} else {
 			$ctrl.fuzzySearchResult = $ctrl.docs; // all documents.
 		}
-	}
+	};
 
 	function processDocuments(documents){
 		documents.forEach(function(d){
@@ -62,6 +62,13 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		return documents;
 	}
 
+	function processBooks(books){
+	    books.forEach(function(b){
+	        b.created_at = moment(new Date(b.created_at_ms * 1000)).fromNow();
+        });
+        return books;
+    }
+
 	function processUser(user){
 		if (!user.guest){
 			user.created_at = moment(new Date(user.created_at_ms * 1000)).fromNow();
@@ -69,6 +76,10 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		}
 		return user;
 	}
+
+    $ctrl.openBook = function(id){
+	    DocumentService.fetchFilesInBook(id);
+    };
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
 	$scope.$on('user:ready', $ctrl.getUser);

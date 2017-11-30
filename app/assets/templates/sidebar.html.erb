@@ -64,17 +64,19 @@
                ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">-->
       </div>
       <div class="list-group">
-        <!--<a ng-repeat="doc in $ctrl.fuzzySearchResult" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div ng-repeat="book in $ctrl.books" class="list-group-item flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{doc.filename}}</h5>
-            <small class="text-muted">{{doc.created_at}}</small>
+            <h5 class="mb-1">{{book.name}}</h5>
+            <small class="text-muted">{{book.created_at}}</small>
           </div>
-          <p class="wrap">{{doc.description}}</p>
-          <small class="text-muted">uploaded by {{doc.username}}</small>
-        </a>-->
+          <p class="wrap">{{book.description}}</p>
+          <small class="text-muted">uploaded by {{book.username}}</small>
+          <hr>
+          <button class="btn btn-primary" style="width: 100%" ng-click="$ctrl.openBook(book.id)">View Contents</button>
+        </div>
       </div>
     </div>
-    
+
     <!-- PROFILE -->
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>

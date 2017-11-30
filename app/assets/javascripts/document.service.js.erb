@@ -44,7 +44,7 @@ function DocumentService($http, $rootScope){
 
 	doc_service.fetchFilesInBook = function(book_id){
 		return $http({
-			method: 'GET',
+			method: 'POST',
 			url: doc_service.baseUrl + '/fetch_files_in_book',
 			params: {
 				id: book_id

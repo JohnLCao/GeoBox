@@ -2,6 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy, :fetch_book_files]
   before_action :ensure_admin, only: :index
   before_action :ensure_not_guest, only: [:new, :create]
+  skip_before_action :verify_authenticity_token, only: [:fetch_book_files]
 
   # GET /books
   # GET /books.json
