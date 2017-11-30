@@ -17,6 +17,7 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
         $ctrl.secret = null;
         $ctrl.book = data.book;
         $ctrl.getDocs();
+        $ctrl.baseUrl = UserService.baseUrl;
     });
 
     $ctrl.checkSecret = function(){

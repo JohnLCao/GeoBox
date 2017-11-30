@@ -27,7 +27,7 @@
       </div>
 
       <div class="modal-footer" ng-if="$ctrl.allow_access">
-        <button type="button" class="btn btn-primary">Add Document</button>
+        <a type="button" class="btn btn-primary" href="{{$ctrl.baseUrl}}/add_file_to_book/{{$ctrl.book.id}}">Add Document</a>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
       </div>
     </div>

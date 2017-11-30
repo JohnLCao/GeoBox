@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   root to: "home#home"
   #TO BE CHANGED
-  get "/book_test/:id" => "books#update"
+  get "/add_file_to_book/:id" => "books#update"
   #TO BE CHANGED
 
   get "/admin_root" => "home#admin_home", as: :admin_root
