@@ -55,7 +55,7 @@
         <div class="list-group">
           <a ng-repeat="book in $ctrl.fuzzySearchResult" href="{{book.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1">{{book.filename}}</h5>
+              <h5 class="mb-1">{{book.name}}</h5>
               <small class="text-muted">{{book.created_at}}</small>
             </div>
             <p class="wrap">{{book.description}}</p>
