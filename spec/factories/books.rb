@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :book do
-    name "MyString"
-    key "MyString"
+    sequence(:name) {|n| "MyNameString#{n}"}
+    sequence(:key) {|n| "MyKeyString#{n}"}
     description "MyText"
     latitude "MyString"
     longitude "MyString"

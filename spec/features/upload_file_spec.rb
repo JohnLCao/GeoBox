@@ -23,7 +23,7 @@ RSpec.feature "UploadFile", type: :feature, js: true do
     fill_in "Username", with: user.username
     fill_in "Password", with: user.password
     click_button "Login"
-    sleep(2)
+    sleep(7)
     click_on(class: 'fa fa-plus btn')
     fill_in "Description", with: "Just for fun"
     attach_file "Attachment", "#{Rails.root}/spec/files/test2.txt"
