@@ -9,15 +9,25 @@ ModalController.$inject = ['$rootScope', 'DocumentService', '$scope', 'UserServi
 function ModalController($rootScope, DocumentService, $scope, UserService){
     var $ctrl = this;
     $ctrl.docs = [];
+    $ctrl.book = {};
 
-    $scope.$on('files_in_book:ready', function(){
+    $scope.$on('files_in_book:ready', function(event, data){
         $("#exampleModal").modal("show");
+        $ctrl.allow_access = false;
+        $ctrl.secret = null;
+        $ctrl.book = data.book;
         $ctrl.getDocs();
     });
 
+    $ctrl.checkSecret = function(){
+        if ($ctrl.secret === $ctrl.book.key){
+            $ctrl.allow_access = true;
+        }
+    }
+
     $ctrl.getDocs = function(book_id){
         console.log(book_id);
-        $ctrl.docs = DocumentService.files_in_book;
+        $ctrl.docs = processDocuments(DocumentService.files_in_book);
         console.log($ctrl.docs);
     };
 

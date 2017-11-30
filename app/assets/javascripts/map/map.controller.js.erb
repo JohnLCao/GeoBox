@@ -53,10 +53,9 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 		}
 	}
 
-  function openBook(id){
-      alert('HELP');
-      $rootScope.$broadcast('book:contents', {book_id: id});
-  }
+	document.openBook = function(id){
+	      DocumentService.fetchFilesInBook(id);
+	}
 
 	function updateMarkers(e,data){
 		$ctrl.doc_markers = [];
@@ -84,7 +83,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
                 width: 45,
                 height: 45
             },
-            infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-success" style="width: 100%" onclick="openBook(' +  book.id + ')"> Open Book </button></div>'
+            infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-success" style="width: 100%" onclick="openBook(' + book.id + ')"> Open Book </button></div>'
         });
         $ctrl.book_markers.push(new_marker);
 		});

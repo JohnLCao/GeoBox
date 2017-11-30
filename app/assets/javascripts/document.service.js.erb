@@ -52,7 +52,11 @@ function DocumentService($http, $rootScope){
 		})
 		.then(function(response){
 			doc_service.files_in_book = response.data;
-			$rootScope.$broadcast('files_in_book:ready');
+			$rootScope.$broadcast('files_in_book:ready', {
+				book: doc_service.books.find(function(b){
+					return b.id === book_id; 
+				})
+			});
 		})
 		.catch(function(error){
 			console.warn(error);

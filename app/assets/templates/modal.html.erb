@@ -4,14 +4,17 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Documents</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{$ctrl.book.name}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-body">
-        <div class="list-group">
+        <div ng-if="!$ctrl.allow_access">
+          <input type="text" placeholder="Enter Book Secret: " ng-model="$ctrl.secret" ng-change="$ctrl.checkSecret()">
+        </div>
+        <div class="list-group" ng-if="$ctrl.allow_access">
           <a ng-repeat="doc in $ctrl.docs" href="{{doc.download_url}}" class="list-group-item flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">{{doc.name}}</h5>
@@ -23,7 +26,7 @@
         </div>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer" ng-if="$ctrl.allow_access">
         <button type="button" class="btn btn-primary">Add Document</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
       </div>
