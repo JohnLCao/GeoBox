@@ -33,10 +33,11 @@ ActiveRecord::Schema.define(version: 20171125213237) do
     t.string   "latitude"
     t.string   "longitude"
     t.integer  "user_id"
+    t.integer  "book_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "attachment"
-    t.integer  "book_id"
+    t.integer  "book"
   end
 
   create_table "users", force: :cascade do |t|

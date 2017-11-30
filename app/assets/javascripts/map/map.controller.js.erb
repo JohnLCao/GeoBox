@@ -17,7 +17,6 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	$ctrl.$onInit = function(){
       var hours = (new Date()).getHours();
       var mapStyle;
-
       if (hours > 6 && hours < 20) {
         mapStyle = retroMode;
       } else {
@@ -25,7 +24,6 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
       }
 
       $ctrl.handler = Gmaps.build('Google');
-
       $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
           zoom: 17,
           styles: JSON.parse(mapStyle),
