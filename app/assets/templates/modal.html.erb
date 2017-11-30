@@ -11,8 +11,9 @@
       </div>
 
       <div class="modal-body">
-        <div ng-if="!$ctrl.allow_access">
-          <input type="text" placeholder="Enter Book Secret: " ng-model="$ctrl.secret" ng-change="$ctrl.checkSecret()">
+        <div class="form-group" ng-if="!$ctrl.allow_access">
+          <label class="" for="keyEntry">Enter your Secret Key</label>
+          <input id="keyEntry" type="text" class="form-control" placeholder="Key..." ng-model="$ctrl.secret" ng-change="$ctrl.checkSecret()">
         </div>
         <div class="list-group" ng-if="$ctrl.allow_access">
           <a ng-repeat="doc in $ctrl.docs" href="{{doc.download_url}}" class="list-group-item flex-column align-items-start">
