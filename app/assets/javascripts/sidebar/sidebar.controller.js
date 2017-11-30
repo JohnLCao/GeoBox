@@ -37,8 +37,11 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$ctrl.getDocs = function(e,d){
 		$ctrl.docs = processDocuments(DocumentService.docs);
-		$ctrl.books = DocumentService.books;
 	};
+
+	$ctrl.getBooks = function(e,d){
+		$ctrl.books = processBooks(DocumentService.books);
+	}
 
 	$ctrl.getUser = function(e,d){
 		$ctrl.user = processUser(UserService.user);
@@ -52,6 +55,13 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 			$ctrl.fuzzySearchResult = $ctrl.docs; // all documents.
 		}
 	}
+	$ctrl.books.search = function(){
+		if ($ctrl.fuzzySearchString){
+			$ctrl.fuzzySearchResult = $ctrl.fuzzySearchList.search($ctrl.fuzzySearchString);
+		} else {
+			$ctrl.fuzzySearchResult = $ctrl.books; // all documents.
+		}
+	}
 
 	function processDocuments(documents){
 		documents.forEach(function(d){
@@ -60,6 +70,15 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		$ctrl.fuzzySearchList = new Fuse(documents, $ctrl.fuzzySearchOptions);
 		$ctrl.fuzzySearchResult = documents;
 		return documents;
+	}
+
+	function processBooks(books){
+		books.forEach(function(b){
+			b.created_at = moment(new Date(b.created_at_ms * 1000)).fromNow();
+		});
+		$ctrl.fuzzySearchList = new Fuse(books, $ctrl.fuzzySearchOptions);
+		$ctrl.fuzzySearchResult = books;
+		return books;
 	}
 
 	function processUser(user){
@@ -72,6 +91,8 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
 	$scope.$on('user:ready', $ctrl.getUser);
+	$scope.$on('books:ready', $ctrl.getBooks);
+
 }
 
 })();
