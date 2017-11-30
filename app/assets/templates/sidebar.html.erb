@@ -97,7 +97,7 @@
         <br>
         <ul class="list-group">
           <li class="list-group-item active">Owned Books: </li>
-          <li class="list-group-item" ng-repeat="book in $ctrl.user.owned_books"><a ng-click="$ctrl.openBook(book.id)"><i class="fa fa-cloud-download" style="color: rgb(110, 199, 238)"></i></a>&nbsp &nbsp{{book.name}}</li>
+          <li class="list-group-item" ng-repeat="book in $ctrl.user.owned_books"><a href="" ng-click="$ctrl.openBook(book.id)"><i class="fa fa-cloud-download" style="color: rgb(110, 199, 238)"></i></a>&nbsp &nbsp{{book.name}}</li>
         </ul>
       </div>
       <div ng-if="$ctrl.user.guest">
