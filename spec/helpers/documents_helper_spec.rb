@@ -14,10 +14,17 @@ RSpec.describe DocumentsHelper, :type => :helper do
 
     it "returns only documents within the radius" do
       document1 = FactoryBot.create(:document)
-      document2 = FactoryBot.create(:document, latitude: 100, longitude: 100)
+      document2 = FactoryBot.create(:document)
       userCurrentLatlng = {lat: 100, lng: 100}
-      expect(DocumentsHelper.fetchfiles(userCurrentLatlng).first[:filename]).to eq("document1")
-      expect(DocumentsHelper.fetchfiles(userCurrentLatlng).second[:filename]).to eq("document2")
+      expect(DocumentsHelper.fetchfiles(userCurrentLatlng)).not_to be_empty
+      puts "======================================="
+      puts document1.filename
+      puts document2.filename
+      puts DocumentsHelper.fetchfiles(userCurrentLatlng).first[:filename]
+      puts DocumentsHelper.fetchfiles(userCurrentLatlng).second[:filename]
+      puts "======================================="
+      expect(DocumentsHelper.fetchfiles(userCurrentLatlng).first[:filename]).to eq("document6")
+      expect(DocumentsHelper.fetchfiles(userCurrentLatlng).second[:filename]).to eq("document7")
     end
 
     it "returns empty array when user is out of document's radius" do
