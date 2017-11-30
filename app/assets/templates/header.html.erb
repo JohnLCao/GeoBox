@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" href="/">
     <%= image_tag 'logo.png', size: '30x30' %>
-    GeoBox
+    &nbsp Home
   </a>
 
   <div class="navbar-collapse collapse">
@@ -15,9 +15,16 @@
   </div>
 
   <span class="nav-item active">
-    <span ng-if="$ctrl.logged_in">
-      <%= link_to '', new_document_path, {class: 'fa fa-plus btn'} %>
+
+    <span class="dropdown">
+      <a class="btn fa fa-plus" style="color: white" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <%= link_to 'Document', new_document_path, {class: 'dropdown-item'} %>
+        <%= link_to 'Book', new_document_path, {class: 'dropdown-item'} %>
+      </div>
     </span>
+
     <span ng-if="$ctrl.logged_in" ng-click="$ctrl.onLogout()">
       <%= link_to 'Logout', logout_path, {method: :delete, class: 'btn'} %>
     </span>
