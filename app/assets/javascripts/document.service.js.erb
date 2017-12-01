@@ -33,8 +33,6 @@ function DocumentService($http, $rootScope){
 			doc_service.books = response.data.filter(function(item){
 				return item.is_book;
 			});
-			console.log('documents', doc_service.docs);
-			console.log('books', doc_service.books);
 			$rootScope.$broadcast('documents:ready');
 		})
 		.catch(function(error){
@@ -51,11 +49,11 @@ function DocumentService($http, $rootScope){
 			}
 		})
 		.then(function(response){
-			doc_service.files_in_book = response.data;
+			doc_service.files_in_book = response.data.book_docs;
 			$rootScope.$broadcast('files_in_book:ready', {
 				book: doc_service.books.find(function(b){
 					return b.id === book_id; 
-				})
+				}) || response.data.book_attr
 			});
 		})
 		.catch(function(error){
