@@ -41,7 +41,8 @@ class UsersController < ApplicationController
                   .merge({
                     created_at_ms: user.created_at.to_f,
                     updated_at_ms: user.updated_at.to_f,
-                    owned_documents: user.documents
+                    owned_documents: user.documents,
+                    owned_books: user.books
                   })
     else
       user_data = {guest: true}
