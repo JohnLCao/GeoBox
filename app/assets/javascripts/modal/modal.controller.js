@@ -27,9 +27,7 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     }
 
     $ctrl.getDocs = function(book_id){
-        console.log(book_id);
         $ctrl.docs = processDocuments(DocumentService.files_in_book);
-        console.log($ctrl.docs);
     };
 
     function processDocuments(documents){
