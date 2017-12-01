@@ -11,12 +11,19 @@
       </div>
 
       <div class="modal-body">
+
         <div class="form-group" ng-if="!$ctrl.allow_access">
           <label class="" for="keyEntry">Enter your Secret Key</label>
           <input id="keyEntry" type="text" class="form-control" placeholder="Key..." ng-model="$ctrl.secret" ng-change="$ctrl.checkSecret()">
         </div>
         <div class="list-group" ng-if="$ctrl.allow_access">
-          <a ng-repeat="doc in $ctrl.docs" href="{{doc.download_url}}" class="list-group-item flex-column align-items-start">
+
+          <div class="form-group">
+            <input class="form-control" id="search" type="text" placeholder="Search for files..."
+                   ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">
+          </div>
+
+          <a ng-repeat="doc in $ctrl.fuzzySearchResult" href="{{doc.download_url}}" class="list-group-item flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">{{doc.name}}</h5>
               <small class="text-muted">{{doc.created_at}}</small>
