@@ -31,6 +31,8 @@ RSpec.feature "UploadFile", type: :feature, js: true do
     click_button "Submit"
     expect(page).to have_text 'Document was successfully created.'
     expect(page).to have_current_path root_path
+    find_link(href: '#home').click
+    expect(page).to have_content "test2.txt"
   end
 
   scenario "user create a book and upload a file" do
@@ -59,6 +61,6 @@ RSpec.feature "UploadFile", type: :feature, js: true do
     find_link(href: '#books').click
     click_on "View Contents"
     fill_in "Key", with: "simple"
-    expect(page).to have_content "Test book 1"
+    expect(page).to have_content "test2.txt"
   end
 end

@@ -3,26 +3,47 @@ require 'rails_helper'
 RSpec.feature "DownloadFile", type: :feature, js: true do
   # pending "add some scenarios (or delete) #{__FILE__}"
   let(:user) { FactoryBot.create(:user) }
-  # self.use_transactional_fixtures = false
   scenario "user login - upload files - view files - download - logout" do
-    # user = FactoryBot.create(:user)
     visit login_path
     fill_in "Username", with: user.username
     fill_in "Password", with: user.password
     click_button "Login"
-    # getting current location is slow, so wait for 7 secs guarantees tests pass
-    sleep(7)
-
-    click_on(class: 'fa fa-plus btn')
+    find_by_id('dropdownMenuButton').click
+    click_on "Document"
     fill_in "Description", with: "Just for fun"
-    attach_file "Attachment", "#{Rails.root}/spec/files/test.txt"
+    attach_file "Attachment", "#{Rails.root}/spec/files/test2.txt"
     click_button "Submit"
-    # wait for current location again to fetch files to clicking right away would result test fail
-    sleep(5)
     find_link(href: '#home').click
-    expect(page).to have_content "test.txt"
-    click_on("test.txt")
-    expect(page).to have_content "This is to test the upload file function."
+    click_on("test2.txt")
+    expect(page).to have_content "This is to test the download file function."
+    page.driver.go_back
+    click_on "Logout"
+  end
+
+  scenario "user login - create and add file to the book - view books - download - logout" do
+    visit login_path
+    fill_in "Username", with: user.username
+    fill_in "Password", with: user.password
+    click_button "Login"
+    find_by_id('dropdownMenuButton').click
+    click_on "Book"
+    expect(page).to have_current_path new_book_path
+    fill_in "Name", with: "Book 1"
+    fill_in "Description", with: "Create a book"
+    fill_in "Key", with: "simple"
+    click_button "Submit"
+    find_link(href: '#books').click
+    click_on "View Contents"
+    fill_in "Key", with: "simple"
+    click_on "Add Document"
+    fill_in "Description", with: "Add file to book"
+    attach_file "Attachment", "#{Rails.root}/spec/files/test2.txt"
+    click_button "Submit"
+    find_link(href: '#books').click
+    click_on "View Contents"
+    fill_in "Key", with: "simple"
+    click_on("test2.txt")
+    expect(page).to have_content "This is to test the download file function."
     page.driver.go_back
     click_on "Logout"
   end
