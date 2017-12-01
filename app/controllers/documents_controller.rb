@@ -7,6 +7,7 @@ class DocumentsController < ApplicationController
   # GET /documents.json
   def index
     @documents = Document.all
+
   end
 
   # GET /documents/1
@@ -17,6 +18,7 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    @document[:book_id] = params[:book_id]
   end
 
   # GET /documents/1/edit
@@ -42,7 +44,9 @@ class DocumentsController < ApplicationController
         format.html { redirect_to root_path, success: 'Document was successfully created.' }
         format.json { render :show, status: :created, location: @document }
       else
-        flash[:danger] = @document.errors.collect { |key, value| "#{key.capitalize} #{value}" }.first
+        @document.errors.collect { |key, value| "#{key.capitalize} #{value}" }.each do |error|
+          flash[:danger] = error
+        end
         format.html { render :new }
         format.json { render json: @document.errors, status: :unprocessable_entity }
       end
@@ -85,6 +89,6 @@ class DocumentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def document_params
-      params.require(:document).permit(:description, :attachment)
+      params.require(:document).permit(:description, :attachment, :book_id)
     end
 end

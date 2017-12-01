@@ -6,5 +6,6 @@ FactoryBot.define do
     longitude "100"
     attachment { File.new("#{Rails.root}/spec/files/test.txt") }
     association :user
+    # association :book
   end
 end

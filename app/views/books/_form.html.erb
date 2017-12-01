@@ -1,0 +1,21 @@
+<%= form_for @book, html: { multipart: true } do |f| %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control', placeholder: 'The name of your book...' %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: 'form-control', placeholder: 'A brief description of your book...' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :key %>
+    <%= f.text_field :key, class: 'form-control', placeholder: 'A private passcode...' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit :Submit, {class: 'btn btn-primary'} %>
+  </div><br>
+<% end %>

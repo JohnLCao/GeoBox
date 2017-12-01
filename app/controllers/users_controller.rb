@@ -22,6 +22,14 @@ class UsersController < ApplicationController
                                   username: User.find(doc.user_id).username,
                                   download_url: doc.attachment.url
                                 })}
+                 .concat(
+                  BooksHelper.fetchbooks({lat: loc_params[:lat], lng: loc_params[:lng]})
+                                .map{|book| book.attributes.merge({
+                                  is_book: true,
+                                  created_at_ms: book.created_at.to_f,
+                                  username: User.find(book.user_id).username
+                                })}
+                  )
   end
 
   def userInfo
@@ -33,7 +41,8 @@ class UsersController < ApplicationController
                   .merge({
                     created_at_ms: user.created_at.to_f,
                     updated_at_ms: user.updated_at.to_f,
-                    owned_documents: user.documents
+                    owned_documents: user.documents,
+                    owned_books: user.books
                   })
     else
       user_data = {guest: true}

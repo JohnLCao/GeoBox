@@ -8,13 +8,14 @@ angular.module('GeoBox')
 DocumentService.$inject = ['$http', '$rootScope'] //$resources or $http would likely go here.
 function DocumentService($http, $rootScope){
 	var doc_service = this;
-	doc_service.docs = {};
+	doc_service.docs = [];
+	doc_service.books = [];
 
 	doc_service.baseUrl = "<% if Rails.env.production? %>			\
-								<%= 'https://geobox-staging.herokuapp.com' %> 	\
-						   <% else %>	\
-						  		<%= 'http://localhost:3000' %> 			\
-						   <% end %>".trim();
+							<%= 'https://geobox.herokuapp.com' %> 	\
+						  <% else %>								\
+						  	<%= 'http://localhost:3000' %> 			\
+						  <% end %>".trim();
 
 	doc_service.updateLocation = function(browser_lat, browser_lng){
 		return $http({
@@ -26,11 +27,37 @@ function DocumentService($http, $rootScope){
 			}
 		})
 		.then(function(response){
-			doc_service.docs = response.data;
+			doc_service.docs = response.data.filter(function(item){
+				return !item.is_book;
+			});
+			doc_service.books = response.data.filter(function(item){
+				return item.is_book;
+			});
 			$rootScope.$broadcast('documents:ready');
 		})
 		.catch(function(error){
 			console.log(error);
+		})
+	}
+
+	doc_service.fetchFilesInBook = function(book_id){
+		return $http({
+			method: 'POST',
+			url: doc_service.baseUrl + '/fetch_files_in_book',
+			params: {
+				id: book_id
+			}
+		})
+		.then(function(response){
+			doc_service.files_in_book = response.data.book_docs;
+			$rootScope.$broadcast('files_in_book:ready', {
+				book: doc_service.books.find(function(b){
+					return b.id === book_id; 
+				}) || response.data.book_attr
+			});
+		})
+		.catch(function(error){
+			console.warn(error);
 		})
 	}
 }

@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.wrap {
+  word-wrap: break-word;
+}
+
 /* append the notification badge after it */
 [data-notifications]:after {
   /* the burger */
@@ -24,7 +28,7 @@
   bottom: 0;
   width: 100%;
   overflow: hidden;
-  z-index: 2000; }
+  z-index: 1000; }
 .sidebar.collapsed {
   width: 40px; }
 

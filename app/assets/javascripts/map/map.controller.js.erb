@@ -9,6 +9,7 @@ MapController.$inject = ['DocumentService', '$scope', '$interval', 'retroMode','
 function MapController(DocumentService, $scope, $interval, retroMode, nightMode){
 	var $ctrl = this;
 	$ctrl.doc_markers = [];
+	$ctrl.book_markers = [];
 	$ctrl.user_marker = [];
 	$ctrl.radius_marker = [];
 
@@ -16,7 +17,6 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	$ctrl.$onInit = function(){
       var hours = (new Date()).getHours();
       var mapStyle;
-
       if (hours > 6 && hours < 20) {
         mapStyle = retroMode;
       } else {
@@ -24,7 +24,6 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
       }
 
       $ctrl.handler = Gmaps.build('Google');
-
       $ctrl.handler.buildMap({ internal: {id: 'geolocation'}, provider:{
           zoom: 17,
           styles: JSON.parse(mapStyle),
@@ -52,8 +51,13 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 		}
 	}
 
+	document.openBook = function(id){
+	      DocumentService.fetchFilesInBook(id);
+	}
+
 	function updateMarkers(e,data){
 		$ctrl.doc_markers = [];
+		$ctrl.book_markers = [];
 		DocumentService.docs.forEach(function(doc){
 			var new_marker = $ctrl.handler.addMarker({
 				lat: Number(doc.latitude),
@@ -67,7 +71,22 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 			});
 			$ctrl.doc_markers.push(new_marker);
 		});
+		DocumentService.books.forEach(function(book){
+      var new_marker = $ctrl.handler.addMarker({
+          lat: Number(book.latitude),
+          lng: Number(book.longitude),
+          picture: {
+              url: "<%= image_path 'book_map_marker.png'%>",
+              width: 45,
+              height: 45
+          },
+          infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-success" style="width: 100%" onclick="openBook(' + book.id + ')"> Open Book </button></div>'
+      });
+      $ctrl.book_markers.push(new_marker);
+		});
 	}
+
+
 
 	function displayMapCallback(position){
 		if (shouldUpdate(position.coords)){

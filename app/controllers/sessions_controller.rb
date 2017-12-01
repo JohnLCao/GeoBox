@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
 
 	  	if user && user.authenticate("#{password}")
 	  		session[:user_id] = user.id
-  			redirect_to admin_root_path and return if is_admin?
+  			#redirect_to admin_root_path and return if is_admin? # angelinn plz comment dis out
 	  		redirect_to root_path, success: "Logged in succesfully"
 	  	else
 	  		redirect_to login_path, danger: "Invalid username/password combination!"
