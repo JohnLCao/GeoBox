@@ -12,7 +12,7 @@
 
       <!-- BOOKS ICON -->
       <li>
-        <a ng-click="$ctrl.getBooks()" a href="#books" role="tab">
+        <a href="#books" role="tab">
           <i data-notifications="{{$ctrl.books.length}}" class="fa fa-book"></i>
         </a>
       </li>
@@ -39,12 +39,12 @@
       <br>
       <div class="form-group">
         <input class="form-control" id="search" type="text" placeholder="Search for files..."
-               ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">
+               ng-model="$ctrl.fuzzySearchString_file" ng-change="$ctrl.file_search()">
       </div>
       <div class="list-group">
-        <a ng-repeat="doc in $ctrl.fuzzySearchResult" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a ng-repeat="doc in $ctrl.fuzzySearchResult_file" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
-            <wbr><h5 class="mb-1">{{doc.filename}}</h5></wbr>
+            <h5 class="mb-1">{{doc.filename}}</h5>
             <small class="text-muted">{{doc.created_at}}</small>
           </div>
           <p class="wrap">{{doc.description}}</p>
@@ -53,16 +53,13 @@
     </div>
   </div>
 
-      <div class="sidebar-pane" id="books">
+      <!--<div class="sidebar-pane" id="books">
         <h1 class="sidebar-header">
           Books
           <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
         </h1>
         <br>
-        <div class="form-group">
-          <input class="form-control" id="search" type="text" placeholder="Search for books..."
-                 ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">
-        </div>
+
         <div class="list-group">
           <a ng-repeat="book in $ctrl.fuzzySearchResult" href="{{book.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
@@ -73,7 +70,7 @@
             <small class="text-muted">uploaded by {{book.username}}</small>
           </a>
         </div>
-      </div>
+      </div>-->
 
     <!-- BOOKS -->
     <div class="sidebar-pane" id="books">
@@ -83,11 +80,13 @@
       </h1>
       <br>
       <div class="form-group">
-        <!--<input class="form-control" id="search" type="text" placeholder="Search for books..."
-               ng-model="$ctrl.fuzzySearchString" ng-change="$ctrl.search()">-->
+        <div class="form-group">
+          <input class="form-control" id="search" type="text" placeholder="Search for books..."
+                 ng-model="$ctrl.fuzzySearchString_book" ng-change="$ctrl.book_search()">
+        </div>
       </div>
       <div class="list-group">
-        <div ng-repeat="book in $ctrl.books" class="list-group-item flex-column align-items-start">
+        <div ng-repeat="book in $ctrl.fuzzySearchResult_book" class="list-group-item flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{book.name}}</h5>
             <small class="text-muted">{{book.created_at}}</small>
