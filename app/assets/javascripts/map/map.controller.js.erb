@@ -51,6 +51,10 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 		}
 	}
 
+	document.openBook = function(id){
+	      DocumentService.fetchFilesInBook(id);
+	}
+
 	function updateMarkers(e,data){
 		$ctrl.doc_markers = [];
 		$ctrl.book_markers = [];
@@ -68,9 +72,21 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 			$ctrl.doc_markers.push(new_marker);
 		});
 		DocumentService.books.forEach(function(book){
-			// display book on map ui, following the doc example above.
+      var new_marker = $ctrl.handler.addMarker({
+          lat: Number(book.latitude),
+          lng: Number(book.longitude),
+          picture: {
+              url: "<%= image_path 'book_map_marker.png'%>",
+              width: 45,
+              height: 45
+          },
+          infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-success" style="width: 100%" onclick="openBook(' + book.id + ')"> Open Book </button></div>'
+      });
+      $ctrl.book_markers.push(new_marker);
 		});
 	}
+
+
 
 	function displayMapCallback(position){
 		if (shouldUpdate(position.coords)){
