@@ -1,7 +1,4 @@
 module BooksHelper
-  # mockRadius = 0.00001497678
-  # setRadius = mockRadius
-
 
   def self.fetchbooks(latlng)
     Book.all.select{|book| mutualRadius?(latlng, book.latitude, book.longitude)}
