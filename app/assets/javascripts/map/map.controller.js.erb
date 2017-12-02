@@ -67,7 +67,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 					width: 45,
 					height: 45
 				},
-				infowindow: '<div class="container-color-no-margin"><h5> Filename: ' + doc.filename + '</h5><p> Description: ' + doc.description + '</p><a class="btn btn-success" style="width: 100%" href=' + doc.download_url + '> Download </a></div>'
+				infowindow: '<div class="container-color-no-margin"><h5> Filename: ' + doc.filename + '</h5><p> Description: ' + doc.description + '</p><a class="btn btn-warning" style="width: 100%; color: white" href=' + doc.download_url + '> Download </a></div>'
 			});
 			$ctrl.doc_markers.push(new_marker);
 		});
@@ -80,7 +80,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
               width: 45,
               height: 45
           },
-          infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-success" style="width: 100%" onclick="openBook(' + book.id + ')"> Open Book </button></div>'
+          infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-warning" style="width: 100%; color: white" onclick="openBook(' + book.id + ')"> Open Book </button></div>'
       });
       $ctrl.book_markers.push(new_marker);
 		});
