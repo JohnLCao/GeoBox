@@ -23,7 +23,7 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
         maxPatternLength: 32,
         minMatchCharLength: 1,
         keys: [
-            "name",
+            "filename",
             "description",
             "username"
         ]
