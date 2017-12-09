@@ -34,6 +34,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	};
 
 	$scope.$on('documents:ready', updateMarkers);
+	$scope.$on('ready_to:fly', updateLocation);
 
 	$ctrl.locUpdater = $interval(function(){
 		if ($ctrl.handler){
@@ -45,8 +46,17 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 		$interval.cancel($ctrl.locUpdater);
 	};
 
-	function updateLocation(){
-		if(navigator.geolocation) {
+	function updateLocation(event=null, data=null){
+		if (data){
+			var thinPosition = {
+				coords: {
+					latitude: data.fly_lat,
+					longitude: data.fly_lng
+				}
+			};
+			displayMapCallback(thinPosition);
+		}
+		else if(navigator.geolocation) {
 	        navigator.geolocation.getCurrentPosition(displayMapCallback);
 		}
 	}
