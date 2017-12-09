@@ -50,6 +50,10 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 	$ctrl.fuzzySearchResult_file = [];
     $ctrl.fuzzySearchResult_book = [];
 
+    $ctrl.geocoder = new google.maps.Geocoder();
+    $ctrl.flyAddress = '';
+    $ctrl.flewAway = false;
+
 	$ctrl.$onInit = function(){
 		$rootScope.$broadcast('login:login', {}); // we can consider adding data to this event
 		var sidebar = $('#sidebar').sidebar();
@@ -81,6 +85,31 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 			$ctrl.fuzzySearchResult_book = $ctrl.books; // all documents.
 		}
 	};
+
+	$ctrl.fly = function(e){
+		// only happy path for now
+		if (e.keyCode == 13){ //enter was pressed
+			$ctrl.geocoder.geocode({
+				address: $ctrl.flyAddress
+			}, function(result, status){
+				if (status == 'OK'){
+					let fly_lat = result[0].geometry.location.lat();
+					let fly_lng = result[0].geometry.location.lng();
+					$rootScope.$broadcast('ready_to:fly', {
+						fly_lat: fly_lat,
+						fly_lng: fly_lng
+					});
+					$ctrl.flewAway = true;
+				}
+			});
+		}
+	}
+
+	$ctrl.flyHome = function(){
+		$ctrl.flewAway = false;
+		$ctrl.flyAddress = '';
+		$rootScope.$broadcast('fly:flew_home');
+	}
 
 	function processDocuments(documents){
 		documents.forEach(function(d){
