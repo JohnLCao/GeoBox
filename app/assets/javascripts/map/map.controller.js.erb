@@ -44,7 +44,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 		if ($ctrl.autoUpdate && $ctrl.handler){
 			updateLocation();
 		}
-	}, 7500); // currently updates every 7.5 seconds
+	}, 15000); // currently updates every 7.5 seconds
 
 	$ctrl.$onDestroy = function(){
 		$interval.cancel($ctrl.locUpdater);
@@ -58,11 +58,15 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 					longitude: data.fly_lng
 				}
 			};
-			$ctrl.autoUpdate = false;
+
 			displayMapCallback(thinPosition);
 		}
 		else if(navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(displayMapCallback);
+	        navigator.geolocation.getCurrentPosition(function(pos){
+						if ($ctrl.autoUpdate){ // if autoUpdate hasn't changed 
+							displayMapCallback(pos);
+						}
+					});
 		}
 	}
 
