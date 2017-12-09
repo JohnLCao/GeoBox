@@ -54,6 +54,9 @@ gem 'google-cloud-storage'
 gem 'angularjs-rails'
 gem 'angular-rails-templates'
 
+# geocoding
+gem 'geocoder'
+
 # asset packaging
 # gem 'sprockets'
 
