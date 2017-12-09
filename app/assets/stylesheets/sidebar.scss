@@ -22,6 +22,11 @@
   font-size: 12px;
 }
 
+.sidebar-content {
+  border-right: 2px solid #de8842;
+  border-bottom: 2px solid #de8842;
+}
+
 .sidebar {
   position: absolute;
   top: 0;
@@ -63,7 +68,7 @@
 // Makes stuff move for sidebar to dock
 @media (max-width: 767px){
   .sidebar {
-    margin-top: 56px;
+    margin-top: 58px;
   }
   #geolocation {
     margin-left: 40px !important;
@@ -89,18 +94,18 @@
 .sidebar-tabs > li, .sidebar-tabs > ul > li {
   width: 100%;
   height: 40px;
-  color: #ffffff;
+  color: #ffffff; // Icon color (not selected)
   font-size: 12pt;
   overflow: hidden;
   transition: all 80ms; }
 .sidebar-tabs > li:hover, .sidebar-tabs > ul > li:hover {
-  color: #fff9e6;
-  background-color: #363a40; }
+  color: #fff9e6; // Hover icon color
+  background-color: #363a40; } // icon background hover color
 .sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
-  color: #363a40;
-  background-color: #ffffff; }
+  color: #ffffff; // Icon color after clicked
+  background-color: #de8842; } // icon background after click
 .sidebar-tabs > li.disabled, .sidebar-tabs > ul > li.disabled {
-  color: rgba(102, 102, 102, 0.4); }
+  color: rgba(102, 102, 102, 0.4); } // disabled color
 .sidebar-tabs > li.disabled:hover, .sidebar-tabs > ul > li.disabled:hover {
   background: transparent; }
 .sidebar-tabs > li.disabled > a, .sidebar-tabs > ul > li.disabled > a {
@@ -120,7 +125,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.95); // background of tab's content
   overflow-x: hidden;
   overflow-y: auto; }
 .sidebar-left .sidebar-content {
@@ -158,8 +163,8 @@
   padding: 0 20px;
   line-height: 40px;
   font-size: 14.4pt;
-  color: #363a40;
-  background-color: #ffffff; }
+  color: #ffffff; // content top bar text color
+  background-color: #de8842; } // content top bar color
 .sidebar-right .sidebar-header {
   padding-left: 40px; }
 
