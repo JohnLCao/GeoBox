@@ -52,6 +52,7 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
     $ctrl.geocoder = new google.maps.Geocoder();
     $ctrl.flyAddress = '';
+    $ctrl.flewAway = false;
 
 	$ctrl.$onInit = function(){
 		$rootScope.$broadcast('login:login', {}); // we can consider adding data to this event
@@ -98,9 +99,16 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 						fly_lat: fly_lat,
 						fly_lng: fly_lng
 					});
+					$ctrl.flewAway = true;
 				}
 			});
 		}
+	}
+
+	$ctrl.flyHome = function(){
+		$ctrl.flewAway = false;
+		$ctrl.flyAddress = '';
+		$rootScope.$broadcast('fly:flew_home');
 	}
 
 	function processDocuments(documents){
