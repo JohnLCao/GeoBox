@@ -12,7 +12,7 @@ function DocumentService($http, $rootScope){
 	doc_service.books = [];
 
 	doc_service.baseUrl = "<% if Rails.env.production? %>			\
-							<%= 'https://geobox.herokuapp.com' %> 	\
+							<%= 'https://geobox.xyz' %> 	\
 						  <% else %>								\
 						  	<%= 'http://localhost:3000' %> 			\
 						  <% end %>".trim();
@@ -52,7 +52,7 @@ function DocumentService($http, $rootScope){
 			doc_service.files_in_book = response.data.book_docs;
 			$rootScope.$broadcast('files_in_book:ready', {
 				book: doc_service.books.find(function(b){
-					return b.id === book_id; 
+					return b.id === book_id;
 				}) || response.data.book_attr
 			});
 		})

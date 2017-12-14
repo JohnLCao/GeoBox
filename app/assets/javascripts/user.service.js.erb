@@ -11,7 +11,7 @@ function UserService($http, $rootScope){
 	user_service.user = {};
 
 	user_service.baseUrl = "<% if Rails.env.production? %>			\
-								<%= 'https://geobox.herokuapp.com' %> 	\
+								<%= 'https://geobox.xyz' %> 	\
 						  	<% else %>								\
 						  		<%= 'http://localhost:3000' %> 			\
 						  	<% end %>".trim();
