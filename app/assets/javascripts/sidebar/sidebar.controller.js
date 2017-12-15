@@ -87,7 +87,6 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 	};
 
 	$ctrl.fly = function(e){
-		// only happy path for now
 		if (e.keyCode == 13){ //enter was pressed
 			$ctrl.geocoder.geocode({
 				address: $ctrl.flyAddress
@@ -100,6 +99,9 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 						fly_lng: fly_lng
 					});
 					$ctrl.flewAway = true;
+				} else {
+					console.warn("geocoding failed due to", status); // for dev
+					alert("sorry, flying failed due to " +  status.toLowerCase()); // for user
 				}
 			});
 		}
