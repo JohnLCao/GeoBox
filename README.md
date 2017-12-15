@@ -1,5 +1,5 @@
 # GeoBox
-File sharing based on geolocation. Group project for Software Engineering Course
+File sharing based on geolocation with secure books, and new features in development.
 
 ## 1.        Introduction
 ### 1.1        Purpose
