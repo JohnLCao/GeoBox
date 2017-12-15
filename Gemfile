@@ -21,7 +21,6 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'launchy'
   gem 'selenium-webdriver'
-  gem 'database_cleaner'
 end
 
 
@@ -54,6 +53,9 @@ gem 'google-cloud-storage'
 # angular
 gem 'angularjs-rails'
 gem 'angular-rails-templates'
+
+# geocoding
+gem 'geocoder'
 
 # asset packaging
 # gem 'sprockets'

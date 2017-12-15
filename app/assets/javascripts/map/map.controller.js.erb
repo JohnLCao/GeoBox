@@ -12,7 +12,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	$ctrl.book_markers = [];
 	$ctrl.user_marker = [];
 	$ctrl.radius_marker = [];
-
+	$ctrl.autoUpdate = true;
 
 	$ctrl.$onInit = function(){
       var hours = (new Date()).getHours();
@@ -34,20 +34,39 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	};
 
 	$scope.$on('documents:ready', updateMarkers);
+	$scope.$on('ready_to:fly', updateLocation);
+	$scope.$on('fly:flew_home', function(e,d){
+		$ctrl.autoUpdate = true;
+		updateLocation();
+	});
 
 	$ctrl.locUpdater = $interval(function(){
-		if ($ctrl.handler){
+		if ($ctrl.autoUpdate && $ctrl.handler){
 			updateLocation();
 		}
-	}, 7500); // currently updates every 7.5 seconds
+	}, 15000); // currently updates every 7.5 seconds
 
 	$ctrl.$onDestroy = function(){
 		$interval.cancel($ctrl.locUpdater);
 	};
 
-	function updateLocation(){
-		if(navigator.geolocation) {
-	        navigator.geolocation.getCurrentPosition(displayMapCallback);
+	function updateLocation(event=null, data=null){
+		if (data){
+			var thinPosition = {
+				coords: {
+					latitude: data.fly_lat,
+					longitude: data.fly_lng
+				}
+			};
+			$ctrl.autoUpdate = false;
+			displayMapCallback(thinPosition);
+		}
+		else if(navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(function(pos){
+				if ($ctrl.autoUpdate){ // if autoUpdate hasn't changed 
+					displayMapCallback(pos);
+				}
+			});
 		}
 	}
 

@@ -86,6 +86,13 @@
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       <div ng-if="!$ctrl.user.guest">
         <br>
+        <input class="form-control" id="search" type="text" placeholder="Fly..." 
+        ng-model="$ctrl.flyAddress" ng-keypress="$ctrl.fly($event)">
+        <div ng-if="$ctrl.flewAway">
+          <button class="btn btn-primary" style="width: 50%" 
+            ng-click="$ctrl.flyHome()">Return Home</button>
+        </div>
+        <br>
         <ul class="list-group">
           <li class="list-group-item active">User Information</li>
           <li class="list-group-item">Username: {{$ctrl.user.username}}</li>
