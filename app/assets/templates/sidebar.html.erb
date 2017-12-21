@@ -18,7 +18,7 @@
       </li>
 
       <!-- PROFILE ICON -->
-      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li> -->
     </ul>
 
 
@@ -42,7 +42,9 @@
                ng-model="$ctrl.fuzzySearchString_file" ng-change="$ctrl.file_search()">
       </div>
       <div class="list-group">
-        <a ng-repeat="doc in $ctrl.fuzzySearchResult_file" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start">
+        <!-- <a ng-repeat="doc in $ctrl.fuzzySearchResult_file" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start"> -->
+        <a ng-repeat="book in $ctrl.fuzzySearchResult_book" href="" ng-click="$ctrl.openDoc(doc.id)"
+           class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{doc.filename}}</h5>
             <small class="text-muted">{{doc.created_at}}</small>
@@ -64,8 +66,6 @@
         <div class="form-group">
           <input class="form-control" id="search" type="text" placeholder="Search for books..."
                  ng-model="$ctrl.fuzzySearchString_book" ng-change="$ctrl.book_search()">
-
-
         </div>
       </div>
       <div class="list-group">
@@ -86,10 +86,10 @@
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
       <div ng-if="!$ctrl.user.guest">
         <br>
-        <input class="form-control" id="search" type="text" placeholder="Fly..." 
+        <input class="form-control" id="search" type="text" placeholder="Enter an address to go to"
         ng-model="$ctrl.flyAddress" ng-keypress="$ctrl.fly($event)">
         <div ng-if="$ctrl.flewAway">
-          <button class="btn btn-primary" style="width: 50%" 
+          <button class="btn btn-primary" style="width: 50%"
             ng-click="$ctrl.flyHome()">Return Home</button>
         </div>
         <br>
