@@ -18,7 +18,7 @@
       </li>
 
       <!-- PROFILE ICON -->
-      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li> -->
+      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
     </ul>
 
 
@@ -43,7 +43,7 @@
       </div>
       <div class="list-group">
         <!-- <a ng-repeat="doc in $ctrl.fuzzySearchResult_file" href="{{doc.download_url}}" class="list-group-item list-group-item-action flex-column align-items-start"> -->
-        <a ng-repeat="book in $ctrl.fuzzySearchResult_book" href="" ng-click="$ctrl.openDoc(doc.id)"
+        <a ng-repeat="doc in $ctrl.fuzzySearchResult_file" href="" ng-click="$ctrl.openDoc(doc.id)"
            class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{doc.filename}}</h5>
