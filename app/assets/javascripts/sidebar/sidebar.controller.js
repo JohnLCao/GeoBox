@@ -145,9 +145,9 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
     };
 
 
-		$ctrl.openDoc = function(id){
-			//TODO: open a detail modal view showing content instead of download it
-		};
+	$ctrl.openDoc = function(doc){
+		$rootScope.$broadcast("detail_doc_view:ready", {doc: doc});
+	};
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
 	$scope.$on('user:ready', $ctrl.getUser);
