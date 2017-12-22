@@ -10,6 +10,7 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     var $ctrl = this;
     $ctrl.docs = [];
     $ctrl.book = {};
+    $ctrl.detailDoc = {};
 
     $ctrl.fuzzySearchString = '';
 
@@ -40,12 +41,19 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     };
 
     $scope.$on('files_in_book:ready', function(event, data){
-        $("#exampleModal").modal("show");
+        $("#bookModal").modal("show");
         $ctrl.allow_access = false;
         $ctrl.secret = null;
         $ctrl.book = data.book;
         $ctrl.getDocs();
         $ctrl.baseUrl = UserService.baseUrl;
+    });
+
+    $scope.$on('detail_doc_view:ready', function(event, data){
+        $ctrl.detailDoc = data.doc;
+        // file extension - not used right now
+        $ctrl.detailDoc.type = data.doc.download_url.split('.').pop();
+        $("#docModal").modal("show");
     });
 
     $ctrl.checkSecret = function(){
