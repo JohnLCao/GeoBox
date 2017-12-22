@@ -50,16 +50,17 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     });
 
     $scope.$on('detail_doc_view:ready', function(event, data){
-        $ctrl.detailDoc = data.doc;
-        // file extension - not used right now
-        $ctrl.detailDoc.type = data.doc.download_url.split('.').pop();
-        $("#docModal").modal("show");
+        showDoc(data.doc);
     });
 
     $ctrl.checkSecret = function(){
         if ($ctrl.secret === $ctrl.book.key){
             $ctrl.allow_access = true;
         }
+    };
+
+    $ctrl.openDoc = function(doc){
+        showDoc(doc);
     };
 
     $ctrl.getDocs = function(book_id){
@@ -73,6 +74,13 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
         $ctrl.fuzzySearchList = new Fuse(documents, $ctrl.fuzzySearchOptions);
         $ctrl.fuzzySearchResult = documents;
         return documents;
+    }
+
+    function showDoc(doc){
+        $ctrl.detailDoc = doc;
+        // file extension - not used right now
+        $ctrl.detailDoc.type = doc.download_url.split('.').pop();
+        $("#docModal").modal("show");
     }
 
 }
