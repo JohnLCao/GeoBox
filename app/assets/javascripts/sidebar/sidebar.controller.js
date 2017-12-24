@@ -62,7 +62,7 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$ctrl.getDocs = function(e,d){
 		$ctrl.docs = processDocuments(DocumentService.docs);
-        $ctrl.books = processBooks(DocumentService.books);
+    $ctrl.books = processBooks(DocumentService.books);
 	};
 
 	$ctrl.getUser = function(e,d){
@@ -143,6 +143,11 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
     $ctrl.openBook = function(id){
 	    DocumentService.fetchFilesInBook(id);
     };
+
+
+	$ctrl.openDoc = function(doc){
+		$rootScope.$broadcast("detail_doc_view:ready", {doc: doc});
+	};
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
 	$scope.$on('user:ready', $ctrl.getUser);
