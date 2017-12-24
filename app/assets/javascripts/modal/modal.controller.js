@@ -11,11 +11,8 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     $ctrl.docs = [];
     $ctrl.book = {};
     $ctrl.detailDoc = {};
-
     $ctrl.fuzzySearchString = '';
-
     $ctrl.fuzzySearchList = [];
-
     $ctrl.fuzzySearchOptions = {
         shouldSort: true,
         threshold: 0.6,
@@ -29,16 +26,7 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
             "username"
         ]
     };
-
     $ctrl.fuzzySearchResult = [];
-
-    $ctrl.search = function(){
-        if ($ctrl.fuzzySearchString){
-            $ctrl.fuzzySearchResult = $ctrl.fuzzySearchList.search($ctrl.fuzzySearchString);
-        } else {
-            $ctrl.fuzzySearchResult = $ctrl.docs; // all documents.
-        }
-    };
 
     $scope.$on('files_in_book:ready', function(event, data){
         $("#bookModal").modal("show");
@@ -52,6 +40,14 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     $scope.$on('detail_doc_view:ready', function(event, data){
         showDoc(data.doc);
     });
+
+    $ctrl.search = function(){
+        if ($ctrl.fuzzySearchString){
+            $ctrl.fuzzySearchResult = $ctrl.fuzzySearchList.search($ctrl.fuzzySearchString);
+        } else {
+            $ctrl.fuzzySearchResult = $ctrl.docs; // all documents.
+        }
+    };
 
     $ctrl.checkSecret = function(){
         if ($ctrl.secret === $ctrl.book.key){
@@ -79,7 +75,7 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     function showDoc(doc){
         $ctrl.detailDoc = doc;
         // file extension - not used right now
-        $ctrl.detailDoc.type = doc.download_url.split('.').pop();
+        // $ctrl.detailDoc.type = doc.download_url.split('.').pop();
         $("#docModal").modal("show");
     }
 
