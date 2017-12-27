@@ -10,11 +10,9 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     var $ctrl = this;
     $ctrl.docs = [];
     $ctrl.book = {};
-
+    $ctrl.detailDoc = {};
     $ctrl.fuzzySearchString = '';
-
     $ctrl.fuzzySearchList = [];
-
     $ctrl.fuzzySearchOptions = {
         shouldSort: true,
         threshold: 0.6,
@@ -28,8 +26,20 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
             "username"
         ]
     };
-
     $ctrl.fuzzySearchResult = [];
+
+    $scope.$on('files_in_book:ready', function(event, data){
+        $("#bookModal").modal("show");
+        $ctrl.allow_access = false;
+        $ctrl.secret = null;
+        $ctrl.book = data.book;
+        $ctrl.getDocs();
+        $ctrl.baseUrl = UserService.baseUrl;
+    });
+
+    $scope.$on('detail_doc_view:ready', function(event, data){
+        showDoc(data.doc);
+    });
 
     $ctrl.search = function(){
         if ($ctrl.fuzzySearchString){
@@ -39,19 +49,14 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
         }
     };
 
-    $scope.$on('files_in_book:ready', function(event, data){
-        $("#exampleModal").modal("show");
-        $ctrl.allow_access = false;
-        $ctrl.secret = null;
-        $ctrl.book = data.book;
-        $ctrl.getDocs();
-        $ctrl.baseUrl = UserService.baseUrl;
-    });
-
     $ctrl.checkSecret = function(){
         if ($ctrl.secret === $ctrl.book.key){
             $ctrl.allow_access = true;
         }
+    };
+
+    $ctrl.openDoc = function(doc){
+        showDoc(doc);
     };
 
     $ctrl.getDocs = function(book_id){
@@ -65,6 +70,13 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
         $ctrl.fuzzySearchList = new Fuse(documents, $ctrl.fuzzySearchOptions);
         $ctrl.fuzzySearchResult = documents;
         return documents;
+    }
+
+    function showDoc(doc){
+        $ctrl.detailDoc = doc;
+        // file extension - not used right now
+        // $ctrl.detailDoc.type = doc.download_url.split('.').pop();
+        $("#docModal").modal("show");
     }
 
 }
