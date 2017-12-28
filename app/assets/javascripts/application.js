@@ -21,5 +21,7 @@
 //= require bootstrap
 //= require jquery-sidebar
 //= require geobox.module
+//= require private_pub
 //= require_tree ../templates
+//= require private_pub
 //= require_tree .

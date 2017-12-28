@@ -149,6 +149,10 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		$rootScope.$broadcast("detail_doc_view:ready", {doc: doc});
 	};
 
+	$ctrl.openRoom = function(){
+		
+	}
+
 	$scope.$on('documents:ready', $ctrl.getDocs);
 	$scope.$on('user:ready', $ctrl.getUser);
 
