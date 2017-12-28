@@ -41,6 +41,11 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
         showDoc(data.doc);
     });
 
+    $scope.$on('chatroom:ready', function(event, data){
+        $("#chatroomModal").modal("show");
+        $ctrl.baseUrl = UserService.baseUrl;
+    })
+
     $ctrl.search = function(){
         if ($ctrl.fuzzySearchString){
             $ctrl.fuzzySearchResult = $ctrl.fuzzySearchList.search($ctrl.fuzzySearchString);

@@ -19,7 +19,7 @@
 
       <!-- CHATROOM ICON -->
       <li>
-        <a ng-click="$ctrl.openRoom()" href="{{$ctrl.base_url}}/messages" role="tab">
+        <a href="#chatrooms" role="tab">
           <i data-notifications="{{$ctrl.chatrooms.length}}" class="fa fa-comments"></i>
         </a>
       </li>
@@ -99,23 +99,23 @@
         <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
       </h1>
       <br>
-   <!--    <div class="form-group">
+<!--       <div class="form-group">
         <div class="form-group">
           <input class="form-control" id="search" type="text" placeholder="Search for chatrooms..."
                  ng-model="$ctrl.fuzzySearchString_chatroom" ng-change="$ctrl.chatroom_search()">
         </div>
-      </div>
+      </div> -->
       <div class="list-group">
-        <a ng-repeat="book in $ctrl.fuzzySearchResult_chatroom" href="" ng-click="$ctrl.openRoom(book.id)"
+        <a ng-repeat="room in $ctrl.fuzzySearchResult_chatroom" href="" ng-click="$ctrl.openRoom(room)"
            class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{book.name}}</h5>
-            <small class="text-muted">{{book.created_at}}</small>
+            <h5 class="mb-1">{{room.name}}</h5>
+            <small class="text-muted">{{room.created_at}}</small>
           </div>
-          <p class="wrap">{{book.description}}</p>
-          <small class="text-muted">uploaded by {{book.username}}</small>
+          <p class="wrap">{{room.description}}</p>
+          <small class="text-muted">uploaded by {{room.username}}</small>
         </a>
-      </div> -->
+      </div>
     </div>
 
     <!-- PROFILE -->
