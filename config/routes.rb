@@ -4,15 +4,13 @@ Rails.application.routes.draw do
   resources :books
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  
+
   get "/login" => "sessions#new", as: :login
   delete "/logout" => "sessions#destroy", as: :logout
   get "/guest_login" => "sessions#guest", as: :guest_login
 
   root to: "home#home"
-  #TO BE CHANGED
   get "/add_file_to_book/:id" => "books#update"
-  #TO BE CHANGED
 
   get "/admin_root" => "home#admin_home", as: :admin_root
 
