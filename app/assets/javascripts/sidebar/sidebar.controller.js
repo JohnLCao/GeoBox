@@ -10,13 +10,13 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 	var $ctrl = this;
 	$ctrl.docs = [];
 	$ctrl.books = [];
-	$ctrl.chatrooms = [{
-		id: 0,
-		name: 'dummy room',
-		created_at: "end of time",
-		description: "haha, i'm not a real room!",
-		username: "dummy dumbenson"
-	}];
+	// $ctrl.chatrooms = [{
+	// 	id: 0,
+	// 	name: 'Public Main Room',
+	// 	created_at: "Public",
+	// 	description: "This is the first public room that allows users to chat with each other within mutual radius",
+	// 	username: "For all users to share"
+	// }];
 	$ctrl.user = {};
 	$ctrl.base_url = null;
 
@@ -56,13 +56,23 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$ctrl.fuzzySearchResult_file = [];
     $ctrl.fuzzySearchResult_book = [];
-    $ctrl.fuzzySearchResult_chatroom = [{
-		id: 0,
-		name: 'dummy room',
-		created_at: "end of time",
-		description: "haha, i'm not a real room!",
-		username: "dummy dumbenson"
-	}];
+    $ctrl.fuzzySearchResult_chatroom = [
+			{
+			id: 0,
+			name: 'Public Main Room 0',
+			created_at: "Everybody",
+			description: "ChatSpace for all users within mutual radius",
+			username: "Public"
+		  },
+      // TODO Possibility we can many different chat room down the line 
+			{
+			id: 1,
+			name: 'Public Main Room 1',
+			created_at: "Everybody",
+			description: "ChatSpace for all users within mutual radius",
+			username: "Public"
+			}
+	];
 
     $ctrl.geocoder = new google.maps.Geocoder();
     $ctrl.flyAddress = '';
