@@ -17,8 +17,19 @@
         </a>
       </li>
 
+      <!-- CHATROOM ICON -->
+      <li>
+        <a ng-click="$ctrl.openRoom()" href="{{$ctrl.base_url}}/messages" role="tab">
+          <i data-notifications="{{$ctrl.chatrooms.length}}" class="fa fa-comments"></i>
+        </a>
+      </li>
+
       <!-- PROFILE ICON -->
-      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+      <li>
+        <a href="#profile" role="tab">
+          <i class="fa fa-user"></i>
+        </a>
+      </li>
     </ul>
 
 
@@ -79,6 +90,32 @@
           <small class="text-muted">uploaded by {{book.username}}</small>
         </a>
       </div>
+    </div>
+
+    <!-- CHATROOMS -->
+    <div class="sidebar-pane" id="chatrooms">
+      <h1 class="sidebar-header">
+        Chatrooms
+        <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+      </h1>
+      <br>
+   <!--    <div class="form-group">
+        <div class="form-group">
+          <input class="form-control" id="search" type="text" placeholder="Search for chatrooms..."
+                 ng-model="$ctrl.fuzzySearchString_chatroom" ng-change="$ctrl.chatroom_search()">
+        </div>
+      </div>
+      <div class="list-group">
+        <a ng-repeat="book in $ctrl.fuzzySearchResult_chatroom" href="" ng-click="$ctrl.openRoom(book.id)"
+           class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{book.name}}</h5>
+            <small class="text-muted">{{book.created_at}}</small>
+          </div>
+          <p class="wrap">{{book.description}}</p>
+          <small class="text-muted">uploaded by {{book.username}}</small>
+        </a>
+      </div> -->
     </div>
 
     <!-- PROFILE -->

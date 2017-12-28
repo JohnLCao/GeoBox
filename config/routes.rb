@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages, module: 'chatroom'
   resources :documents
   resources :books
   resources :users
