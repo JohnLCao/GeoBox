@@ -10,6 +10,13 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 	var $ctrl = this;
 	$ctrl.docs = [];
 	$ctrl.books = [];
+	$ctrl.chatrooms = [{
+		id: 0,
+		name: 'dummy room',
+		created_at: "end of time",
+		description: "haha, i'm not a real room!",
+		username: "dummy dumbenson"
+	}];
 	$ctrl.user = {};
 	$ctrl.base_url = null;
 
@@ -49,6 +56,13 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$ctrl.fuzzySearchResult_file = [];
     $ctrl.fuzzySearchResult_book = [];
+    $ctrl.fuzzySearchResult_chatroom = [{
+		id: 0,
+		name: 'dummy room',
+		created_at: "end of time",
+		description: "haha, i'm not a real room!",
+		username: "dummy dumbenson"
+	}];
 
     $ctrl.geocoder = new google.maps.Geocoder();
     $ctrl.flyAddress = '';
@@ -149,8 +163,8 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		$rootScope.$broadcast("detail_doc_view:ready", {doc: doc});
 	};
 
-	$ctrl.openRoom = function(){
-		
+	$ctrl.openRoom = function(room){
+		$rootScope.$broadcast("chatroom:ready", {room: room});
 	}
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
