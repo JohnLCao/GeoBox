@@ -10,23 +10,19 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 	var $ctrl = this;
 	$ctrl.docs = [];
 	$ctrl.books = [];
-	// $ctrl.chatrooms = [{
-	// 	id: 0,
-	// 	name: 'Public Main Room',
-	// 	created_at: "Public",
-	// 	description: "This is the first public room that allows users to chat with each other within mutual radius",
-	// 	username: "For all users to share"
-	// }];
+    $ctrl.rooms = [];
 	$ctrl.user = {};
 	$ctrl.base_url = null;
 
 	$ctrl.fuzzySearchString_file = '';
     $ctrl.fuzzySearchString_book = '';
+    $ctrl.fuzzySearchString_room = '';
 
 	$ctrl.fuzzySearchList_file = [];
     $ctrl.fuzzySearchList_book = [];
+    $ctrl.fuzzySearchList_room = [];
 
-	$ctrl.fuzzySearchOptions_file = {
+	$ctrl.fuzzySearchOptions = {
 		  shouldSort: true,
 		  threshold: 0.6,
 		  location: 0,
@@ -34,45 +30,16 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		  maxPatternLength: 32,
 		  minMatchCharLength: 1,
 		  keys: [
+		  	"name",
 		    "filename",
 		    "description",
 		    "username"
 		  ]
 	};
 
-    $ctrl.fuzzySearchOptions_book = {
-        shouldSort: true,
-        threshold: 0.6,
-        location: 0,
-        distance: 30,
-        maxPatternLength: 32,
-        minMatchCharLength: 1,
-        keys: [
-            "name",
-            "description",
-            "username"
-        ]
-    };
-
 	$ctrl.fuzzySearchResult_file = [];
     $ctrl.fuzzySearchResult_book = [];
-    $ctrl.fuzzySearchResult_chatroom = [
-			{
-			id: 0,
-			name: 'Public Main Room 0',
-			created_at: "Everybody",
-			description: "ChatSpace for all users within mutual radius",
-			username: "Public"
-		  },
-      // TODO Possibility we can many different chat room down the line 
-			{
-			id: 1,
-			name: 'Public Main Room 1',
-			created_at: "Everybody",
-			description: "ChatSpace for all users within mutual radius",
-			username: "Public"
-			}
-	];
+    $ctrl.fuzzySearchResult_room = [];
 
     $ctrl.geocoder = new google.maps.Geocoder();
     $ctrl.flyAddress = '';
@@ -86,7 +53,8 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$ctrl.getDocs = function(e,d){
 		$ctrl.docs = processDocuments(DocumentService.docs);
-    $ctrl.books = processBooks(DocumentService.books);
+    	$ctrl.books = processBooks(DocumentService.books);
+    	$ctrl.rooms = processRooms(DocumentService.rooms);
 	};
 
 	$ctrl.getUser = function(e,d){
@@ -106,9 +74,17 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		if ($ctrl.fuzzySearchString_book){
 			$ctrl.fuzzySearchResult_book = $ctrl.fuzzySearchList_book.search($ctrl.fuzzySearchString_book);
 		} else {
-			$ctrl.fuzzySearchResult_book = $ctrl.books; // all documents.
+			$ctrl.fuzzySearchResult_book = $ctrl.books; // all books.
 		}
 	};
+
+	$ctrl.room_search = function(){
+		if ($ctrl.fuzzySearchString_room){
+			$ctrl.fuzzySearchResult_room = $ctrl.fuzzySearchList_room.search($ctrl.fuzzySearchString_room);
+		} else {
+			$ctrl.fuzzySearchResult_room = $ctrl.rooms; // all rooms.
+		}
+	}
 
 	$ctrl.fly = function(e){
 		if (e.keyCode == 13){ //enter was pressed
@@ -141,19 +117,27 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 		documents.forEach(function(d){
 			d.created_at = moment(new Date(d.created_at_ms * 1000)).fromNow();
 		});
-		$ctrl.fuzzySearchList_file = new Fuse(documents, $ctrl.fuzzySearchOptions_file);
+		$ctrl.fuzzySearchList_file = new Fuse(documents, $ctrl.fuzzySearchOptions);
 		$ctrl.fuzzySearchResult_file = documents;
 		return documents;
 	}
 
 	function processBooks(books){
-
 		books.forEach(function(b){
 			b.created_at = moment(new Date(b.created_at_ms * 1000)).fromNow();
 		});
-		$ctrl.fuzzySearchList_book = new Fuse(books, $ctrl.fuzzySearchOptions_book);
+		$ctrl.fuzzySearchList_book = new Fuse(books, $ctrl.fuzzySearchOptions);
 		$ctrl.fuzzySearchResult_book = books;
 		return books;
+	}
+
+	function processRooms(rooms){
+		rooms.forEach(function(r){
+			r.created_at = moment(new Date(r.created_at_ms * 1000)).fromNow();
+		});
+		$ctrl.fuzzySearchList_room = new Fuse(rooms, $ctrl.fuzzySearchOptions);
+		$ctrl.fuzzySearchResult_room = rooms;
+		return rooms;
 	}
 
 	function processUser(user){

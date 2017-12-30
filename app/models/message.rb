@@ -1,5 +1,6 @@
 class Message < ActiveRecord::Base
 		# validates
+		belongs_to :room
 		validates :content, :presence => true, :length => { :maximum => 250 }
 
 		EMOTIONS = [
