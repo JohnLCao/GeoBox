@@ -28,11 +28,14 @@ function DocumentService($http, $rootScope){
 		})
 		.then(function(response){
 			doc_service.docs = response.data.filter(function(item){
-				return !item.is_book;
+				return item.is_file;
 			});
 			doc_service.books = response.data.filter(function(item){
 				return item.is_book;
 			});
+			doc_service.rooms = response.data.filter(function(item){
+				return item.is_room;
+			})
 			$rootScope.$broadcast('documents:ready');
 		})
 		.catch(function(error){

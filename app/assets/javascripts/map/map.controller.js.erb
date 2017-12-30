@@ -10,6 +10,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	var $ctrl = this;
 	$ctrl.doc_markers = [];
 	$ctrl.book_markers = [];
+	$ctrl.room_markers = [];
 	$ctrl.user_marker = [];
 	$ctrl.radius_marker = [];
 	$ctrl.autoUpdate = true;
@@ -77,6 +78,7 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	function updateMarkers(e,data){
 		$ctrl.doc_markers = [];
 		$ctrl.book_markers = [];
+		$ctrl.room_markers = [];
 		DocumentService.docs.forEach(function(doc){
 			var new_marker = $ctrl.handler.addMarker({
 				lat: Number(doc.latitude),
@@ -91,17 +93,30 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 			$ctrl.doc_markers.push(new_marker);
 		});
 		DocumentService.books.forEach(function(book){
-      var new_marker = $ctrl.handler.addMarker({
-          lat: Number(book.latitude),
-          lng: Number(book.longitude),
-          picture: {
-              url: "<%= image_path 'book_map_marker.png'%>",
-              width: 45,
-              height: 45
-          },
-          infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-warning" style="width: 100%; color: white" onclick="openBook(' + book.id + ')"> Open Book </button></div>'
-      });
-      $ctrl.book_markers.push(new_marker);
+      		var new_marker = $ctrl.handler.addMarker({
+	          lat: Number(book.latitude),
+	          lng: Number(book.longitude),
+	          picture: {
+	              url: "<%= image_path 'book_map_marker.png'%>",
+	              width: 45,
+	              height: 45
+	          },
+	          infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-warning" style="width: 100%; color: white" onclick="openBook(' + book.id + ')"> Open Book </button></div>'
+	      });
+	      $ctrl.book_markers.push(new_marker);
+		});
+		DocumentService.rooms.forEach(function(room){
+      		var new_marker = $ctrl.handler.addMarker({
+	          lat: Number(room.latitude),
+	          lng: Number(room.longitude),
+	          picture: {
+	              url: "<%= image_path 'chatroom_marker.png'%>",
+	              width: 50,
+	              height: 50
+	          }//,
+	          //infowindow: '<div class="container-color-no-margin"><h5> Book Name: ' + book.name + '</h5><p> Description: ' + book.description + '</p><button class="btn btn-warning" style="width: 100%; color: white" onclick="openBook(' + book.id + ')"> Open Book </button></div>'
+	      });
+	      $ctrl.room_markers.push(new_marker);
 		});
 	}
 
@@ -110,7 +125,14 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	function displayMapCallback(position){
 		if (shouldUpdate(position.coords)){
 			$ctrl.user_location = position.coords;
-			$ctrl.handler.removeMarkers($ctrl.doc_markers.concat($ctrl.user_marker).concat($ctrl.radius_marker));
+			$ctrl.handler.removeMarkers(
+				$ctrl.doc_markers
+				.concat($ctrl.book_markers)
+				.concat($ctrl.room_markers)
+				.concat($ctrl.user_marker)
+				.concat($ctrl.radius_marker)
+			);
+			DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
 			$ctrl.user_marker = $ctrl.handler.addMarker({
 	            lat: position.coords.latitude,
 	            lng: position.coords.longitude,
@@ -119,24 +141,22 @@ function MapController(DocumentService, $scope, $interval, retroMode, nightMode)
 	            	width: 65,
 	            	height: 65
 	            }
-      });
+      		});
 
 			$ctrl.radius_marker = $ctrl.handler.addCircles(
-          [{
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-              radius: 150
-          }],
-          {
-              strokeColor: '#6ec7ee',
-              fillColor: '#6ec7ee',
-              strokeWeight: 2
-          }
-        );
+	          [{
+	              lat: position.coords.latitude,
+	              lng: position.coords.longitude,
+	              radius: 150
+	          }],
+	          {
+	              strokeColor: '#6ec7ee',
+	              fillColor: '#6ec7ee',
+	              strokeWeight: 2
+	          }
+	        );
 
 			$ctrl.handler.map.centerOn($ctrl.user_marker);
-
-			DocumentService.updateLocation(position.coords.latitude.toString(), position.coords.longitude.toString());
 		}
   }
 

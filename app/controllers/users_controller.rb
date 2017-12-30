@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:updateLocation, :userInfo]
 
   include DocumentsHelper
-
+  include BooksHelper
+  include Chatroom
 
   # GET /users
   # GET /users.json
@@ -18,6 +19,7 @@ class UsersController < ApplicationController
     session[:longitude] = loc_params[:lng] 
     render json: DocumentsHelper.fetchfiles({lat: loc_params[:lat], lng: loc_params[:lng]})
                                 .map{|doc| doc.attributes.merge({
+                                  is_file: true,
                                   created_at_ms: doc.created_at.to_f,
                                   username: User.find(doc.user_id).username,
                                   download_url: doc.attachment.url
@@ -29,6 +31,14 @@ class UsersController < ApplicationController
                                   created_at_ms: book.created_at.to_f,
                                   username: User.find(book.user_id).username
                                 })}
+                  )
+                 .concat(
+                  ChatroomsHelper.fetchrooms({lat: loc_params[:lat], lng: loc_params[:lng]})
+                                 .map{|room| room.attributes.merge({
+                                    is_room: true,
+                                    created_at_ms: room.created_at.to_f,
+                                    username: User.find(room.user_id).username
+                                  })}
                   )
   end
 
