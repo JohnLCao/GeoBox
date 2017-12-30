@@ -20,8 +20,7 @@
       <!-- CHATROOM ICON -->
       <li>
         <a href="#chatrooms" role="tab">
-          <!-- TODO {$ctrl.chatrooms.length} should show messages, i would recommend disable this for now -->
-          <i data-notifications="{{$ctrl.chatrooms.length}}" class="fa fa-comments"></i>
+          <i data-notifications="{{$ctrl.rooms.length}}" class="fa fa-comments"></i>
         </a>
       </li>
 
@@ -96,18 +95,18 @@
     <!-- CHATROOMS -->
     <div class="sidebar-pane" id="chatrooms">
       <h1 class="sidebar-header">
-        Chatrooms
+        Chat rooms
         <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
       </h1>
       <br>
-<!--       <div class="form-group">
+      <div class="form-group">
         <div class="form-group">
           <input class="form-control" id="search" type="text" placeholder="Search for chatrooms..."
-                 ng-model="$ctrl.fuzzySearchString_chatroom" ng-change="$ctrl.chatroom_search()">
+                 ng-model="$ctrl.fuzzySearchString_room" ng-change="$ctrl.room_search()">
         </div>
-      </div> -->
+      </div>
       <div class="list-group">
-        <a ng-repeat="room in $ctrl.fuzzySearchResult_chatroom" href="" ng-click="$ctrl.openRoom(room)"
+        <a ng-repeat="room in $ctrl.fuzzySearchResult_room" href="" ng-click="$ctrl.openRoom(room)"
            class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{room.name}}</h5>
@@ -131,7 +130,7 @@
             ng-click="$ctrl.flyHome()">Return Home</button>
         </div>
         <br>
-        <ul class="list-group">
+        <ul class="list-group"> 
           <li class="list-group-item active">User Information</li>
           <li class="list-group-item">Username: {{$ctrl.user.username}}</li>
           <li class="list-group-item">Email: {{$ctrl.user.email}}</li>

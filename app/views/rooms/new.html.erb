@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-11 container-color">
+      <p id="notice"><%= notice %></p>
+      <h1>New Room</h1>
+      <%= render 'form' %>
+      <br>
+      <% if is_admin? %>
+          <%= link_to 'Back', documents_path %>
+      <% else %>
+          <%= link_to 'Back', root_path %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -69,16 +69,14 @@
   <div class="modal-dialog modal-lg" role="chat">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #de8842">
-        <!-- TODO fetch TitleModalLabel -->
-        <h5 class="modal-title" style="color: white" id="TitleModalLabel">{{}}</h5>
+        <h5 class="modal-title" style="color: white" id="ModalHeaderLabel">{{$ctrl.room.name}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span style="color: white" aria-hidden="true">&times;</span>
         </button>
       </div>
 
       <div class="modal-body">
-        <!-- <object data="{{$ctrl.baseUrl}}/messages" width="100%" height="100%"></object> -->
-        <object data="{{$ctrl.baseUrl}}/messages"></object>
+        <object data="{{$ctrl.baseUrl}}/messages/rooms/{{$ctrl.room.id}}" width="100%" height="100%"></object>
       </div>
 
     </div>

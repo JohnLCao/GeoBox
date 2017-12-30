@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :documents
   resources :books
   resources :users
+  resources :rooms, only: [:new, :create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
 
   get "/login" => "sessions#new", as: :login
@@ -18,6 +19,8 @@ Rails.application.routes.draw do
   get "/user_info" => "users#userInfo"
   post "/fetch_files_in_book" => "books#fetch_book_files"
 
+  #override messages resource routes
+  get "/messages/rooms/:room_id"=> "chatroom/messages#index", as: :room_messages
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
