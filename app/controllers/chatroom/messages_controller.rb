@@ -5,7 +5,7 @@ module Chatroom
 		before_action :set_room, only: [:index]
 		# GET /messages/rooms/:room_id
 		def index
-			session[:room_id] = @room.id
+			session[:room_id] = @room.nil? ? nil : @room.id
 			@messages = Message.all.where(room_id: @room.id)
 		end
 
@@ -28,7 +28,11 @@ module Chatroom
 			end
 
 			def set_room
-				@room = Room.find(params[:room_id])
+				if params[:room_id] 
+					@room = Room.find(params[:room_id])
+				else
+					@room = nil;
+				end
 			end
 	end
 end
