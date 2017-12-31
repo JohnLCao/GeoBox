@@ -12,7 +12,7 @@ function DocumentService($http, $rootScope){
 	doc_service.books = [];
 
 	doc_service.baseUrl = "<% if Rails.env.production? %>			\
-							<%= 'https://geobox.xyz' %> 	\
+							<%= 'https://geobox.herokuapp.com' %> 	\
 						  <% else %>								\
 						  	<%= 'http://localhost:3000' %> 			\
 						  <% end %>".trim();
