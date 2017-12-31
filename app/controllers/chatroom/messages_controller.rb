@@ -20,7 +20,7 @@ module Chatroom
 		private
 			# Never trust parameters from the scary internet, only allow the white list through.
 			def message_params
-				params.require(:message).permit(:content)
+				params.require(:message).permit(:content, :username)
 			end
 
 			def define_chatting
