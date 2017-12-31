@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 	has_secure_password
 	has_many :documents
 	has_many :books
+	has_many :rooms
 	validates :username, :password_digest, :presence => true
 	validates :username, uniqueness: true
 	validates :email, uniqueness: true

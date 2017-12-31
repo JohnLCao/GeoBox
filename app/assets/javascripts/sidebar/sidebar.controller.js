@@ -163,7 +163,6 @@ function SidebarController($rootScope, DocumentService, $scope, UserService){
 
 	$scope.$on('documents:ready', $ctrl.getDocs);
 	$scope.$on('user:ready', $ctrl.getUser);
-
 }
 
 })();
