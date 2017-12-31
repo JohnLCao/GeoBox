@@ -1,0 +1,1 @@
+web: bundle exec rackup private_pub.ru --server thin -E production
