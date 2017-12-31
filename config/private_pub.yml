@@ -5,6 +5,6 @@ test:
   server: "http://localhost:9292/faye"
   secret_token: "secret"
 production:
-  server: "https://geobox.xyz:9292/faye"
+  server: "https://geobox.xyz/faye"
   secret_token: "fb503a39a2bed39bf01a5d2cfe796b7f82680e532cd200ec348435b4274e046b"
   signature_expiration: 3600 # one hour
