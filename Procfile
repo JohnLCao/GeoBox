@@ -1,1 +1,1 @@
-web: bundle exec rackup private_pub.ru -E production
+worker: bundle exec rackup private_pub.ru -E production
