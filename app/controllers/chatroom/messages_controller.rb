@@ -5,12 +5,8 @@ module Chatroom
 		# before_action :set_room, only: [:index]
 		# GET /messages/rooms/:room_id
 		def index
-			if params[:room_id]
-				session[:room_id] = @room.id
-				@messages = Message.all.where(room_id: @room.id)
-			else
-				@messages = Message.all.where(room_id: session[:room_id])
-			end
+			session[:room_id] = params[:room_id]
+			@messages = Message.all.where(room_id: session[:room_id])
 		end
 
 		# POST /messages
