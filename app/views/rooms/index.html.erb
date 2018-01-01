@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="container-color col-11">
+      <p id="notice"><%= notice %></p>
+      <h1>Listing Rooms</h1>
+      <table class="table table-responsive table-hover" style="background-color: #ffffff">
+        <thead>
+        <tr>
+          <th>Roomname</th>
+          <th>Description</th>
+          <th>Latitude</th>
+          <th>Longitude</th>
+          <th>User</th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @rooms.each do |room| %>
+            <tr>
+              <td><%= room.name %></td>
+              <td><%= room.description %></td>
+              <td><%= room.latitude %></td>
+              <td><%= room.longitude %></td>
+              <td><%= room.user.username %></td>
+              <td><%= link_to 'Destroy', room, method: :delete, class: 'btn btn-danger' %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <br>
+      <%= link_to 'New Book', new_room_path %>
+      <br>
+      <%= link_to 'Back', admin_root_path %>
+    </div>
+  </div>
+</div>
