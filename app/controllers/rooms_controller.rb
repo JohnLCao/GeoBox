@@ -1,13 +1,15 @@
 class RoomsController < ApplicationController
+	before_action :ensure_admin, only: :index
 	before_action :ensure_not_guest, only: [:new, :create]
+	before_action :set_room, only: [:show, :edit, :update, :destroy]
 
 	def index
-
+		@rooms = Room.all
 	end
 
 	def new
 		@room = Room.new
-	end 
+	end
 
 	def create
 	    @room = Room.new(room_params)
@@ -27,24 +29,29 @@ class RoomsController < ApplicationController
 	    end
 	end
 
-  def show
-
+ 	def show
 	end
 
-  def edit
-
+  	def edit
 	end
 
-  def update
-
+  	def update
 	end
 
 	def destroy
-
+		@room.destroy
+	    respond_to do |format|
+	      format.html { redirect_to rooms_url, success: 'Room was successfully deleted.' }
+	      format.json { head :no_content }
+	    end
 	end
 
 	private
 	    def room_params
 	      params.require(:room).permit(:description,:name)
+	    end
+
+	    def set_room
+	    	@room = Room.find(params[:id])
 	    end
 end
