@@ -53,11 +53,11 @@ window.Messages =
 					row = $("<tr></tr>")
 				else
 					row = $("<tr style='display:none;'></tr>")
-				for j in [0...8]
+				for j in [0...8] 
 					n = i * 8 + j
-					img = $("<span></span>").addClass("emotion-img")
+					img = $("<img>").addClass("emotion-img")
 					img.attr("emotion", "#{n}")
-					img.css({"background": "url(\"/assets/emotions/#{n}.gif\")"})
+					img.attr("src", "/assets/emotions/#{n}.gif")
 					img.click(Messages.selectEmotion)
 					cell = $("<td></td>").addClass("chat-cell").append(img)
 					row.append(cell)
@@ -114,7 +114,7 @@ window.Messages =
 				row = $("<tr></tr>")
 				for j in [0...10]
 					n = i * 10 + j
-					color = $('<span></span>').addClass("font-color")
+					color = $('<span>&nbsp&nbsp&nbsp&nbsp</span>').addClass("font-color")
 					num = color.attr("color-num", "#{colors[n]}")
 					color.css({"background-color": "#{num.attr('color-num')}"})
 					color.click(Messages.selectColor)
