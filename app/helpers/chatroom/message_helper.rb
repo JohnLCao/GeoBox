@@ -8,7 +8,7 @@ module Chatroom
 				<div class='info-message'>
 					<span class='send-time'>#{msg.try(:send_time)}</span>
 				</div>
-				<span class='say'>#{sanitize(msg.try(:html_content), tags: %w(br img span p i b a), attributes: %w(id class style))}</span>
+				<span class='say'>#{sanitize(msg.try(:html_content), tags: %w(br img span p i b a), attributes: %w(id class style src))}</span>
 			</div>"
 		end
 
@@ -23,7 +23,7 @@ module Chatroom
 				<div class='info-message'>
 					<span class='send-time'>#{msg.try(:send_time)}</span>
 				</div>
-				<span class='say'>#{sanitize(msg.try(:html_content), tags: %w(br img span p i b a), attributes: %w(id class style))}</span>
+				<span class='say'>#{sanitize(msg.try(:html_content), tags: %w(br img span p i b a), attributes: %w(id class style src))}</span>
 			</div>"
 			end
 			messages.join(' ')
