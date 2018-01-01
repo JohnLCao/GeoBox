@@ -28,7 +28,7 @@
 		</div>
 
     <%= f.text_field :content, :id => "new_message_editor", :class => 'form-control'%>
-		<%= f.hidden_field :username, :value => current_user.username %>
+		<%= f.hidden_field :username, :value => current_user.nil? ? "guest" : current_user.username %>
     <br>
 		<div class="send pull-right"><%= f.submit "Send", :class => "btn btn-primary" %></div>
 	<% end %>

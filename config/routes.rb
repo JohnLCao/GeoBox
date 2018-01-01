@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :documents
   resources :books
   resources :users
-  resources :rooms, only: [:new, :create, :destroy]
+  resources :rooms, only: [:index, :new, :create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
 
   get "/login" => "sessions#new", as: :login
