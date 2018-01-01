@@ -2,11 +2,11 @@ module Chatroom
 	class MessagesController < ApplicationController
 		skip_before_action :verify_authenticity_token, only: [:create]
 		before_action :define_chatting
-		before_action :set_room, only: [:index]
+		# before_action :set_room, only: [:index]
 		# GET /messages/rooms/:room_id
 		def index
-			session[:room_id] = @room.id
-			@messages = Message.all.where(room_id: @room.id)
+			session[:room_id] = params[:room_id]
+			@messages = Message.all.where(room_id: session[:room_id])
 		end
 
 		# POST /messages
