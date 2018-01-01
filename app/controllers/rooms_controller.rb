@@ -1,4 +1,9 @@
 class RoomsController < ApplicationController
+	before_action :ensure_admin, only: :index
+	def index
+		@rooms = Room.all
+	end
+
 	def new
 		@room = Room.new
 	end 
