@@ -1,4 +1,10 @@
 class RoomsController < ApplicationController
+	before_action :ensure_not_guest, only: [:new, :create]
+
+	def index
+
+	end
+
 	def new
 		@room = Room.new
 	end 
@@ -19,6 +25,22 @@ class RoomsController < ApplicationController
 	        format.json { render json: @room.errors, status: :unprocessable_entity }
 	      end
 	    end
+	end
+
+  def show
+
+	end
+
+  def edit
+
+	end
+
+  def update
+
+	end
+
+	def destroy
+
 	end
 
 	private
