@@ -57,6 +57,9 @@ gem 'angular-rails-templates'
 # geocoding
 gem 'geocoder'
 
+#chatroom
+gem 'chatroom'
+
 # asset packaging
 # gem 'sprockets'
 
@@ -78,3 +81,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'private_pub', '1.0.3'
+gem 'thin', '1.5.1'

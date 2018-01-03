@@ -11,6 +11,7 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     $ctrl.docs = [];
     $ctrl.book = {};
     $ctrl.detailDoc = {};
+    $ctrl.room = {};
     $ctrl.fuzzySearchString = '';
     $ctrl.fuzzySearchList = [];
     $ctrl.fuzzySearchOptions = {
@@ -40,6 +41,12 @@ function ModalController($rootScope, DocumentService, $scope, UserService){
     $scope.$on('detail_doc_view:ready', function(event, data){
         showDoc(data.doc);
     });
+
+    $scope.$on('chatroom:ready', function(event, data){
+        $("#chatroomModal").modal("show");
+        $ctrl.baseUrl = UserService.baseUrl;
+        $ctrl.room = data.room;
+    })
 
     $ctrl.search = function(){
         if ($ctrl.fuzzySearchString){

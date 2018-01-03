@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
+  resources :messages, module: 'chatroom'
   resources :documents
   resources :books
   resources :users
+  resources :rooms, only: [:index, :new, :create, :destroy]
   resources :sessions, only: [:new, :create, :destroy]
-  
+
   get "/login" => "sessions#new", as: :login
   delete "/logout" => "sessions#destroy", as: :logout
   get "/guest_login" => "sessions#guest", as: :guest_login
 
   root to: "home#home"
-  #TO BE CHANGED
   get "/add_file_to_book/:id" => "books#update"
-  #TO BE CHANGED
 
   get "/admin_root" => "home#admin_home", as: :admin_root
 
@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   get "/user_info" => "users#userInfo"
   post "/fetch_files_in_book" => "books#fetch_book_files"
 
+  #override messages resource routes
+  get "/messages/rooms/:room_id"=> "chatroom/messages#index", as: :room_messages
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

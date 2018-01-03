@@ -1,0 +1,16 @@
+<% publish_to "/messages/new" do %>
+	$("#chat").append("<%= escape_javascript new_communication(@message).html_safe %>");
+
+	if($("#chatBeam").css("display") != "none") {
+		if ($(".max-chatroom").attr("interval") == null ) {
+			var flash = setInterval(function() { $(".max-chatroom").fadeOut(100).fadeIn(100)}, 300);
+			$(".max-chatroom").attr("interval", flash)
+		}
+	} else {
+		$(".max-chatroom").attr("interval", null)
+	}
+
+	$("#chat").animate({scrollTop: $("#chat")[0].scrollHeight}, 100);
+<% end %>
+
+$("#new_message_content").val(''); 

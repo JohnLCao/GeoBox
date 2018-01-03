@@ -1,0 +1,34 @@
+<div class="chat-send">
+
+	<%= form_for Message.new, :remote => true, :html => { :class => "send-message" } do |f| %>
+		<div class="send-bar">
+			<%= link_to "", :class => "font-colorer", style: "text-decoration:none;" do%>
+				<b><i class="font-colorer-icon">colours </i></b>
+				<table class="chatroom-font-colors" style="display: none;">
+					<tbody></tbody>
+				</table>
+			<% end %>
+
+			<%= link_to "", :class => "emotions", style: "text-decoration:none;" do |emote|%>
+				<b><i class="emotions-icon">emojis </i></b>
+				<table class="chatroom-emotions-images" style="display: none;">
+					<tbody></tbody>
+				</table>
+			<% end %>
+
+			<%= link_to "", :class => "font-bloder", style: "text-decoration:none;" do%>
+				<i class="font-bloder-icon">bold </i>
+			<% end %>
+
+			<%= link_to "", :class => "font-italic", style: "text-decoration:none;" do%>
+				<i class="font-italic-icon">italic </i>
+			<% end %>
+		</div>
+
+		<%= f.text_area :content, :id => "new_message_editor", :rows => 5, cols: 75 %>
+		<%= f.hidden_field :username, :value => current_user.nil? ? "guest" : current_user.username %>
+
+		<div class="send"><%= f.submit "Send", :class => "btn" %></div>
+	<% end %>
+</div>
+

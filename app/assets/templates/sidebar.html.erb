@@ -17,8 +17,19 @@
         </a>
       </li>
 
+      <!-- CHATROOM ICON -->
+      <li>
+        <a href="#chatrooms" role="tab">
+          <i data-notifications="{{$ctrl.rooms.length}}" class="fa fa-comments"></i>
+        </a>
+      </li>
+
       <!-- PROFILE ICON -->
-      <li><a href="#profile" role="tab"><i class="fa fa-user"></i></a></li>
+      <li>
+        <a href="#profile" role="tab">
+          <i class="fa fa-user"></i>
+        </a>
+      </li>
     </ul>
 
 
@@ -81,6 +92,32 @@
       </div>
     </div>
 
+    <!-- CHATROOMS -->
+    <div class="sidebar-pane" id="chatrooms">
+      <h1 class="sidebar-header">
+        Chat rooms
+        <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+      </h1>
+      <br>
+      <div class="form-group">
+        <div class="form-group">
+          <input class="form-control" id="search" type="text" placeholder="Search for chatrooms..."
+                 ng-model="$ctrl.fuzzySearchString_room" ng-change="$ctrl.room_search()">
+        </div>
+      </div>
+      <div class="list-group">
+        <a ng-repeat="room in $ctrl.fuzzySearchResult_room" href="" ng-click="$ctrl.openRoom(room)"
+           class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{room.name}}</h5>
+            <small class="text-muted">{{room.created_at}}</small>
+          </div>
+          <p class="wrap">{{room.description}}</p>
+          <small class="text-muted">uploaded by {{room.username}}</small>
+        </a>
+      </div>
+    </div>
+
     <!-- PROFILE -->
     <div class="sidebar-pane" id="profile">
       <h1 class="sidebar-header">Profile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
@@ -93,7 +130,7 @@
             ng-click="$ctrl.flyHome()">Return Home</button>
         </div>
         <br>
-        <ul class="list-group">
+        <ul class="list-group"> 
           <li class="list-group-item active">User Information</li>
           <li class="list-group-item">Username: {{$ctrl.user.username}}</li>
           <li class="list-group-item">Email: {{$ctrl.user.email}}</li>
@@ -115,6 +152,14 @@
             <a href="" ng-click="$ctrl.openBook(book.id)">
               <i class="fa fa-cloud-download" style="color: rgb(110, 199, 238)"></i>
             </a>&nbsp &nbsp{{book.name}}</li>
+        </ul>
+        <br>
+        <ul class="list-group">
+          <li class="list-group-item active">Owned Rooms: </li>
+          <li class="list-group-item" ng-repeat="room in $ctrl.user.owned_rooms">
+            <a href="" ng-click="$ctrl.openRoom(room)">
+              <i class="fa fa-cloud-download" style="color: rgb(110, 199, 238)"></i>
+            </a>&nbsp &nbsp{{room.name}}</li>
         </ul>
       </div>
       <div ng-if="$ctrl.user.guest">

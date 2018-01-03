@@ -11,7 +11,9 @@
 
 <body ng-app="GeoBox">
 
-<geobox-header></geobox-header>
+<% unless defined? @chatting %>
+	<geobox-header></geobox-header>
+<% end %>
 
 <geobox-modal></geobox-modal>
 
