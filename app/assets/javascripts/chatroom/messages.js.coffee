@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-window.Messages = 
+window.Messages =
 	# maximun or minimun your chatroom
 	minChatroom: () ->
 		$("#chatroom").slideToggle()
@@ -53,7 +53,7 @@ window.Messages =
 					row = $("<tr></tr>")
 				else
 					row = $("<tr style='display:none;'></tr>")
-				for j in [0...8] 
+				for j in [0...8]
 					n = i * 8 + j
 					img = $("<img>").addClass("emotion-img")
 					img.attr("emotion", "#{n}")
@@ -75,8 +75,8 @@ window.Messages =
 				$("table.chatroom-emotions-images tbody tr").toggle()
 			false
 		false
-	
-	displayAllEmotions: () -> 
+
+	displayAllEmotions: () ->
 		Messages.constructEmotions()
 		$("table.chatroom-emotions-images").toggle()
 		false
@@ -105,7 +105,7 @@ window.Messages =
 			"#7F7F7F", "#0C0C0C", "#1D1D10", "#0F243E", "#244061", "#632423", "#4F6128", "#3F3151", "#205867", "#974806",
 			"#C00000", "#FF0000", "#FFC000", "#FFFF00", "#92D050", "#00B050", "#00B0F0", "#0070C0", "#002060", "#7030A0"
 		]
-	
+
 	constructColorsTab: () ->
 		colors = Messages.constructColors()
 		table = $("table.chatroom-font-colors tbody")
@@ -122,12 +122,12 @@ window.Messages =
 					row.append(cell)
 				table.append(row)
 		false
-	
+
 	displayAllColors: () ->
 		Messages.constructColorsTab()
 		$("table.chatroom-font-colors").toggle()
 		false
-		
+
 	# Editor: select one color for text
 	selectColor: () ->
 		color = $(this).attr("color-num")
@@ -136,7 +136,7 @@ window.Messages =
 		Messages.changeSelectionChar(fontTag)
 		$("table.chatroom-font-colors").toggle()
 		false
-		
+
 
 $(document).ready ->
 	$(".min-chatroom").click ->
@@ -161,4 +161,9 @@ $(document).ready ->
 
 	$(".font-colorer").click ->
 		Messages.displayAllColors()
+		false
+
+	$(".send").click ->
+		$(".send-message").submit()
+		$("#new_message_editor").val("")
 		false

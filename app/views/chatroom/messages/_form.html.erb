@@ -28,7 +28,7 @@
 		<%= f.text_area :content, :id => "new_message_editor", :rows => 5, cols: 75 %>
 		<%= f.hidden_field :username, :value => current_user.nil? ? "guest" : current_user.username %>
 
-		<div class="send"><%= f.submit "Send", :class => "btn" %></div>
+		<!-- <div class="send"><%= f.submit "Send", :class => "btn" %></div> -->
+		<div class="send"><%= f.submit("Send")%></div>
 	<% end %>
 </div>
-
