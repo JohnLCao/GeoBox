@@ -167,3 +167,18 @@ $(document).ready ->
 		$(".send-message").submit()
 		$("#new_message_editor").val("")
 		false
+
+	$("#new_message_editor").keydown (e) ->
+		if e.keyCode == 13
+        $(".send-message").submit()
+				# $("#new_message_editor").val("")
+		true
+
+	# $(".chat-modal-body").scrollTop($(".chat-modal-body").prop('scrollHeight'))
+	 # $(window).scrollTop($(".chat-modal-body").prop('scrollHeight'))
+
+	# $(".chat-modal-body").load(function(){
+	# 	var height = $(".chat-modal-body").prop('scrollHeight')
+	# 	$(".chat-modal-body").scrollTop(height)
+	# 	console.log('================SCROLL REACHED=======================')
+	# })
