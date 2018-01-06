@@ -137,6 +137,11 @@ window.Messages =
 		$("table.chatroom-font-colors").toggle()
 		false
 
+	# Send new message
+	sendMessage: ()->
+		$(".send-message").submit()
+		$("#new_message_editor").val("")
+		false
 
 $(document).ready ->
 	$(".min-chatroom").click ->
@@ -164,14 +169,12 @@ $(document).ready ->
 		false
 
 	$(".send").click ->
-		$(".send-message").submit()
-		$("#new_message_editor").val("")
+		Messages.sendMessage()
 		false
 
-	$("#new_message_editor").keydown (e) ->
+	$("#new_message_editor").keyup (e) -> 
 		if e.keyCode == 13
-        $(".send-message").submit()
-				# $("#new_message_editor").val("")
+        	Messages.sendMessage()
 		true
 
 	# $(".chat-modal-body").scrollTop($(".chat-modal-body").prop('scrollHeight'))
