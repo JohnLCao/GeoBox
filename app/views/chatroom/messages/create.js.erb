@@ -10,7 +10,6 @@
 		$(".max-chatroom").attr("interval", null)
 	}
 
-	$("#chat").animate({scrollTop: $("#chat")[0].scrollHeight}, 100);
+	//John: I moved this line back to message.js.coffee
+	// $("html, body").animate({scrollTop: $("#chat")[0].scrollHeight}, "slow");
 <% end %>
-
-$("#new_message_content").val(''); 
