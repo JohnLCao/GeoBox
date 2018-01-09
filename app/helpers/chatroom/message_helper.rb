@@ -1,7 +1,7 @@
 module Chatroom
 	module MessageHelper
 		def new_communication(msg=nil)
-			"<div class='message-line card'>
+			"<div class='container'>
 				<div class='info-message card-header'>
 					<span class='send-time'><strong>#{msg.username}</strong></span>
 					<span class='send-time'>#{msg.try(:send_time)}</span>
@@ -19,7 +19,7 @@ module Chatroom
 		def show_communications(msgs=nil)
 			msgs ||= []
 			messages = msgs.collect do |msg|
-			"<div class='message-line card'>
+			"<div class='container'>
 				<div class='info-message card-header'>
 					<span class='send-time'><strong>#{msg.username}</strong></span>
 					<span class='send-time'>#{msg.try(:send_time)}</span>
