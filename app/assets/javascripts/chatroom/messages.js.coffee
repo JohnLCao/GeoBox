@@ -177,5 +177,5 @@ $(document).ready ->
         	Messages.sendMessage()
 		true
 
-	# $("html, body").animate({scrollTop: $("#chat")[0].scrollHeight}, "slow");
-	$("html").animate({scrollTop: $("#chat")[0].scrollHeight}, "slow");
+  # autoscroll upon view loading but it will not scroll everytime it is sent
+	$("html, body").animate({scrollTop: $("#chat")[0].scrollHeight}, "slow");
