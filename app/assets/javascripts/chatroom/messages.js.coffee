@@ -172,16 +172,10 @@ $(document).ready ->
 		Messages.sendMessage()
 		false
 
-	$("#new_message_editor").keyup (e) -> 
+	$("#new_message_editor").keyup (e) ->
 		if e.keyCode == 13
         	Messages.sendMessage()
 		true
 
-	# $(".chat-modal-body").scrollTop($(".chat-modal-body").prop('scrollHeight'))
-	 # $(window).scrollTop($(".chat-modal-body").prop('scrollHeight'))
-
-	# $(".chat-modal-body").load(function(){
-	# 	var height = $(".chat-modal-body").prop('scrollHeight')
-	# 	$(".chat-modal-body").scrollTop(height)
-	# 	console.log('================SCROLL REACHED=======================')
-	# })
+	# $("html, body").animate({scrollTop: $("#chat")[0].scrollHeight}, "slow");
+	$("html").animate({scrollTop: $("#chat")[0].scrollHeight}, "slow");
