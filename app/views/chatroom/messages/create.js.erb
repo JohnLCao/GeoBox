@@ -10,6 +10,6 @@
 		$(".max-chatroom").attr("interval", null)
 	}
 
-	//John: I moved this line back to message.js.coffee
-	// $("html, body").animate({scrollTop: $("#chat")[0].scrollHeight}, "slow");
+	//Autoscroll when a message is sent, but will not scroll upon view loaded
+	$("html, body").animate({scrollTop: $("#chat")[0].scrollHeight}, "slow");
 <% end %>
