@@ -6,7 +6,7 @@ module Chatroom
 
 		  def self.mutualRadius?(userCurrentLatlng, room_lat, room_lng)
 
-		    radiusInMeters = 150.0  # meters
+		    radiusInMeters = 300.0  # meters
 		    radiusInDeg = radiusInMeters/111000 # Convert to degrees via dividing by rate of conversion from meter to degree
 
 
