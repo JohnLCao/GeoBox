@@ -1,24 +1,24 @@
 # GeoBox
-File sharing based on geolocation with secure books, and new features in development.
+File-sharing application that enables users to manage shared files based on geolocation.
 
 ## 1.        Introduction
 ### 1.1        Purpose
-To enable multiple users to share files without connecting to each other. File organization and availability  will be done by geolocation 
-### 1.2        Intended Audience and Reading Suggestions
-This app is intended for all users who like file organization and sharing based on geolocation. 
+Enable users to manage shared files based on geolocation.
+
+### 1.2        Intended Audience
+All users who want to manage shared files based on geolocation.
+
 ### 1.3        Product Scope
-Scope will be limited to file discovery,  upload and download only. Rooms and possibly File open will be next feature. User needs to login to the application on start-up. Users will have an option to login as “guest”, without an account, and have access to certain public files. 
+Main functions includes file search, upload and download. To be developed features: sharing rooms and file open. Users can login as guest, normal users, or admins to gain access to the application. 
 
-Files could have the option of disappearing after some amount of time. Files could also be deleted by the original uploader or room owner. 
+File will be automatically deleleted after they expires. Uploaders or room owners also have permission to delete their files.
+
 ### 1.4		Minimal Viable Product
-Have file pop up when user walks into the vicinity 
-This means User radius overlaps with coordinate property for file.
-Same discovery mechanism can be used for rooms.
+Have files popped up when users walk into the vicinity of share file location.
 
-Be able to download the files
 ### 1.5		Competitors
-Dropbox, Google Doc, any file sharing solution. 
-Whisper, application that shares media (mostly text) with limits based on geolocation.  
+Any file-sharing solutions: Box, Dropbox, Google Drive, etc.
+Whisper: allows users to share media (mostly text) with limits based on geolocation.  
 
 ## 2.        Overall Description
 ### 2.1        Product Functions
