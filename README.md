@@ -22,25 +22,28 @@ Whisper: allows users to share media (mostly text) with limits based on geolocat
 
 ## 2.        Overall Description
 ### 2.1        Product Functions
-When two users are within a (User Controlled) radius of each other, they share files based on their geolocation range. Suppose we have users a, b, c, d; when a is in vicinity of the rest of the group and user a has just shared a file, users b, c, d, can have access to the file user a has shared. Users a, b, c, d do not have any other connection besides the fact they are within each other’s radius.  
+A user can set a radius for a shared file so that other users whose geolocations are within the radius can access the file.
 
-Users in the above case connect to each other via “rooms” or another mechanism. Each “room” could have a secret key. Each “room” has a coordinates property. Users interact with other users via uploading/downloading files in the same “room”
+Example situation: there are users A, B, C, D in a classroom. User A shares a file and set the file's radius to the classroom size. Then users B, C, D can access the shared file. User A also can create a "room" and upload (adding) a file in that room. The room can have a secret key. Then all users in the example can connect to each other via “rooms”.
 
-“Rooms” are automatically discovered when the room comes within the User’s “radius”
+Each “room” has a coordinate that allows users to discover it when being within its radius.
+
 ### 2.2       User Classes and Characteristics (Stories)
 #### Admin Gods
 **Characteristics:**
  
-Admins are super users only reserved to be developers for the app. Admins can ban users when inappropriate behaviour is found.
+Admins are super users with following permissions:
+- Ban users when inappropriate behaviours are found.
+- Access rooms, shared files, and users' information except passwords.
+- Delete/modify rooms and files.
 
-Admins can see all users (not passwords), all rooms, and all files. 
-Have permission to delete / modify users rooms and files.
 
 **Stories:**  
 
-Steve is an employee of GeoBox and is part of the anti-harassment team which is     responsible to make sure no malicious or offensive content lingers on the app.  
- 	
-Steve logs into the app. Steve has special views to the database (complete view). Steve can check on the new users who made an account and the new rooms that are created, as well as which files have been added and can also view all rooms and files just like standard users. Steve can also check for suspicious behaviour - for example in the afternoon, Steve notices that user John is sharing malicious files. Steve decides to delete user John from the database or send him an warning. 
+Steve is an employee of GeoBox and is part of the anti-harassment team which is responsible to make sure no malicious or offensive content lingers on the app.
+
+Steve logs into the application as Admin. Steve now can see a complete view of the company's database. Steve can check on new users, new rooms, and new files just like a standard user. Steve will look for suspicious behaviours. For example, Steve notices that user John has shared malicious files. Steve then decides to give John a warning or delete John from the database.
+
 #### Login Users
 **Characteristics:**
 
