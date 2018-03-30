@@ -11,7 +11,7 @@ All users who want to manage shared files based on geolocation.
 ### 1.3        Product Scope
 Main functions includes file search, upload and download. To be developed features: sharing rooms and file open. Users can login as guest, normal users, or admins to gain access to the application. 
 
-File will be automatically deleleted after they expires. Uploaders or room owners also have permission to delete their files.
+File will be automatically deleleted after they expire. Uploaders or room owners also have permission to delete their files.
 
 ### 1.4		Minimal Viable Product
 Have files popped up when users walk into the vicinity of share file location.
@@ -24,25 +24,23 @@ Whisper: allows users to share media (mostly text) with limits based on geolocat
 ### 2.1        Product Functions
 A user can set a radius for a shared file so that other users whose geolocations are within the radius can access the file.
 
-Example situation: there are users A, B, C, D in a classroom. User A shares a file and set the file's radius to the classroom size. Then users B, C, D can access the shared file. User A also can create a "room" and upload (adding) a file in that room. The room can have a secret key. Then all users in the example can connect to each other via “rooms”.
+Example situation: there are users A, B, C, D in a classroom. User A shares a file and set the file's radius to the classroom size. Then users B, C, D can access the shared file. User A also can create a "room" and upload (adding) a file in that room. The room can have a secret key. Then all users in the example can connect to each other via “rooms”. 
 
 Each “room” has a coordinate that allows users to discover it when being within its radius.
-
 ### 2.2       User Classes and Characteristics (Stories)
 #### Admin Gods
 **Characteristics:**
  
 Admins are super users with following permissions:
 - Ban users when inappropriate behaviours are found.
-- Access rooms, shared files, and users' information except passwords.
+- Access rooms, shared files, and users' information except passwords. 
 - Delete/modify rooms and files.
-
 
 **Stories:**  
 
-Steve is an employee of GeoBox and is part of the anti-harassment team which is responsible to make sure no malicious or offensive content lingers on the app.
-
-Steve logs into the application as Admin. Steve now can see a complete view of the company's database. Steve can check on new users, new rooms, and new files just like a standard user. Steve will look for suspicious behaviours. For example, Steve notices that user John has shared malicious files. Steve then decides to give John a warning or delete John from the database.
+Steve is an employee of GeoBox and is part of the anti-harassment team which is responsible to make sure no malicious or offensive content lingers on the app.  
+ 	
+Steve logs into the application as Admin. Steve now can see a complete view of the company's database. Steve can check on new users, new rooms, and new files just like a standard user. Steve will look for suspicious behaviours. For example, Steve notices that user John has shared malicious files. Steve then decides to give John a warning or delete John from the database. 
 
 #### Login Users
 **Characteristics:**
