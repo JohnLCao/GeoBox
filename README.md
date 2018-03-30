@@ -42,26 +42,32 @@ Steve is an employee of GeoBox and is part of the anti-harassment team which is 
  	
 Steve logs into the application as Admin. Steve now can see a complete view of the company's database. Steve can check on new users, new rooms, and new files just like a standard user. Steve will look for suspicious behaviours. For example, Steve notices that user John has shared malicious files. Steve then decides to give John a warning or delete John from the database. 
 
-#### Login Users
+#### Standard Users
 **Characteristics:**
 
-Login Users are logged in users that can create and get content at any given location. Logged in users have names and can be identified by anyone using the app. 
+Standard Users are users with valid username/password to log into the application. Standard Users's permissions:
+- Access files
+- Upload/ download files
+- Create rooms 
 
 **Stories:**
 
-Logged in user logs into the app. After providing geolocation info, he/she can create content for that location. If there is content from that location, he/she can download that content. 
-#### Anonymous Monkeys
+John as a standard user logs ino the application. John now can have full access (view, upload, download, delete (only files uploaded by John)) to rooms/ files which are accessable within his geolocation.
+ 
+#### Guest Users
 **Characteristics:**
 
-Users that have no need to login, but in exchange do not have the ability to “drop” files.
+Guest users which only can see files which are accessible within their geolocation.
 
 **Stories:**
 	
-Anonymous monkeys hit a skip button to bypass login page and are presented with a map with files, but can only see files and cannot edit them.
-Bobby is going to a symposium on how rails is the future of web development. The organisers tell the guests that they have all requisite symposium files on “Geobox”. Bobby loads geobox.xyz and sees a login page. He also sees a “skip” button which he presses. A map with his location and several “file” icons appears. Opening a sidebar reveals the files he needs.
+Story 1. 
+John, as a guest user, hits a skip button to bypass the login page. John now sees a map with files. He can only view files but edit them.
+
+Story 2. 
+Bobby is going to a symposium on how Rails is the future of web development. The organisers inform all guests that they have all requisite symposium files on “Geobox”. Bobby loads geobox.xyz and sees a login page. As a guest user, he hits a skip button to bypass the login page. A map shows his location and “file” icons. Bobby opens a sidebar to access the files.
 
 ## 3.        External Interface Requirements
 ### 3.1        User Interfaces
-Responsive Design - should look good on phones as well as large screens
-Majority of Screen is the map, the user position is indicated on the map.
-File/Rooms could also be shown on the map, or not (decide later)
+Responsive Design - should look good on phones as well as large screens.
+Majority of Screen is the map, the user position and file icons are shown on the map.
