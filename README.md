@@ -41,6 +41,7 @@ Admins are super users with following permissions:
 Steve is an employee of GeoBox and is part of the anti-harassment team which is responsible to make sure no malicious or offensive content lingers on the app.  
  	
 Steve logs into the application as Admin. Steve now can see a complete view of the company's database. Steve can check on new users, new rooms, and new files just like a standard user. Steve will look for suspicious behaviours. For example, Steve notices that user John has shared malicious files. Steve then decides to give John a warning or delete John from the database. 
+
 #### Login Users
 **Characteristics:**
 
